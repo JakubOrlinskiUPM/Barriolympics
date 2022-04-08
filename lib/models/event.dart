@@ -3,7 +3,7 @@ import 'package:barriolympics/models/location.dart';
 
 
 class Event {
-  const Event({
+  Event({
     required this.id,
     required this.name,
     required this.description,
@@ -27,7 +27,7 @@ class Event {
   final Location location;
 
   final User organiser;
-  final List<User> goingUsers;
-  final List<User> goingVolunteers;
-  final List<User> goingSellers;
+  List<User> goingUsers;
+  List<User> goingVolunteers;
+  List<User> goingSellers;
 }

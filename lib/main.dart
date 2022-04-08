@@ -1,38 +1,102 @@
-import 'package:barriolympics/ui/components/custom_theme.dart';
+import 'package:barriolympics/ui/pages/events/events.dart';
+import 'package:barriolympics/ui/pages/help.dart';
+import 'package:barriolympics/ui/pages/page_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:barriolympics/ui/pages/home.dart';
+import 'package:barriolympics/ui/custom_theme.dart';
+import 'package:barriolympics/ui/pages/home/home.dart';
 import 'package:barriolympics/provider/app_state.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => AppState())],
-      child: const App(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: CustomTheme.lightTheme,
+        home: const App(),
+      ),
     ),
   );
 }
 
-
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: CustomTheme.lightTheme,
-      home: const HomePage(),
-    );
-  }
+  State<App> createState() => _AppState();
 }
 
+class _AppState extends State<App> {
+  int _currentIndex = 0;
 
+  final List<PageDetails> tabs = [
+    Home(),
+    Events(),
+  ];
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: tabs[_currentIndex].navigator,
+      extendBodyBehindAppBar: true,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8.0,
+        clipBehavior: Clip.antiAlias,
+        child: BottomNavigationBar(
+            iconSize: 30,
+            backgroundColor: Colors.transparent,
+            currentIndex: _currentIndex,
+            onTap: (val) => _onTap(val, context),
+            items: tabs
+                .map(
+                  (tab) => BottomNavigationBarItem(
+                    icon: Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                      child: Icon(tab.pageIcon),
+                    ),
+                    label: tab.pageName,
+                  ),
+                )
+                .toList()),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(1.0),
+        child: FloatingActionButton(
+          onPressed: () {
+            Provider.of<AppState>(context, listen: false).addEvents();
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext ctx) {
+                return const HelpPage();
+              },
+            );
+          },
+          tooltip: 'Help the community',
+          child: const Icon(Icons.group),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
+  }
 
-
+  void _onTap(int val, BuildContext context) {
+    if (_currentIndex == val) {
+      tabs[_currentIndex]
+          .navigatorKey
+          .currentState
+          ?.popUntil((route) => route.isFirst);
+    } else {
+      if (mounted) {
+        setState(() {
+          _currentIndex = val;
+        });
+      }
+    }
+  }
+}
 
 // For illustration purposes
 class MyHomePage extends StatefulWidget {

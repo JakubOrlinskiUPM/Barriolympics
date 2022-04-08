@@ -5,26 +5,60 @@ class CustomTheme {
     return ThemeData(
       primarySwatch: Colors.orange,
       primaryColor: Colors.orange,
-      scaffoldBackgroundColor: const Color(0xfff1e5d9),
+      scaffoldBackgroundColor: const Color(0xfffff6f1),
       bottomAppBarColor: Color(0xFFFF6E00),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Color(0xffffe3d6),
         backgroundColor: Color(0xFFFF6E00),
         elevation: 0,
+        selectedIconTheme: IconThemeData(size: 30),
+        unselectedIconTheme: IconThemeData(size: 30),
+        selectedLabelStyle: TextStyle(fontSize: 16),
+        unselectedLabelStyle: TextStyle(fontSize: 16),
       ),
       fontFamily: 'Narin',
       buttonTheme: ButtonThemeData(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
         buttonColor: Colors.orangeAccent,
       ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: Color(0xFFFF5900),
+        foregroundColor: Colors.white,
+      ),
+      cardTheme: const CardTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        shadowColor: Color(0x45FF5900),
+        elevation: 10,
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+      ),
+      listTileTheme: const ListTileThemeData(
+        contentPadding: EdgeInsets.only(top: 6, left: 10),
+        minVerticalPadding: 10,
+      ),
+      textTheme: TextTheme(),
+      primaryTextTheme: TextTheme(),
+
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(),
+      ),
+
       // primaryColorLight: Color(0x000000),
       // primaryColorDark: Color(0x000000),
       // focusColor: Color(0x000000),
       // hoverColor: Color(0x000000),
       // shadowColor: Color(0x000000),
       // canvasColor: Color(0x000000),
-      // bottomAppBarColor: Color(0x000000),
-      // cardColor: Color(0x000000),
       // dividerColor: Color(0x000000),
       // highlightColor: Color(0x000000),
       // splashColor: Color(0x000000),
@@ -37,12 +71,8 @@ class CustomTheme {
       // indicatorColor: Color(0x000000),
       // hintColor: Color(0x000000),
       // errorColor: Color(0x000000),
-      // textTheme: TextTheme(),
-      // primaryTextTheme: TextTheme(),
       // cardTheme: CardTheme(),
       // chipTheme: ChipThemeData(),
-      // floatingActionButtonTheme: FloatingActionButtonThemeData(),
-      // listTileTheme: ListTileThemeData(),
       // progressIndicatorTheme: ProgressIndicatorThemeData(),
     );
   }

@@ -6,6 +6,6 @@ getRandChoice(List list) {
 }
 
 getRandSublist(List list) {
-  int index = Random(42).nextInt(list.length - 1);
-  return list.sublist(index, list.length);
+  int index = Random(42).nextInt(list.length-1);
+  return list.sublist(index, list.length-1);
 }

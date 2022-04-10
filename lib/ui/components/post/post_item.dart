@@ -1,4 +1,5 @@
 import 'package:barriolympics/ui/components/post/comment_button.dart';
+import 'package:barriolympics/ui/components/post/comment_modal.dart';
 import 'package:barriolympics/ui/components/post/share_button.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +70,18 @@ class _PostItemState extends State<PostItem> {
                 ),
               ),
             ),
+            TextButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    useRootNavigator: true,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CommentModal(post: widget.post);
+                    },
+                  );
+                },
+                child:
+                    Text(widget.post.comments.length.toString() + " comments")),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

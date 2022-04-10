@@ -11,7 +11,6 @@ class ShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, state, child) {
-
       return Expanded(
         child: OutlinedButton(
           onPressed: () {
@@ -20,13 +19,16 @@ class ShareButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(Icons.share, size: 20,),
+            children: const [
+              Icon(
+                Icons.share,
+                size: 15,
+              ),
               Padding(
-                padding: const EdgeInsets.only(left: 4.0),
+                padding: EdgeInsets.only(left: 4.0),
                 child: Text(
                   "Share",
-                  style: const TextStyle(height: 1.5),
+                  style: TextStyle(height: 1.5),
                 ),
               ),
             ],

@@ -13,23 +13,26 @@ class CommentButton extends StatelessWidget {
     return Consumer<AppState>(builder: (context, state, child) {
 
       return Expanded(
-        child: OutlinedButton(
-          onPressed: () {
-            // state.likePost(post);
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(Icons.comment, size: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 4.0),
-                child: Text(
-                  "Comment",
-                  style: const TextStyle(height: 1.5),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 4.0),
+          child: OutlinedButton(
+            onPressed: () {
+              // state.likePost(post);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.comment, size: 15),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Text(
+                    "Comment",
+                    style: const TextStyle(height: 1.5),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

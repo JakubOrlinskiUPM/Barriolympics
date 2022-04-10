@@ -18,23 +18,26 @@ class LikeButton extends StatelessWidget {
           : Icons.thumb_up_outlined;
 
       return Expanded(
-        child: OutlinedButton(
-          onPressed: () {
-            state.likePost(post);
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(icon, size: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 4.0),
-                child: Text(
-                  text,
-                  style: const TextStyle(height: 1.5),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 4.0),
+          child: OutlinedButton(
+            onPressed: () {
+              state.likePost(post);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(icon, size: 15),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Text(
+                    text,
+                    style: const TextStyle(height: 1.5),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

@@ -67,7 +67,6 @@ class _AppState extends State<App> {
         padding: const EdgeInsets.all(1.0),
         child: FloatingActionButton(
           onPressed: () {
-            Provider.of<AppState>(context, listen: false).addEvents();
             showModalBottomSheet(
               context: context,
               builder: (BuildContext ctx) {
@@ -76,7 +75,7 @@ class _AppState extends State<App> {
             );
           },
           tooltip: 'Help the community',
-          child: const Icon(Icons.group),
+          child: const Icon(Icons.handshake_outlined, size: 40,),
         ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );

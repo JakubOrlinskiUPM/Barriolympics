@@ -18,19 +18,76 @@ List<User> USER_LIST = [
 ];
 
 List<Comment> COMMENT_LIST = [
-  Comment(id: 0, user: getRandChoice(USER_LIST), text: "I love it!", likes: 0),
-  Comment(id: 1, user: getRandChoice(USER_LIST), text: "Go for it!", likes: 0),
   Comment(
-      id: 2, user: getRandChoice(USER_LIST), text: "This is great!", likes: 0),
+    id: 0,
+    user: getRandChoice(USER_LIST),
+    text: "I love it!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
   Comment(
-      id: 3, user: getRandChoice(USER_LIST), text: "Yeah, I like it", likes: 0),
+    id: 1,
+    user: getRandChoice(USER_LIST),
+    text: "Go for it!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
   Comment(
-      id: 4, user: getRandChoice(USER_LIST), text: "Ohh so cool!", likes: 0),
+    id: 2,
+    user: getRandChoice(USER_LIST),
+    text: "This is great!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
   Comment(
-      id: 5,
-      user: getRandChoice(USER_LIST),
-      text: "What is this about?",
-      likes: 0),
+    id: 3,
+    user: getRandChoice(USER_LIST),
+    text: "Yeah, I like it",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
+  Comment(
+    id: 4,
+    user: getRandChoice(USER_LIST),
+    text: "Ohh so cool!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
+  Comment(
+    id: 5,
+    user: getRandChoice(USER_LIST),
+    text: "What is this about?",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
+  Comment(
+    id: 6,
+    user: getRandChoice(USER_LIST),
+    text: "I love it!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
+  Comment(
+    id: 7,
+    user: getRandChoice(USER_LIST),
+    text: "I love it!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
+  Comment(
+    id: 8,
+    user: getRandChoice(USER_LIST),
+    text: "I love it!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
+  Comment(
+    id: 9,
+    user: getRandChoice(USER_LIST),
+    text: "I love it!",
+    likes: 0,
+    timePosted: getRandDate(),
+  ),
 ];
 
 List<Post> POST_LIST = [
@@ -47,10 +104,7 @@ List<Post> POST_LIST = [
       "https://upload.wikimedia.org/wikipedia/commons/9/9d/Autumn_Colours_-_Stourhead_-_geograph.org.uk_-_1044997.jpg"
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: DateTime.now().subtract(Duration(
-      hours: Random().nextInt(5),
-      minutes: Random().nextInt(20),
-    )),
+    timePosted: getRandDate(),
   ),
   Post(
     id: 1,
@@ -64,10 +118,7 @@ List<Post> POST_LIST = [
       "https://afbeelding.dvhn.nl/dvhn/incoming/6ueilh-drive-in-bioscoop.jpg/alternates/LANDSCAPE_1920/drive-in%20bioscoop.jpg"
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: DateTime.now().subtract(Duration(
-      hours: Random().nextInt(5),
-      minutes: Random().nextInt(20),
-    )),
+    timePosted: getRandDate(),
   ),
   Post(
     id: 2,
@@ -80,10 +131,7 @@ List<Post> POST_LIST = [
       "https://foodandroad.com/wp-content/uploads/2021/04/free-walking-tour-group-meeting-point-2.jpg"
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: DateTime.now().subtract(Duration(
-      hours: Random().nextInt(5),
-      minutes: Random().nextInt(20),
-    )),
+    timePosted: getRandDate(),
   ),
   Post(
     id: 3,
@@ -95,10 +143,7 @@ List<Post> POST_LIST = [
       "https://9968c6ef49dc043599a5-e151928c3d69a5a4a2d07a8bf3efa90a.ssl.cf2.rackcdn.com/237782-1.jpg"
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: DateTime.now().subtract(Duration(
-      hours: Random().nextInt(5),
-      minutes: Random().nextInt(20),
-    )),
+    timePosted: getRandDate(),
   ),
 ];
 
@@ -136,9 +181,9 @@ List<Event> EVENT_LIST = [
 ];
 
 List<Barrio> BARRIO_LIST = [
-  Barrio(id: 0, name: "Chamberi", events: EVENT_LIST, posts: POST_LIST),
-  Barrio(id: 1, name: "La Latina"),
-  Barrio(id: 2, name: "Chueca"),
-  Barrio(id: 3, name: "Lavapies"),
-  Barrio(id: 4, name: "Retiro"),
+  Barrio(id: 0, name: "Chamberi", events: EVENT_LIST, posts: POST_LIST, points: getRandPoints()),
+  Barrio(id: 1, name: "La Latina", points: getRandPoints()),
+  Barrio(id: 2, name: "Chueca", points: getRandPoints()),
+  Barrio(id: 3, name: "Lavapies", points: getRandPoints()),
+  Barrio(id: 4, name: "Retiro", points: getRandPoints()),
 ];

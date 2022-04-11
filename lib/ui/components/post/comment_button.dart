@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CommentButton extends StatelessWidget {
-  const CommentButton({Key? key, required this.post}) : super(key: key);
+  const CommentButton({Key? key, required this.post, required this.onTap}) : super(key: key);
 
   final Post post;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,7 @@ class CommentButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(right: 4.0),
           child: OutlinedButton(
-            onPressed: () {
-              // state.likePost(post);
-            },
+            onPressed: this.onTap,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

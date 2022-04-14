@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'package:barriolympics/models/post.dart';
+import 'package:barriolympics/models/event.dart';
 import 'package:barriolympics/provider/dummy_data.dart';
-import 'package:barriolympics/ui/components/post/post_item.dart';
+import 'package:barriolympics/ui/components/event/event_item.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/app_state.dart';
+import 'event_item.dart';
 
 class EventList extends StatefulWidget {
   const EventList({Key? key}) : super(key: key);
@@ -12,20 +15,22 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
+  get event => null;
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FractionallySizedBox(
-        widthFactor: 1,
-        heightFactor: 0.7,
-        child: ListView.builder(
-          itemCount: POST_LIST.length,
-          itemBuilder: (BuildContext context, index) {
-            Post post = POST_LIST[index];
-            return PostItem(post: post);
-          },
-        ),
-      ),
+    return Consumer<AppState>(
+      builder: (context, state, widget) {
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+              Event event = state.barrio.events[index];
+              return EventItem(event: event);
+            },
+            childCount: state.barrio.events.length,
+          ),
+        );
+      },
     );
   }
 }

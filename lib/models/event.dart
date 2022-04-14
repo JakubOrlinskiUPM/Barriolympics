@@ -30,4 +30,6 @@ class Event {
   List<User> goingUsers;
   List<User> goingVolunteers;
   List<User> goingSellers;
+
+
 }

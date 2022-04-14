@@ -3,10 +3,10 @@ import 'package:barriolympics/ui/pages/help.dart';
 import 'package:barriolympics/ui/pages/page_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:barriolympics/ui/custom_theme.dart';
 import 'package:barriolympics/ui/pages/home/home.dart';
 import 'package:barriolympics/provider/app_state.dart';
+
 
 void main() {
   runApp(

@@ -1,0 +1,6 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+upm/hcid/barriolympics/BuildConfig.java
+ upm.hcid.barriolympics.BuildConfig
+upm/hcid/barriolympics/MainActivity.java
+ upm.hcid.barriolympics.MainActivity

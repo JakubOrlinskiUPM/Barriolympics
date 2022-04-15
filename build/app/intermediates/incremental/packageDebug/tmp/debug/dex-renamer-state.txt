@@ -1,4 +1,4 @@
-#Mon Apr 11 18:42:29 CEST 2022
+#Fri Apr 15 20:25:00 CEST 2022
 base.0=C\:\\Users\\jonas\\Documents\\HCID\\HCID Project\\flutter\\barriolympics\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

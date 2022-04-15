@@ -19,22 +19,36 @@ class _FilterPageState extends State<FilterPage> {
   DateTime? _dateStartTime;
 
   TimeOfDay? time;
+  TimeOfDay? time1;
   TimeOfDay? picked;
+  TimeOfDay? picked1;
 
   @override
   void initState(){
     super.initState();
-    time = TimeOfDay.now();
+    time = const TimeOfDay(hour:10, minute: 30);
+    time1 =  TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 120)));
 }
 
 Future<Null> selectTime(BuildContext context) async {
   picked = await showTimePicker(
       context: context, initialTime: TimeOfDay.now()
   );
-
   if (picked != Null) {
     setState(() {
       time = picked;
+    });
+  }
+}
+
+Future<Null> selectTime1(BuildContext context) async {
+  picked1 = await showTimePicker(
+      context: context, initialTime: TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 120)))
+  );
+
+  if (picked1 != Null) {
+    setState(() {
+      time1 = picked1;
     });
   }
 }
@@ -60,7 +74,15 @@ Future<Null> selectTime(BuildContext context) async {
                     const Text('Date: ', style: TextStyle(fontSize: 14)),
                     const SizedBox(width: 10),
 
-                    Text(_dateStartTime == null ? '' : [_dateStartTime!.day, _dateStartTime!.month, _dateStartTime!.year]
+                    Text(_dateStartTime == null ? '' : (_dateStartTime?.day)
+                        .toString(), style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                    )),
+                    Text(_dateStartTime == null ? '' : (' / ')
+                        .toString(), style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                    )),
+                    Text(_dateStartTime == null ? '' : (_dateStartTime?.month)
                         .toString(), style: const TextStyle(
                         fontWeight: FontWeight.bold
                     )),
@@ -87,6 +109,7 @@ Future<Null> selectTime(BuildContext context) async {
                   const SizedBox(width: 10),
                   const Text('Starts after:', style: TextStyle(fontSize: 14)),
                   const SizedBox(width: 10),
+
                   Text('${time?.hour}:${time?.minute}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
 
                   const Spacer(),
@@ -104,7 +127,7 @@ Future<Null> selectTime(BuildContext context) async {
                     const SizedBox(width: 10),
                     const Text('Ends before:', style: TextStyle(fontSize: 14)),
                     const SizedBox(width: 10),
-                    Text('${time?.hour}:${time?.minute}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    Text('${time1?.hour}:${time1?.minute}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
 
                     const Spacer(),
                     OutlinedButton(
@@ -122,7 +145,7 @@ Future<Null> selectTime(BuildContext context) async {
                   onPressed: () {
                   Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EventsPage()),
+                  MaterialPageRoute(builder: (context) => EventsPage()),
                   );}),
               const SizedBox(height: 50),
 

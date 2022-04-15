@@ -1,5 +1,5 @@
 import 'dart:ffi';
-// import 'dart:html';
+
 
 import 'package:barriolympics/ui/components/post/comment_button.dart';
 import 'package:barriolympics/ui/components/post/comment_modal.dart';
@@ -35,7 +35,7 @@ class _EventItemState extends State<EventItem> {
           horizontalTitleGap: 0,
           contentPadding: EdgeInsets.all(0),
           title: Text(widget.event.name),
-
+            subtitle: Text(widget.event.description)
 
           ),
             Padding(
@@ -46,11 +46,7 @@ class _EventItemState extends State<EventItem> {
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.event.imageUrl.length,
                   itemBuilder: (context, index) {
-                    return Image.network(widget.event.imageUrl[index],
-                      errorBuilder: (context, exception, stackTrack) => Icon(Icons.error,),
-                        loadingBuilder: (context, exception, stackTrack) => CircularProgressIndicator(),
-
-                    );
+                    return Image.network(widget.event.imageUrl);
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const Padding(padding: EdgeInsets.all(6));
@@ -58,7 +54,37 @@ class _EventItemState extends State<EventItem> {
                 ),
               ),
             ),
-        ]
+            Column(
+              children: [
+
+                Row(
+                    children: [
+                      const Spacer(),
+                      const Text('Time: '),
+                      Text(widget.event.startTime.hour.toString(),
+                          style: Theme.of(context).textTheme.bodyText2),
+                      const Text('h-'),
+
+                      Text(widget.event.startTime.hour.toString(),
+                          style: Theme.of(context).textTheme.bodyText2),
+                      const Text('h'),
+                    ]),
+                Row(
+                    children: [
+                      const Spacer(),
+                      const Text('Date: '),
+                      Text(widget.event.startTime.day.toString(),
+                          style: Theme.of(context).textTheme.bodyText2),
+                      const Text('/'),
+                      Text(widget.event.startTime.month.toString(),
+                          style: Theme.of(context).textTheme.bodyText2),
+                    ])
+              ],
+            )
+
+
+
+          ]
         ),
         ),
       );

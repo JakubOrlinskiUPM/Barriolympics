@@ -18,13 +18,10 @@ class _EventsPageState extends State<EventsPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           const TopBanner(),
-          // const SliverAppBar(
-          //     pinned: true,
-          //   title:
-          //
-          // ),
-          SliverToBoxAdapter(
-              child: Row(
+          SliverAppBar(
+              pinned: true,
+              backgroundColor: const Color(0xfffdf5f0),
+              title: Row(
                 children: <Widget>[
                   Padding(
                         padding: const EdgeInsets.all(15),

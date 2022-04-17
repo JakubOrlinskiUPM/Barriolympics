@@ -1,6 +1,7 @@
 import 'package:barriolympics/ui/pages/events/events.dart';
-import 'package:barriolympics/ui/pages/help.dart';
+import 'package:barriolympics/ui/pages/help_page.dart';
 import 'package:barriolympics/ui/pages/page_details.dart';
+import 'package:barriolympics/ui/pages/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ void main() {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: CustomTheme.lightTheme,
+        onGenerateRoute: checkGeneralRoutes,
         home: const App(),
       ),
     ),

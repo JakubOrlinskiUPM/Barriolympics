@@ -83,12 +83,8 @@ class _PostItemState extends State<PostItem> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-                            opaque: false,
-                            pageBuilder: (BuildContext context, _, __) =>
-                                ImageView(post: widget.post)));
-                        // Navigator.pushNamed(context, POST_IMAGE_VIEW,
-                        //     arguments: {"post": widget.post});
+                        Navigator.pushNamed(context, POST_IMAGE_VIEW,
+                            arguments: {"post": widget.post});
                       },
                       child: Image.network(widget.post.imageUrls[index]),
                     );

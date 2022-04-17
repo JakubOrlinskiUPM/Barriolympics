@@ -12,7 +12,7 @@ PageRoute? checkGeneralRoutes(route) {
     case POST_IMAGE_VIEW:
       return PageRouteBuilder(
         pageBuilder: (BuildContext context, _, __) {
-          final args = ModalRoute.of(context)?.settings.arguments;
+          final args = route.arguments;
           Post post = args != null ? (args as Map)['post'] : null;
 
           return ImageView(
@@ -20,7 +20,7 @@ PageRoute? checkGeneralRoutes(route) {
             index: 0,
           );
         },
-          barrierDismissible: true,
+        opaque: false,
       );
     case STATISTICS_VIEW:
       return PageRouteBuilder(pageBuilder: (BuildContext context, _, __) {

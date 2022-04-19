@@ -8,9 +8,7 @@ import 'package:barriolympics/models/post.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/utils.dart';
 
-
 bool isNetworkPresent = true;
-
 
 List<User> USER_LIST = [
   User(id: 1, firstName: "John", lastName: "Johnson"),
@@ -172,7 +170,7 @@ List<Event> EVENT_LIST = [
     isPublished: true,
   ),
   Event(
-    id: 0,
+    id: 1,
     name: "Art exhibition",
     description: "Lorem ipsum",
     imageUrl: "",
@@ -183,13 +181,49 @@ List<Event> EVENT_LIST = [
     isPublished: true,
   ),
   Event(
-    id: 0,
+    id: 2,
     name: "Light show",
     description: "Lorem ipsum",
     imageUrl: "",
     startTime: DateTime(2022, 4, 30, 18),
     endTime: DateTime(2022, 4, 31, 23),
     location: const Location(locationName: "Botanical garden"),
+    organiser: getRandChoice(USER_LIST),
+    isPublished: true,
+  ),
+  Event(
+    id: 3,
+    name: "Outdoor cinema",
+    description: "Lorem ipsum",
+    imageUrl:
+        "https://img.theculturetrip.com/1440x807/smart/wp-content/uploads/2018/07/096.jpg",
+    startTime: DateTime(2022, 4, 30, 18),
+    endTime: DateTime(2022, 4, 31, 23),
+    location: const Location(locationName: "Autocine Madrid"),
+    organiser: getRandChoice(USER_LIST),
+    isPublished: true,
+  ),
+  Event(
+    id: 4,
+    name: "Basketball event",
+    description: "Lorem ipsum",
+    imageUrl:
+        "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
+    startTime: DateTime(2022, 4, 30, 18),
+    endTime: DateTime(2022, 4, 31, 23),
+    location: const Location(locationName: "Parque de baloncesto"),
+    organiser: getRandChoice(USER_LIST),
+    isPublished: true,
+  ),
+  Event(
+    id: 5,
+    name: "Pool Party",
+    description: "Lorem ipsum",
+    imageUrl:
+        "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
+    startTime: DateTime(2022, 4, 30, 18),
+    endTime: DateTime(2022, 4, 31, 23),
+    location: const Location(locationName: "Calle de Velásquez 36"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
   ),

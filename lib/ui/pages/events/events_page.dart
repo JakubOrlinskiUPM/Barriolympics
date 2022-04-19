@@ -1,9 +1,8 @@
 import 'package:barriolympics/provider/app_state.dart';
+import 'package:barriolympics/ui/components/banner/top_banner.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:flutter/material.dart';
-import 'package:barriolympics/ui/components/top_banner.dart';
 import 'package:barriolympics/ui/components/event/event_list.dart';
-import 'package:barriolympics/ui/components/post/like_button.dart';
 import 'package:barriolympics/ui/pages/events/filter_page.dart';
 import 'package:provider/provider.dart';
 

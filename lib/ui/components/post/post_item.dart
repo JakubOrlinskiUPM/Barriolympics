@@ -1,6 +1,9 @@
 import 'package:barriolympics/ui/components/post/comment_button.dart';
 import 'package:barriolympics/ui/components/post/comment_modal.dart';
 import 'package:barriolympics/ui/components/post/share_button.dart';
+import 'package:barriolympics/ui/pages/image_view.dart';
+import 'package:barriolympics/ui/pages/routing.dart';
+import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:barriolympics/ui/components/post/like_button.dart';
@@ -17,11 +20,22 @@ class PostItem extends StatefulWidget {
 }
 
 class _PostItemState extends State<PostItem> {
+  void _showCommentModal() {
+    showModalBottomSheet(
+      useRootNavigator: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return CommentModal(post: widget.post);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +49,7 @@ class _PostItemState extends State<PostItem> {
                 ],
               ),
               title: Text(widget.post.author.fullName),
-              subtitle: Text(widget.post.timePostedFormatted),
+              subtitle: Text(formatDate(widget.post.timePosted)),
               trailing: PopupMenuButton(
                 itemBuilder: (BuildContext context) {
                   return [
@@ -62,7 +76,18 @@ class _PostItemState extends State<PostItem> {
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.post.imageUrls.length,
                   itemBuilder: (context, index) {
-                    return Image.network(widget.post.imageUrls[index]);
+                    return TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.zero,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, POST_IMAGE_VIEW,
+                            arguments: {"post": widget.post});
+                      },
+                      child: Image.network(widget.post.imageUrls[index]),
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const Padding(padding: EdgeInsets.all(6));
@@ -71,22 +96,14 @@ class _PostItemState extends State<PostItem> {
               ),
             ),
             TextButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    useRootNavigator: true,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return CommentModal(post: widget.post);
-                    },
-                  );
-                },
+                onPressed: _showCommentModal,
                 child:
                     Text(widget.post.comments.length.toString() + " comments")),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 LikeButton(post: widget.post),
-                CommentButton(post: widget.post),
+                CommentButton(post: widget.post, onTap: _showCommentModal),
                 ShareButton(post: widget.post),
               ],
             ),

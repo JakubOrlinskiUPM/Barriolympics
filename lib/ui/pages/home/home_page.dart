@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:barriolympics/ui/components/post/post_list.dart';
-import 'package:barriolympics/ui/components/top_banner.dart';
+import 'package:barriolympics/ui/components/banner/top_banner.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
               ),
           ),
           const PostList(),
+          const SliverToBoxAdapter(child: SizedBox(height: 30),),
         ],
       ),
     );

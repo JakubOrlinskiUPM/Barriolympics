@@ -21,19 +21,4 @@ class Post {
   final List<String> imageUrls;
   final List<Comment> comments;
   final DateTime timePosted;
-
-  String get timePostedFormatted {
-    String res = "";
-    Duration diff = DateTime.now().difference(this.timePosted);
-
-    if (diff.inHours > 0) {
-      res = diff.inHours.toString() + " hours ago";
-    } else if (diff.inMinutes > 0) {
-      res = diff.inMinutes.toString() + " minutes ago";
-    } else {
-      res = "Just now";
-    }
-
-    return res;
-  }
 }

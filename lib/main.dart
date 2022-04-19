@@ -1,6 +1,7 @@
 import 'package:barriolympics/ui/pages/events/events.dart';
-import 'package:barriolympics/ui/pages/help.dart';
+import 'package:barriolympics/ui/pages/help_page.dart';
 import 'package:barriolympics/ui/pages/page_details.dart';
+import 'package:barriolympics/ui/pages/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:barriolympics/ui/custom_theme.dart';
@@ -15,6 +16,7 @@ void main() {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: CustomTheme.lightTheme,
+        onGenerateRoute: checkGeneralRoutes,
         home: const App(),
       ),
     ),
@@ -67,7 +69,6 @@ class _AppState extends State<App> {
         padding: const EdgeInsets.all(1.0),
         child: FloatingActionButton(
           onPressed: () {
-            Provider.of<AppState>(context, listen: false).addEvents();
             showModalBottomSheet(
               context: context,
               builder: (BuildContext ctx) {
@@ -76,7 +77,7 @@ class _AppState extends State<App> {
             );
           },
           tooltip: 'Help the community',
-          child: const Icon(Icons.group),
+          child: const Icon(Icons.handshake_outlined, size: 40,),
         ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );

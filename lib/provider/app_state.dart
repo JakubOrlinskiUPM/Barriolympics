@@ -1,3 +1,4 @@
+import 'package:barriolympics/models/comment.dart';
 import 'package:barriolympics/models/post.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +13,6 @@ class AppState extends ChangeNotifier {
 
   User user = User(id: 0, firstName: "Jake", lastName: "the Snake", events: EVENT_LIST.getRange(0, 2).toList());
 
-  void addEvents() {
-    List<Post> list = barrio.posts;
-    list.add(POST_LIST[0]);
-    barrio.posts = list;
-    notifyListeners();
-  }
-
   void likePost(Post post) {
     List<Post> posts = user.postsLiked.toList();
     if (posts.contains(post)) {
@@ -27,6 +21,11 @@ class AppState extends ChangeNotifier {
       posts.add(post);
     }
     user.postsLiked = posts;
+    notifyListeners();
+  }
+
+  void addComment(Post post, String comment) {
+    post.comments.add(Comment(id: 10, user: this.user, text: comment, likes: 0, timePosted: DateTime.now()));
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:barriolympics/models/post.dart';
 import 'package:barriolympics/provider/app_state.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class ShareButton extends StatelessWidget {
       return Expanded(
         child: OutlinedButton(
           onPressed: () {
-            // state.likePost(post);
+            Share.share("Barriolympics is the best!");
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

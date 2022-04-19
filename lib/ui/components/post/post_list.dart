@@ -1,8 +1,8 @@
 import 'package:barriolympics/provider/app_state.dart';
+import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:barriolympics/models/post.dart';
-import 'package:barriolympics/provider/dummy_data.dart';
 import 'package:barriolympics/ui/components/post/post_item.dart';
 import 'package:provider/provider.dart';
 
@@ -18,13 +18,15 @@ class _PostListState extends State<PostList> {
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, state, widget) {
+        List orderedPosts = getOrderedListByDate(state.barrio.posts);
+
         return SliverList(
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-              Post post = state.barrio.posts[index];
+              Post post = orderedPosts[index];
               return PostItem(post: post);
             },
-            childCount: state.barrio.posts.length,
+            childCount: orderedPosts.length,
           ),
         );
       },

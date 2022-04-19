@@ -15,7 +15,7 @@ class Home extends PageDetails {
     navigator = Navigator(
       key: navigatorKey,
       onGenerateRoute: (route) {
-        MaterialPageRoute? r = checkGeneralRoutes(route);
+        PageRoute? r = checkGeneralRoutes(route);
         if (r != null) {
           return r;
         }

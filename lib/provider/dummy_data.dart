@@ -8,6 +8,10 @@ import 'package:barriolympics/models/post.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/utils.dart';
 
+
+bool isNetworkPresent = true;
+
+
 List<User> USER_LIST = [
   User(id: 1, firstName: "John", lastName: "Johnson"),
   User(id: 2, firstName: "Jack", lastName: "Jackson"),
@@ -99,9 +103,11 @@ List<Post> POST_LIST = [
         "This opening was great, so many people showed up! Now everyone come and plant what you want!",
     likes: 0,
     imageUrls: [
-      "https://i.insider.com/5ccb2204e9f08a27c3522ac4?width=2000&format=jpeg&auto=webp",
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ruth-bancroft-garden-san-francisco-waterwise-garden-1639608182.jpg?crop=1xw:1xh;center,top&resize=980:*",
-      "https://upload.wikimedia.org/wikipedia/commons/9/9d/Autumn_Colours_-_Stourhead_-_geograph.org.uk_-_1044997.jpg"
+      if (isNetworkPresent) ...[
+        "https://i.insider.com/5ccb2204e9f08a27c3522ac4?width=2000&format=jpeg&auto=webp",
+        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ruth-bancroft-garden-san-francisco-waterwise-garden-1639608182.jpg?crop=1xw:1xh;center,top&resize=980:*",
+        "https://upload.wikimedia.org/wikipedia/commons/9/9d/Autumn_Colours_-_Stourhead_-_geograph.org.uk_-_1044997.jpg"
+      ]
     ],
     comments: getRandSublist(COMMENT_LIST),
     timePosted: getRandDate(),
@@ -114,8 +120,10 @@ List<Post> POST_LIST = [
         "The show was great, I loved the movie! And all the food trucks were super cool!",
     likes: 0,
     imageUrls: [
-      "https://usercontent.one/wp/northerntimes.nl/wp-content/uploads/2020/04/drive-in-bioscoop-amsterdam-den-haag-scaled-e1587457304723-1140x570.jpg?media=1643034510",
-      "https://afbeelding.dvhn.nl/dvhn/incoming/6ueilh-drive-in-bioscoop.jpg/alternates/LANDSCAPE_1920/drive-in%20bioscoop.jpg"
+      if (isNetworkPresent) ...[
+        "https://usercontent.one/wp/northerntimes.nl/wp-content/uploads/2020/04/drive-in-bioscoop-amsterdam-den-haag-scaled-e1587457304723-1140x570.jpg?media=1643034510",
+        "https://afbeelding.dvhn.nl/dvhn/incoming/6ueilh-drive-in-bioscoop.jpg/alternates/LANDSCAPE_1920/drive-in%20bioscoop.jpg"
+      ]
     ],
     comments: getRandSublist(COMMENT_LIST),
     timePosted: getRandDate(),
@@ -128,7 +136,9 @@ List<Post> POST_LIST = [
         "I loved seeing the city in a new light and learning all about the area! 100% recommended!",
     likes: 0,
     imageUrls: [
-      "https://foodandroad.com/wp-content/uploads/2021/04/free-walking-tour-group-meeting-point-2.jpg"
+      if (isNetworkPresent) ...[
+        "https://foodandroad.com/wp-content/uploads/2021/04/free-walking-tour-group-meeting-point-2.jpg"
+      ]
     ],
     comments: getRandSublist(COMMENT_LIST),
     timePosted: getRandDate(),
@@ -140,7 +150,9 @@ List<Post> POST_LIST = [
     text: "Chamberí for life!",
     likes: 0,
     imageUrls: [
-      "https://9968c6ef49dc043599a5-e151928c3d69a5a4a2d07a8bf3efa90a.ssl.cf2.rackcdn.com/237782-1.jpg"
+      if (isNetworkPresent) ...[
+        "https://9968c6ef49dc043599a5-e151928c3d69a5a4a2d07a8bf3efa90a.ssl.cf2.rackcdn.com/237782-1.jpg"
+      ]
     ],
     comments: getRandSublist(COMMENT_LIST),
     timePosted: getRandDate(),
@@ -157,6 +169,7 @@ List<Event> EVENT_LIST = [
     endTime: DateTime(2022, 4, 24, 18),
     location: const Location(locationName: "Park"),
     organiser: getRandChoice(USER_LIST),
+    isPublished: true,
   ),
   Event(
     id: 0,
@@ -167,6 +180,7 @@ List<Event> EVENT_LIST = [
     endTime: DateTime(2022, 4, 15, 22),
     location: const Location(locationName: "Gallery"),
     organiser: getRandChoice(USER_LIST),
+    isPublished: true,
   ),
   Event(
     id: 0,
@@ -177,11 +191,17 @@ List<Event> EVENT_LIST = [
     endTime: DateTime(2022, 4, 31, 23),
     location: const Location(locationName: "Botanical garden"),
     organiser: getRandChoice(USER_LIST),
+    isPublished: true,
   ),
 ];
 
 List<Barrio> BARRIO_LIST = [
-  Barrio(id: 0, name: "Chamberi", events: EVENT_LIST, posts: POST_LIST, points: getRandPoints()),
+  Barrio(
+      id: 0,
+      name: "Chamberi",
+      events: EVENT_LIST,
+      posts: POST_LIST,
+      points: getRandPoints()),
   Barrio(id: 1, name: "La Latina", points: getRandPoints()),
   Barrio(id: 2, name: "Chueca", points: getRandPoints()),
   Barrio(id: 3, name: "Lavapies", points: getRandPoints()),

@@ -6,7 +6,7 @@ class ImageView extends StatefulWidget {
   const ImageView({Key? key, required this.post, this.index = 0})
       : super(key: key);
 
-  final Post post;
+  final Post? post;
   final int index;
 
   @override
@@ -19,6 +19,11 @@ class _ImageViewState extends State<ImageView> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.post == null) {
+      Navigator.pop(context);
+      return Container();
+    }
+
     return Dismissible(
       key: const Key("ImageView"),
       direction: DismissDirection.vertical,
@@ -47,7 +52,7 @@ class _ImageViewState extends State<ImageView> {
                     });
                   },
                 ),
-                items: widget.post.imageUrls.map((url) {
+                items: widget.post!.imageUrls.map((url) {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
@@ -60,7 +65,7 @@ class _ImageViewState extends State<ImageView> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: widget.post.imageUrls.asMap().entries.map((entry) {
+                children: widget.post!.imageUrls.asMap().entries.map((entry) {
                   return Container(
                     width: 12.0,
                     height: 12.0,

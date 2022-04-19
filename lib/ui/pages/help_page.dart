@@ -29,19 +29,19 @@ class _HelpPageState extends State<HelpPage> {
                 HelpType(
                     text: "Organise an event!",
                     imagePath: "images/organise-img.png",
-                    navigationPath: NEW_EVENT_FORM),
+                    navigationPath: NEW_EVENT_PAGE),
                 HelpType(
                     text: "Volunteer!",
                     imagePath: "images/volunteer-img.png",
-                    navigationPath: NEW_EVENT_FORM),
+                    navigationPath: NEW_EVENT_PAGE),
                 HelpType(
                     text: "Make a poster!",
                     imagePath: "images/paint-img.png",
-                    navigationPath: NEW_EVENT_FORM),
+                    navigationPath: NEW_EVENT_PAGE),
                 HelpType(
                     text: "Attend!",
                     imagePath: "images/attend-img.png",
-                    navigationPath: NEW_EVENT_FORM),
+                    navigationPath: NEW_EVENT_PAGE),
               ],
             ),
           ),

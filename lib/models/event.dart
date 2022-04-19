@@ -1,3 +1,4 @@
+import 'package:barriolympics/models/permit.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/models/location.dart';
 
@@ -5,12 +6,15 @@ import 'package:barriolympics/models/location.dart';
 class Event {
   Event({
     required this.id,
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-    required this.startTime,
-    required this.endTime,
-    required this.location,
+    this.name,
+    this.description,
+    this.imageUrl,
+    this.startTime,
+    this.endTime,
+    this.location,
+    this.permits = const [],
+
+    required this.isPublished,
 
     required this.organiser,
     this.goingUsers = const [],
@@ -19,15 +23,31 @@ class Event {
   });
 
   final int id;
-  final String name;
-  final String description;
-  final String imageUrl;
-  final DateTime startTime;
-  final DateTime endTime;
-  final Location location;
+  String? name;
+  String? description;
+  String? imageUrl;
+  DateTime? startTime;
+  DateTime? endTime;
+  Location? location;
+  List<Permit> permits;
+
+  final bool isPublished;
 
   final User organiser;
   List<User> goingUsers;
   List<User> goingVolunteers;
   List<User> goingSellers;
+
+  bool get step1 {
+    return name != null && description != null;
+  }
+  bool get step2 {
+    return location != null;
+  }
+  bool get step3 {
+    return permits.every((permit) => permit.isDone);
+  }
+  bool get step4 {
+    return isPublished;
+  }
 }

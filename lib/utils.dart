@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 
 getRandChoice(List list) {
   return list[Random(42).nextInt(list.length)];
@@ -50,4 +52,10 @@ List getOrderedListByDate(List list) {
     ..sort((c1, c2) {
       return c1.timePosted.isBefore(c2.timePosted) ? 1 : -1;
     });
+}
+
+getArgument(RouteSettings route, String key) {
+  final args = route.arguments;
+  dynamic res = args != null ? (args as Map)[key] : null;
+  return res;
 }

@@ -1,31 +1,20 @@
+import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
 import 'package:flutter/material.dart';
 
-class EditEventStepLoc extends StatefulWidget {
-  const EditEventStepLoc({Key? key}) : super(key: key);
+class EditEventStepLoc extends StatefulWidget implements EditEventStep {
+  const EditEventStepLoc({Key? key, required this.event}) : super(key: key);
+  final Event event;
 
   @override
   State<EditEventStepLoc> createState() => _EditEventStepLocState();
 
-  static Step getStep(int currentStep, TextStyle stepStyle, StepState state) {
-    return Step(
-        title: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.map,
-                size: 30,
-              ),
-            ),
-            Text(
-              "Location & misc",
-              style: stepStyle,
-            ),
-          ],
-        ),
-        isActive: currentStep == 1,
-        content: EditEventStepLoc()
-    );
+  IconData getIcon() {
+    return Icons.map;
+  }
+
+  String getTitle() {
+    return "Location";
   }
 }
 

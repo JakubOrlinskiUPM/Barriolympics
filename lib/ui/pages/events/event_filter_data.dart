@@ -17,10 +17,10 @@ class EventFilterData {
   bool doesEventMatch(Event event) {
     bool doesMatch = true;
     if (startDate != null) {
-      doesMatch = event.startTime!.isBefore(startDate!);
+      doesMatch = event.date!.isBefore(startDate!);
     }
     if (endDate != null) {
-      doesMatch = event.endTime!.isAfter(endDate!);
+      doesMatch = event.date!.isAfter(endDate!);
     }
     // TODO add in the other checks
 

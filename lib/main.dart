@@ -14,6 +14,7 @@ void main() {
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => AppState())],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: CustomTheme.lightTheme,
         onGenerateRoute: checkGeneralRoutes,

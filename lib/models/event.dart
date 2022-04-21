@@ -1,16 +1,19 @@
+import 'package:barriolympics/models/barrio.dart';
 import 'package:barriolympics/models/permit.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/models/location.dart';
+import 'package:flutter/material.dart';
 
 
 class Event {
   Event({
     required this.id,
+    this.barrio,
     this.name,
     this.description,
-    this.imageUrl,
-    this.startTime,
-    this.endTime,
+    this.imageUrl = "",
+    this.date,
+    this.time,
     this.location,
     this.permits = const [],
 
@@ -23,11 +26,12 @@ class Event {
   });
 
   final int id;
+  Barrio? barrio;
   String? name;
   String? description;
   String? imageUrl;
-  DateTime? startTime;
-  DateTime? endTime;
+  DateTime? date;
+  TimeOfDay? time;
   Location? location;
   List<Permit> permits;
 

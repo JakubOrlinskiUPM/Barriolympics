@@ -27,8 +27,14 @@ class _NewEventSplashScreenState extends State<NewEventSplashScreen> {
               Text("We help you all along the way!"),
               ElevatedButton(
                 onPressed: () {
+                  AppState appSatte =
+                      Provider.of<AppState>(context, listen: false);
                   Navigator.pushNamed(context, EDIT_EVENT_PAGE, arguments: {
-                    'event': Event(id: 1000, isPublished: false, organiser: Provider.of<AppState>(context, listen: false).user),
+                    'event': Event(
+                        id: 1000,
+                        barrio: appSatte.barrio,
+                        isPublished: false,
+                        organiser: appSatte.user),
                   });
                 },
                 child: Text("Organize!"),

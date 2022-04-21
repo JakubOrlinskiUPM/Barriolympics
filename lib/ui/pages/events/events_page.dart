@@ -106,7 +106,7 @@ class _EventsPageState extends State<EventsPage> {
             ),
           ),
           Consumer<AppState>(builder: (context, state, widget) {
-            return EventList(events: state.barrio.events, filters: _filterData);
+            return EventList(events: state.getEvents(), filters: _filterData);
           })
         ],
       ),

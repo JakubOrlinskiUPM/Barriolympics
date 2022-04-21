@@ -1,30 +1,20 @@
+import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
 import 'package:flutter/material.dart';
 
-class EditEventStepPublish extends StatefulWidget {
-  const EditEventStepPublish({Key? key}) : super(key: key);
+class EditEventStepPublish extends StatefulWidget implements EditEventStep {
+  const EditEventStepPublish({Key? key, required this.event}) : super(key: key);
+  final Event event;
 
   @override
   State<EditEventStepPublish> createState() => _EditEventStepPublishState();
 
-  static Step getStep(int currentStep, TextStyle stepStyle, StepState state) {
-    return Step(
-        title: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.publish_outlined,
-                size: 30,
-              ),
-            ),
-            Text(
-              "Publish",
-              style: stepStyle,
-            )
-          ],
-        ),
-        isActive: currentStep == 3,
-        content: EditEventStepPublish());
+  IconData getIcon() {
+    return Icons.publish_outlined;
+  }
+
+  String getTitle() {
+    return "Publish";
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:barriolympics/models/location.dart';
 import 'package:barriolympics/models/post.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/utils.dart';
+import 'package:flutter/material.dart';
 
 bool isNetworkPresent = true;
 
@@ -163,8 +164,8 @@ List<Event> EVENT_LIST = [
     name: "Outdoor BBQ",
     description: "Lorem ipsum",
     imageUrl: "",
-    startTime: DateTime(2022, 4, 24, 12),
-    endTime: DateTime(2022, 4, 24, 18),
+    date: DateTime(2022, 4, 24),
+    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Park"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -174,8 +175,8 @@ List<Event> EVENT_LIST = [
     name: "Art exhibition",
     description: "Lorem ipsum",
     imageUrl: "",
-    startTime: DateTime(2022, 4, 15, 10),
-    endTime: DateTime(2022, 4, 15, 22),
+    date: DateTime(2022, 4, 15),
+    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Gallery"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -185,8 +186,8 @@ List<Event> EVENT_LIST = [
     name: "Light show",
     description: "Lorem ipsum",
     imageUrl: "",
-    startTime: DateTime(2022, 4, 30, 18),
-    endTime: DateTime(2022, 4, 31, 23),
+    date: DateTime(2022, 4, 30),
+    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Botanical garden"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -197,8 +198,8 @@ List<Event> EVENT_LIST = [
     description: "Lorem ipsum",
     imageUrl:
         "https://img.theculturetrip.com/1440x807/smart/wp-content/uploads/2018/07/096.jpg",
-    startTime: DateTime(2022, 4, 30, 18),
-    endTime: DateTime(2022, 4, 31, 23),
+    date: DateTime(2022, 4, 30),
+    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Autocine Madrid"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -209,8 +210,8 @@ List<Event> EVENT_LIST = [
     description: "Lorem ipsum",
     imageUrl:
         "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
-    startTime: DateTime(2022, 4, 30, 18),
-    endTime: DateTime(2022, 4, 31, 23),
+    date: DateTime(2022, 4, 30),
+    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Parque de baloncesto"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -221,8 +222,8 @@ List<Event> EVENT_LIST = [
     description: "Lorem ipsum",
     imageUrl:
         "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
-    startTime: DateTime(2022, 4, 30, 18),
-    endTime: DateTime(2022, 4, 31, 23),
+    date: DateTime(2022, 4, 30),
+    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Calle de Velásquez 36"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,

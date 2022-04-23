@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\jonas\\Documents\\HCID\\HCID Project\\flutter\\barriolympics\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-as\\values-as.xml",
+            "outputFile": "/Users/jakuborlinski/Projects/Barriolympics/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-as/values-as.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jonas\\.gradle\\caches\\transforms-2\\files-2.1\\16a4eaa9083fcb08b8642b835d688c88\\core-1.6.0\\res\\values-as\\values-as.xml",
+                    "source": "/Users/jakuborlinski/.gradle/caches/transforms-3/8bb6d38b23c2a658ba98bfc8433e33ef/transformed/core-1.6.0/res/values-as/values-as.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -46,6 +46,7 @@ class _EditEventPageState extends State<EditEventPage> {
     ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {

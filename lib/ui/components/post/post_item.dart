@@ -26,7 +26,10 @@ class _PostItemState extends State<PostItem> {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return CommentModal(post: widget.post);
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: CommentModal(post: widget.post),
+        );
       },
     );
   }

@@ -8,7 +8,6 @@ import 'package:barriolympics/ui/custom_theme.dart';
 import 'package:barriolympics/ui/pages/home/home.dart';
 import 'package:barriolympics/provider/app_state.dart';
 
-
 void main() {
   runApp(
     MultiProvider(
@@ -41,45 +40,52 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: tabs[_currentIndex].navigator,
-      extendBodyBehindAppBar: true,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        clipBehavior: Clip.antiAlias,
-        child: BottomNavigationBar(
-            iconSize: 30,
-            backgroundColor: Colors.transparent,
-            currentIndex: _currentIndex,
-            onTap: (val) => _onTap(val, context),
-            items: tabs
-                .map(
-                  (tab) => BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
-                      child: Icon(tab.pageIcon),
+    return WillPopScope(
+      onWillPop: () async =>
+          !await tabs[_currentIndex].navigatorKey.currentState!.maybePop(),
+      child: Scaffold(
+        body: tabs[_currentIndex].navigator,
+        extendBodyBehindAppBar: true,
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8.0,
+          clipBehavior: Clip.antiAlias,
+          child: BottomNavigationBar(
+              iconSize: 25,
+              backgroundColor: Colors.transparent,
+              currentIndex: _currentIndex,
+              onTap: (val) => _onTap(val, context),
+              items: tabs
+                  .map(
+                    (tab) => BottomNavigationBarItem(
+                      icon: Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                        child: Icon(tab.pageIcon),
+                      ),
+                      label: tab.pageName,
                     ),
-                    label: tab.pageName,
-                  ),
-                )
-                .toList()),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext ctx) {
-                return const HelpPage();
-              },
-            );
-          },
-          tooltip: 'Help the community',
-          child: const Icon(Icons.handshake_outlined, size: 40,),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+                  )
+                  .toList()),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: FloatingActionButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext ctx) {
+                  return const HelpPage();
+                },
+              );
+            },
+            tooltip: 'Help the community',
+            child: const Icon(
+              Icons.handshake_outlined,
+              size: 40,
+            ),
+          ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),
       ),
     );
   }

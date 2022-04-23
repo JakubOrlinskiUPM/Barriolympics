@@ -99,9 +99,9 @@ class _PostItemState extends State<PostItem> {
               ),
             ),
             TextButton(
-                onPressed: _showCommentModal,
-                child:
-                    Text(widget.post.comments.length.toString() + " comments")),
+              onPressed: _showCommentModal,
+              child: Text(widget.post.comments.length.toString() + " comments"),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

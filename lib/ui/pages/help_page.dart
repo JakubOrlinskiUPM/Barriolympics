@@ -1,3 +1,4 @@
+import 'package:barriolympics/ui/components/dismissible_modal_bar.dart';
 import 'package:barriolympics/ui/components/help_type.dart';
 import 'package:barriolympics/ui/components/help_type.dart';
 import 'package:barriolympics/ui/components/help_type.dart';
@@ -15,13 +16,13 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Text("How you can help:",
-              style: Theme.of(context).textTheme.headline5),
-          Expanded(
+    return Column(
+      children: [
+        const DismissibleModalBar(),
+        Text("How you can help:", style: Theme.of(context).textTheme.headline5),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: GridView(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
@@ -45,8 +46,8 @@ class _HelpPageState extends State<HelpPage> {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

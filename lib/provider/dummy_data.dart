@@ -176,7 +176,6 @@ List<Event> EVENT_LIST = [
     description: "There will be an art exhibition for everyone to stroll in. All kinds of art from madrileños will be shown. You can bring something to drink of you'd like ;)",
     imageUrl: "https://allaboutlimassol.com/assets/images/primary-image/141124-0.art_exhibition_gallery.jpg",
     date: DateTime(2022, 4, 15),
-    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Gallery"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -187,7 +186,6 @@ List<Event> EVENT_LIST = [
     description: "Part of the amazing light shows all over town. See what this street has to offer!",
     imageUrl: "https://www.metrotrekker.com/metro/singapore/singapore/images/_xl/national_orchid_garden_singapore_038_xl.jpg",
     date: DateTime(2022, 4, 30),
-    time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Botanical garden"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -198,8 +196,6 @@ List<Event> EVENT_LIST = [
     description: "Old romantic movies to join whenever you'd like.",
     imageUrl:
         "https://socratessculpturepark.org/wp-content/uploads/2018/08/ssp-119_m-768x512.jpg",
-
-        // "https://img.theculturetrip.com/1440x807/smart/wp-content/uploads/2018/07/096.jpg",
     date: DateTime(2022, 4, 30),
     time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Autocine Madrid"),

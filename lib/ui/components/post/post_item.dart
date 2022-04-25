@@ -26,7 +26,10 @@ class _PostItemState extends State<PostItem> {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return CommentModal(post: widget.post);
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: CommentModal(post: widget.post),
+        );
       },
     );
   }
@@ -96,9 +99,9 @@ class _PostItemState extends State<PostItem> {
               ),
             ),
             TextButton(
-                onPressed: _showCommentModal,
-                child:
-                    Text(widget.post.comments.length.toString() + " comments")),
+              onPressed: _showCommentModal,
+              child: Text(widget.post.comments.length.toString() + " comments"),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

@@ -14,33 +14,26 @@ class HelpType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.pushNamed(context, navigationPath);
-      },
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
       child: Card(
-        margin: EdgeInsets.all(10),
-        child: Container(
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            border: Border.all(
-              width: 2,
-              color: Color(0xFFFF6E00),
-            ),
-          ),
-          child: Column(
-            children: [
-              Text(text),
-              Expanded(
-                child: Image(
-                  image: AssetImage(this.imagePath),
-                  fit: BoxFit.contain,
+        child: OutlinedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, navigationPath);
+          },
+          child: Container(
+            padding: EdgeInsets.all(4),
+            child: Column(
+              children: [
+                Text(text, textAlign: TextAlign.center, style: TextStyle(color: Colors.black),),
+                Expanded(
+                  child: Image(
+                    image: AssetImage(this.imagePath),
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

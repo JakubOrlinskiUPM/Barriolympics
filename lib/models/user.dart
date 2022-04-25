@@ -13,6 +13,7 @@ class User {
     this.postsLiked = const [],
     this.commentsLiked = const [],
     this.events = const [],
+    this.ownEvents = const [],
   });
 
   final int id;
@@ -21,6 +22,7 @@ class User {
   List<Post> postsLiked;
   List<Comment> commentsLiked;
   List<Event> events;
+  List<Event> ownEvents;
   final String imageUrl;
 
   String get fullName {

@@ -1,10 +1,14 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\jonas\\Documents\\HCID\\HCID Project\\flutter\\barriolympics\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rPT\\values-pt-rPT.xml",
+            "outputFile": "/Users/jakuborlinski/Projects/Barriolympics/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\jonas\\.gradle\\caches\\transforms-2\\files-2.1\\26d1e611a1d99986bd9b52ab01c13a1f\\core-1.7.0\\res\\values-pt-rPT\\values-pt-rPT.xml",
+=======
+                    "source": "/Users/jakuborlinski/.gradle/caches/transforms-3/8bb6d38b23c2a658ba98bfc8433e33ef/transformed/core-1.6.0/res/values-pt-rPT/values-pt-rPT.xml",
+>>>>>>> f5186930ec14ac15cead811f67ed8545f13080b3
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,32 +1,19 @@
+import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
 import 'package:flutter/material.dart';
 
-class EditEventStepPermits extends StatefulWidget {
-  const EditEventStepPermits({Key? key}) : super(key: key);
+class EditEventStepPermits extends StatefulWidget implements EditEventStep {
+  const EditEventStepPermits({Key? key, required this.event}) : super(key: key);
+  final Event event;
 
   @override
   State<EditEventStepPermits> createState() => _EditEventStepPermitsState();
 
-  static Step getStep(int currentStep, TextStyle stepStyle, StepState state) {
-    return Step(
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.file_copy_outlined,
-                size: 30,
-              ),
-            ),
-            Text(
-              "Permits",
-              style: stepStyle,
-            ),
-          ],
-        ),
-        isActive: currentStep == 2,
-        content: EditEventStepPermits()
-    );
+  IconData getIcon() {
+    return Icons.file_copy_outlined;
+  }
+  String getTitle() {
+    return "Permits";
   }
 }
 

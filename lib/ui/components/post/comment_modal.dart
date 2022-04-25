@@ -1,6 +1,7 @@
 import 'package:barriolympics/main.dart';
 import 'package:barriolympics/models/comment.dart';
 import 'package:barriolympics/provider/app_state.dart';
+import 'package:barriolympics/ui/components/dismissible_modal_bar.dart';
 import 'package:barriolympics/ui/components/post/comment_item.dart';
 import 'package:barriolympics/ui/components/user_icon.dart';
 import 'package:barriolympics/utils.dart';
@@ -30,6 +31,17 @@ class _CommentModalState extends State<CommentModal> {
     super.dispose();
   }
 
+  void _sendComment([String? text]) {
+    Provider.of<AppState>(context, listen: false)
+        .addComment(widget.post, commentController.text);
+    commentController.text = "";
+    commentScrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.ease,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List orderedComments = getOrderedListByDate(widget.post.comments);
@@ -40,16 +52,7 @@ class _CommentModalState extends State<CommentModal> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: Container(
-                height: 5,
-                width: 150,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade500,
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-              ),
-            ),
+            const DismissibleModalBar(),
             Text(
               "Comments",
               style: Theme.of(context).textTheme.headline5,
@@ -70,21 +73,13 @@ class _CommentModalState extends State<CommentModal> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: commentController,
+                onFieldSubmitted: _sendComment,
                 autofocus: true,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
                     icon: Icon(Icons.send),
-                    onPressed: () {
-                      Provider.of<AppState>(context, listen: false)
-                          .addComment(widget.post, commentController.text);
-                      commentController.text = "";
-                      commentScrollController.animateTo(
-                        0,
-                        duration: Duration(milliseconds: 200),
-                        curve: Curves.ease,
-                      );
-                    },
+                    onPressed:_sendComment,
                   ),
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(

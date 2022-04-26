@@ -32,7 +32,7 @@ class _EventItemState extends State<EventItem> {
               height: 100,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: widget.event.imageUrl!.length,
+                itemCount: 1,
                 itemBuilder: (context, index) {
                   return Image.network(widget.event.imageUrl!);
                 },

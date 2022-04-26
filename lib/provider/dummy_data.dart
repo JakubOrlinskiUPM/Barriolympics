@@ -165,7 +165,7 @@ List<Event> EVENT_LIST = [
     description: "The outdoor barbeque for everyone in the neighbourhood who still has not got plans for dinner! We will all be bringing own meat and veggies, so be sure to bring some to share with the others :)",
     imageUrl: "https://st2.depositphotos.com/1662991/11546/i/950/depositphotos_115465050-stock-photo-young-male-with-a-beard.jpg",
     date: DateTime(2022, 4, 24),
-    time: const TimeOfDay(hour: 12, minute: 0),
+    time: const TimeOfDay(hour: 18, minute: 0),
     location: const Location(locationName: "Park"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -176,6 +176,7 @@ List<Event> EVENT_LIST = [
     description: "There will be an art exhibition for everyone to stroll in. All kinds of art from madrileños will be shown. You can bring something to drink of you'd like ;)",
     imageUrl: "https://allaboutlimassol.com/assets/images/primary-image/141124-0.art_exhibition_gallery.jpg",
     date: DateTime(2022, 4, 15),
+    time: const TimeOfDay(hour: 9, minute: 0),
     location: const Location(locationName: "Gallery"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -186,6 +187,8 @@ List<Event> EVENT_LIST = [
     description: "Part of the amazing light shows all over town. See what this street has to offer!",
     imageUrl: "https://www.metrotrekker.com/metro/singapore/singapore/images/_xl/national_orchid_garden_singapore_038_xl.jpg",
     date: DateTime(2022, 4, 30),
+    time: const TimeOfDay(hour: 22, minute: 0),
+
     location: const Location(locationName: "Botanical garden"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -197,7 +200,7 @@ List<Event> EVENT_LIST = [
     imageUrl:
         "https://socratessculpturepark.org/wp-content/uploads/2018/08/ssp-119_m-768x512.jpg",
     date: DateTime(2022, 4, 30),
-    time: const TimeOfDay(hour: 12, minute: 0),
+    time: const TimeOfDay(hour: 20, minute: 0),
     location: const Location(locationName: "Autocine Madrid"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -209,7 +212,7 @@ List<Event> EVENT_LIST = [
     imageUrl:
         "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
     date: DateTime(2022, 4, 30),
-    time: const TimeOfDay(hour: 12, minute: 0),
+    time: const TimeOfDay(hour: 19, minute: 0),
     location: const Location(locationName: "Parque de baloncesto"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,
@@ -221,7 +224,7 @@ List<Event> EVENT_LIST = [
     imageUrl:
         "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
     date: DateTime(2022, 4, 30),
-    time: const TimeOfDay(hour: 12, minute: 0),
+    time: const TimeOfDay(hour: 13, minute: 0),
     location: const Location(locationName: "Calle de Velásquez 36"),
     organiser: getRandChoice(USER_LIST),
     isPublished: true,

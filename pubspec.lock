@@ -270,7 +270,18 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.2"
+<<<<<<< HEAD
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.4"
+  share_plus_linux:
+=======
   quiver:
+>>>>>>> f5186930ec14ac15cead811f67ed8545f13080b3
     dependency: transitive
     description:
       name: quiver

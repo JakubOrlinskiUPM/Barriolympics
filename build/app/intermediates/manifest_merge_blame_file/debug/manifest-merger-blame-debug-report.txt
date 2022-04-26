@@ -18,10 +18,17 @@
 16    <application
 16-->/Users/jakuborlinski/Projects/Barriolympics/android/app/src/main/AndroidManifest.xml:3:4-41:19
 17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+<<<<<<< HEAD
+17-->[androidx.core:core:1.7.0] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\26d1e611a1d99986bd9b52ab01c13a1f\core-1.7.0\AndroidManifest.xml:24:18-86
+18        android:debuggable="true"
+19        android:icon="@mipmap/launcher_icon"
+19-->C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\android\app\src\main\AndroidManifest.xml:5:9-45
+=======
 17-->[androidx.core:core:1.6.0] /Users/jakuborlinski/.gradle/caches/transforms-3/8bb6d38b23c2a658ba98bfc8433e33ef/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
 18        android:debuggable="true"
 19        android:icon="@mipmap/launcher_icon"
 19-->/Users/jakuborlinski/Projects/Barriolympics/android/app/src/main/AndroidManifest.xml:5:9-45
+>>>>>>> f5186930ec14ac15cead811f67ed8545f13080b3
 20        android:label="barriolympics" >
 20-->/Users/jakuborlinski/Projects/Barriolympics/android/app/src/main/AndroidManifest.xml:4:9-38
 21        <activity
@@ -86,6 +93,50 @@
 62            android:value="2" />
 62-->/Users/jakuborlinski/Projects/Barriolympics/android/app/src/main/AndroidManifest.xml:40:13-30
 63
+<<<<<<< HEAD
+64        <provider
+64-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
+65            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+65-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-77
+66            android:authorities="upm.hcid.barriolympics.flutter.share_provider"
+66-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
+67            android:exported="false"
+67-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
+68            android:grantUriPermissions="true" >
+68-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-47
+69            <meta-data
+69-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:68
+70                android:name="android.support.FILE_PROVIDER_PATHS"
+70-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-67
+71                android:resource="@xml/flutter_share_file_paths" />
+71-->[:share_plus] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-65
+72        </provider>
+73
+74        <activity
+74-->[:url_launcher_android] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+75            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+75-->[:url_launcher_android] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
+76            android:exported="false"
+76-->[:url_launcher_android] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+77            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+77-->[:url_launcher_android] C:\Users\jonas\Documents\HCID\HCID Project\flutter\barriolympics\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+78
+79        <uses-library
+79-->[androidx.window:window:1.0.0-beta04] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\003e09a368714caa49105e4e149893dc\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+80            android:name="androidx.window.extensions"
+80-->[androidx.window:window:1.0.0-beta04] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\003e09a368714caa49105e4e149893dc\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+81            android:required="false" />
+81-->[androidx.window:window:1.0.0-beta04] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\003e09a368714caa49105e4e149893dc\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+82        <uses-library
+82-->[androidx.window:window:1.0.0-beta04] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\003e09a368714caa49105e4e149893dc\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+83            android:name="androidx.window.sidecar"
+83-->[androidx.window:window:1.0.0-beta04] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\003e09a368714caa49105e4e149893dc\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+84            android:required="false" />
+84-->[androidx.window:window:1.0.0-beta04] C:\Users\jonas\.gradle\caches\transforms-2\files-2.1\003e09a368714caa49105e4e149893dc\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+85    </application>
+86
+87</manifest>
+=======
 64        <uses-library
 64-->[androidx.window:window:1.0.0-beta04] /Users/jakuborlinski/.gradle/caches/transforms-3/fa8467a5e02a7ed782d17cfac830b059/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 65            android:name="androidx.window.extensions"
@@ -101,3 +152,4 @@
 70    </application>
 71
 72</manifest>
+>>>>>>> f5186930ec14ac15cead811f67ed8545f13080b3

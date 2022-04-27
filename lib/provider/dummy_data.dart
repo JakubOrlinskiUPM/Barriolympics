@@ -163,7 +163,7 @@ List<Event> EVENT_LIST = [
     id: 0,
     name: "Outdoor BBQ",
     description: "The outdoor barbeque for everyone in the neighbourhood who still has not got plans for dinner! We will all be bringing own meat and veggies, so be sure to bring some to share with the others :)",
-    imageUrl: "https://st2.depositphotos.com/1662991/11546/i/950/depositphotos_115465050-stock-photo-young-male-with-a-beard.jpg",
+    fileUrl: "https://st2.depositphotos.com/1662991/11546/i/950/depositphotos_115465050-stock-photo-young-male-with-a-beard.jpg",
     date: DateTime(2022, 5, 24),
     time: const TimeOfDay(hour: 18, minute: 0),
     location: const Location(locationName: "Park"),
@@ -174,7 +174,7 @@ List<Event> EVENT_LIST = [
     id: 1,
     name: "Art exhibition",
     description: "There will be an art exhibition for everyone to stroll in. All kinds of art from madrileños will be shown. You can bring something to drink of you'd like ;)",
-    imageUrl: "https://allaboutlimassol.com/assets/images/primary-image/141124-0.art_exhibition_gallery.jpg",
+    fileUrl: "https://allaboutlimassol.com/assets/images/primary-image/141124-0.art_exhibition_gallery.jpg",
     date: DateTime(2022, 5, 15),
     time: const TimeOfDay(hour: 9, minute: 0),
     location: const Location(locationName: "Gallery"),
@@ -185,7 +185,7 @@ List<Event> EVENT_LIST = [
     id: 2,
     name: "Light show",
     description: "Part of the amazing light shows all over town. See what this street has to offer!",
-    imageUrl: "https://phantom-elmundo.unidadeditorial.es/dbbeca15d0c12d0ad0d3f9c179db88a6/crop/93x0/1087x670/resize/700/f/webp/assets/multimedia/imagenes/2021/11/04/16360352948948.jpg",
+    fileUrl: "https://phantom-elmundo.unidadeditorial.es/dbbeca15d0c12d0ad0d3f9c179db88a6/crop/93x0/1087x670/resize/700/f/webp/assets/multimedia/imagenes/2021/11/04/16360352948948.jpg",
     date: DateTime(2022, 5, 15),
     time: const TimeOfDay(hour: 23, minute: 0),
     location: const Location(locationName: "Botanical garden"),
@@ -196,7 +196,7 @@ List<Event> EVENT_LIST = [
     id: 3,
     name: "Outdoor cinema",
     description: "Old romantic movies to join whenever you'd like.",
-    imageUrl:
+    fileUrl:
         "https://socratessculpturepark.org/wp-content/uploads/2018/08/ssp-119_m-768x512.jpg",
     date: DateTime(2022, 6, 1),
     time: const TimeOfDay(hour: 20, minute: 0),
@@ -208,7 +208,7 @@ List<Event> EVENT_LIST = [
     id: 4,
     name: "Basketball event",
     description: "Make sure to sign up, because there will be teams made. Only 24 spots!",
-    imageUrl:
+    fileUrl:
         "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
     date: DateTime(2022, 6, 2),
     time: const TimeOfDay(hour: 19, minute: 0),
@@ -220,7 +220,7 @@ List<Event> EVENT_LIST = [
     id: 5,
     name: "Pool Party",
     description: "A cool pool party for internationals, make sure to bring some cash if you want to buy something.",
-    imageUrl:
+    fileUrl:
         "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
     date: DateTime(2022, 6, 6),
     time: const TimeOfDay(hour: 12, minute: 0),

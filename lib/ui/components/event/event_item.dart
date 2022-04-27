@@ -28,7 +28,7 @@ class _EventItemState extends State<EventItem> {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
-                widget.event.imageUrl!,
+                widget.event.fileUrl!,
               ),
             ),
           ),

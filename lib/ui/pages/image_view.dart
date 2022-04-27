@@ -17,6 +17,11 @@ class _ImageViewState extends State<ImageView> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
+  void initState() {
+    super.initState();
+    _current = widget.index;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.post == null) {
@@ -43,6 +48,7 @@ class _ImageViewState extends State<ImageView> {
               CarouselSlider(
                 carouselController: _controller,
                 options: CarouselOptions(
+                  initialPage: _current,
                   enableInfiniteScroll: false,
                   enlargeCenterPage: true,
                   enlargeStrategy: CenterPageEnlargeStrategy.height,
@@ -57,7 +63,10 @@ class _ImageViewState extends State<ImageView> {
                     builder: (BuildContext context) {
                       return Container(
                         margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Image.network(url),
+                        child: Hero(
+                          tag: widget.post!.id.toString() + "-" + widget.post!.imageUrls.indexOf(url).toString(),
+                          child: Image.network(url),
+                        ),
                       );
                     },
                   );

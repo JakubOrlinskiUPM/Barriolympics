@@ -87,9 +87,14 @@ class _PostItemState extends State<PostItem> {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, POST_IMAGE_VIEW,
-                            arguments: {"post": widget.post});
+                            arguments: {"post": widget.post, "index": index});
                       },
-                      child: Image.network(widget.post.imageUrls[index]),
+                      child: Hero(
+                        tag: widget.post.id.toString() + "-" + index.toString(),
+                        child: Image.network(
+                          widget.post.imageUrls[index],
+                        ),
+                      ),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {

@@ -23,9 +23,11 @@ PageRoute? checkGeneralRoutes(RouteSettings route) {
       return PageRouteBuilder(
         pageBuilder: (BuildContext context, _, __) {
           Post? post = getArgument(route, "post");
+          int? index = getArgument(route, "index");
+
           return ImageView(
             post: post,
-            index: 0,
+            index: index ?? 0,
           );
         },
         opaque: false,

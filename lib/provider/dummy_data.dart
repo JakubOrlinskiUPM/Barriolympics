@@ -163,7 +163,7 @@ List<Event> EVENT_LIST = [
     id: 0,
     name: "Outdoor BBQ",
     description: "Lorem ipsum",
-    imageUrl: "",
+    fileUrl: "",
     date: DateTime(2022, 4, 24),
     time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Park"),
@@ -174,7 +174,7 @@ List<Event> EVENT_LIST = [
     id: 1,
     name: "Art exhibition",
     description: "Lorem ipsum",
-    imageUrl: "",
+    fileUrl: "",
     date: DateTime(2022, 4, 15),
     time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Gallery"),
@@ -185,7 +185,7 @@ List<Event> EVENT_LIST = [
     id: 2,
     name: "Light show",
     description: "Lorem ipsum",
-    imageUrl: "",
+    fileUrl: "",
     date: DateTime(2022, 4, 30),
     time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Botanical garden"),
@@ -196,7 +196,7 @@ List<Event> EVENT_LIST = [
     id: 3,
     name: "Outdoor cinema",
     description: "Lorem ipsum",
-    imageUrl:
+    fileUrl:
         "https://img.theculturetrip.com/1440x807/smart/wp-content/uploads/2018/07/096.jpg",
     date: DateTime(2022, 4, 30),
     time: const TimeOfDay(hour: 12, minute: 0),
@@ -208,7 +208,7 @@ List<Event> EVENT_LIST = [
     id: 4,
     name: "Basketball event",
     description: "Lorem ipsum",
-    imageUrl:
+    fileUrl:
         "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
     date: DateTime(2022, 4, 30),
     time: const TimeOfDay(hour: 12, minute: 0),
@@ -220,7 +220,7 @@ List<Event> EVENT_LIST = [
     id: 5,
     name: "Pool Party",
     description: "Lorem ipsum",
-    imageUrl:
+    fileUrl:
         "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
     date: DateTime(2022, 4, 30),
     time: const TimeOfDay(hour: 12, minute: 0),

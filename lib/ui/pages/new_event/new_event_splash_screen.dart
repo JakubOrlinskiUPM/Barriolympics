@@ -20,12 +20,13 @@ class _NewEventSplashScreenState extends State<NewEventSplashScreen> {
         title: Text("Organise an event!"),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Image.asset("images/help.png"),
-              Text("We help you all along the way!"),
-              ElevatedButton(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Center(child: Image.asset("images/help.png")),
+            Center(child: Text("We help you all along the way!")),
+            Center(
+              child: ElevatedButton(
                 onPressed: () {
                   AppState appSatte =
                       Provider.of<AppState>(context, listen: false);
@@ -38,9 +39,9 @@ class _NewEventSplashScreenState extends State<NewEventSplashScreen> {
                   });
                 },
                 child: Text("Organize!"),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

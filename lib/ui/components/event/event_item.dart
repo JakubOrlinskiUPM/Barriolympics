@@ -26,22 +26,6 @@ class _EventItemState extends State<EventItem> {
               contentPadding: EdgeInsets.all(0),
               title: Text(widget.event.name!),
               subtitle: Text(widget.event.description!)),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: SizedBox(
-              height: 100,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.event.imageUrl!.length,
-                itemBuilder: (context, index) {
-                  return Image.network(widget.event.imageUrl!);
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Padding(padding: EdgeInsets.all(6));
-                },
-              ),
-            ),
-          ),
           Column(
             children: [
               Row(children: [

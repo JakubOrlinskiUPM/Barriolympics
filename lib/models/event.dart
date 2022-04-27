@@ -1,17 +1,19 @@
 import 'package:barriolympics/models/barrio.dart';
 import 'package:barriolympics/models/permit.dart';
+import 'package:barriolympics/models/uploadable.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/models/location.dart';
 import 'package:flutter/material.dart';
 
 
-class Event {
+class Event extends Uploadable {
   Event({
     required this.id,
     this.barrio,
     this.name,
     this.description,
-    this.imageUrl = "",
+    this.fileName,
+    this.fileUrl,
     this.date,
     this.time,
     this.location,
@@ -29,7 +31,6 @@ class Event {
   Barrio? barrio;
   String? name;
   String? description;
-  String? imageUrl;
   DateTime? date;
   TimeOfDay? time;
   Location? location;
@@ -42,16 +43,12 @@ class Event {
   List<User> goingVolunteers;
   List<User> goingSellers;
 
-  bool get step1 {
-    return name != null && description != null;
-  }
-  bool get step2 {
-    return location != null;
-  }
-  bool get step3 {
-    return permits.every((permit) => permit.isDone);
-  }
-  bool get step4 {
-    return isPublished;
+  String? fileName;
+  String? fileUrl;
+  String uploadName = "Event poster";
+  String uploadDescription = "The image that represents the event";
+
+  List<Permit> neededPermits() {
+    return [Permit(uploadName: "Permit 1")];
   }
 }

@@ -73,12 +73,7 @@ class _AppState extends State<App> {
           padding: const EdgeInsets.all(1.0),
           child: FloatingActionButton(
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext ctx) {
-                  return const HelpPage();
-                },
-              );
+              HelpPage.showHelpPage(context);
             },
             tooltip: 'Help the community',
             child: const Icon(

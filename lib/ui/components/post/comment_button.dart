@@ -13,8 +13,7 @@ class CommentButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, state, child) {
 
-      return Expanded(
-        child: Padding(
+      return Padding(
           padding: const EdgeInsets.only(right: 4.0),
           child: OutlinedButton(
             onPressed: this.onTap,
@@ -32,7 +31,6 @@ class CommentButton extends StatelessWidget {
                 ),
               ],
             ),
-          ),
         ),
       );
     });

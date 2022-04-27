@@ -1,6 +1,7 @@
 import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/components/banner/banner_points.dart';
 import 'package:barriolympics/ui/components/invisible_expanded.dart';
+import 'package:barriolympics/ui/pages/help_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,9 @@ class BarrioPoints extends StatelessWidget {
                           padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 0, horizontal: 6)),
                           foregroundColor: MaterialStateProperty.all(Colors.white)
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          HelpPage.showHelpPage(context);
+                        },
                         label: Text("Earn points", style: TextStyle(fontSize: 12),),
                         icon: Icon(Icons.handshake_outlined, size: 16,),
                       ),

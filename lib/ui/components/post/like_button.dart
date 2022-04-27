@@ -17,8 +17,7 @@ class LikeButton extends StatelessWidget {
           ? Icons.thumb_up
           : Icons.thumb_up_outlined;
 
-      return Expanded(
-        child: Padding(
+      return Padding(
           padding: const EdgeInsets.only(right: 4.0),
           child: OutlinedButton(
             onPressed: () {
@@ -39,7 +38,6 @@ class LikeButton extends StatelessWidget {
               ],
             ),
           ),
-        ),
       );
     });
   }

@@ -12,8 +12,7 @@ class ShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, state, child) {
-      return Expanded(
-        child: OutlinedButton(
+      return OutlinedButton(
           onPressed: () {
             // Share.share("Barriolympics is the best!");
           },
@@ -34,7 +33,6 @@ class ShareButton extends StatelessWidget {
               ),
             ],
           ),
-        ),
       );
     });
   }

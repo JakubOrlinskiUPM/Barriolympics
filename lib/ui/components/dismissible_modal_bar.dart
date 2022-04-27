@@ -7,12 +7,16 @@ class DismissibleModalBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-      child: Container(
-        height: 5,
-        width: 150,
-        decoration: BoxDecoration(
-            color: Colors.grey.shade500,
-            borderRadius: BorderRadius.all(Radius.circular(50))),
+      child: Align(
+        child: SizedBox(
+          height: 5,
+          width: 150,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.grey.shade500,
+                borderRadius: BorderRadius.all(Radius.circular(50))),
+          ),
+        ),
       ),
     );
   }

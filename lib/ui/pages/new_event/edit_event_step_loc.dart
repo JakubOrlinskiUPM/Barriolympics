@@ -1,13 +1,24 @@
 import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/models/location.dart';
+import 'package:barriolympics/models/marker_type.dart';
 import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
+import 'package:barriolympics/ui/pages/new_event/edit_event_step_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as ll;
 import 'package:osm_nominatim/osm_nominatim.dart' as nm;
 
 class EditEventStepLoc extends StatefulWidget implements EditEventStep {
-  const EditEventStepLoc({Key? key, required this.event}) : super(key: key);
+  const EditEventStepLoc({
+    Key? key,
+    required this.event,
+    required this.nextStep,
+    required this.previousStep,
+  }) : super(key: key);
+
   final Event event;
+  final Function nextStep;
+  final Function previousStep;
 
   @override
   State<EditEventStepLoc> createState() => _EditEventStepLocState();
@@ -21,18 +32,8 @@ class EditEventStepLoc extends StatefulWidget implements EditEventStep {
   }
 }
 
-class MarkerType {
-  const MarkerType({
-    required this.label,
-    required this.color,
-  });
-
-  final String label;
-  final Color color;
-}
-
 class _EditEventStepLocState extends State<EditEventStepLoc> {
-  TextEditingController _locationController = TextEditingController();
+  String locationName = "";
   MapController mapController = MapController();
   List<Map<ll.LatLng, MarkerType>> markers = [];
   List<MarkerType> markerTypes = [
@@ -40,8 +41,16 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
     MarkerType(label: "Meeting point", color: Colors.green),
     MarkerType(label: "Sellers", color: Colors.blue),
   ];
-  int typeIndex = 0;
+  int? typeIndex;
   ll.LatLng? searchResult;
+  Location? location;
+
+  @override
+  void initState() {
+    super.initState();
+    location = widget.event.location ?? Location(locationName: '');
+    markers = location?.markers.toList() ?? [];
+  }
 
   void lookupAddress(String query) async {
     final List<nm.Place> result = await nm.Nominatim.searchByName(
@@ -63,16 +72,20 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      shrinkWrap: true,
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _locationController,
             decoration: InputDecoration(
-                hintText: "Enter the address here...",
-                prefixIcon: Icon(Icons.search)),
-            onFieldSubmitted: lookupAddress,
+                hintText: "Enter the address of the event here...",
+                prefixIcon: Icon(Icons.pin_drop)),
+            onChanged: (String val) {
+              setState(() {
+                this.locationName = val;
+              });
+            },
           ),
         ),
         SizedBox(
@@ -83,9 +96,11 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
               center: ll.LatLng(40.416661, -3.703533),
               zoom: 11.0,
               onTap: (_, ll.LatLng lng) {
-                setState(() {
-                  markers.add({lng: markerTypes[typeIndex]});
-                });
+                if (typeIndex!= null) {
+                  setState(() {
+                    markers.add({lng: markerTypes[typeIndex!]});
+                  });
+                }
               },
             ),
             layers: [
@@ -142,7 +157,7 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0))),
               );
-              if (markerTypes[typeIndex] == markerType) {
+              if (typeIndex != null && markerTypes[typeIndex!] == markerType) {
                 style = ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(markerType.color.withAlpha(40)),
@@ -171,7 +186,33 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
             }).toList(),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: TextFormField(
+            decoration: InputDecoration(
+                hintText: "Search for an address here...",
+                prefixIcon: Icon(Icons.search)),
+            onFieldSubmitted: lookupAddress,
+          ),
+        ),
+        EditEventStepNavigation(
+          isSaveEnabled: _isSaveEnabled(),
+          previousStep: () {
+            widget.previousStep();
+          },
+          index: 1,
+          nextStep: this._saveStep,
+        ),
       ],
     );
+  }
+
+  bool _isSaveEnabled() {
+    return markers.length > 0 && locationName.length > 0;
+  }
+
+  void _saveStep() {
+    widget.event.location = Location(locationName: locationName, markers: markers);
+    widget.nextStep();
   }
 }

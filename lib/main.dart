@@ -44,6 +44,7 @@ class _AppState extends State<App> {
       onWillPop: () async =>
           !await tabs[_currentIndex].navigatorKey.currentState!.maybePop(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: tabs[_currentIndex].navigator,
         extendBodyBehindAppBar: true,
         bottomNavigationBar: BottomAppBar(

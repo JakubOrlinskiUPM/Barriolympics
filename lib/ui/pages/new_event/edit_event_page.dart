@@ -39,14 +39,18 @@ class _EditEventPageState extends State<EditEventPage> {
   @override
   Widget build(BuildContext context) {
     List<EditEventStep> stepList = [
-      NewEventStepBasicInfo(event: widget.event),
-      EditEventStepLoc(event: widget.event),
-      EditEventStepPermits(event: widget.event),
-      EditEventStepPublish(event: widget.event),
+      NewEventStepBasicInfo(
+          event: widget.event, previousStep: previousStep, nextStep: nextStep),
+      EditEventStepLoc(
+          event: widget.event, previousStep: previousStep, nextStep: nextStep),
+      EditEventStepPermits(
+          event: widget.event, previousStep: previousStep, nextStep: nextStep),
+      EditEventStepPublish(
+          event: widget.event, previousStep: previousStep, nextStep: nextStep),
     ];
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -57,7 +61,8 @@ class _EditEventPageState extends State<EditEventPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: ListView(
+          shrinkWrap: true,
           children: [
             IconStepper(
               activeStepColor: Theme.of(context).primaryColor,
@@ -84,41 +89,19 @@ class _EditEventPageState extends State<EditEventPage> {
                 });
               },
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text(stepList[_activeStepIndex].getTitle(),
-                              style: Theme.of(context).textTheme.headline5),
-                          stepList[_activeStepIndex],
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _activeStepIndex > 0
-                                ? TextButton.icon(
-                                    onPressed: previousStep,
-                                    icon: Icon(Icons.navigate_before),
-                                    label: Text("Back"),
-                                  )
-                                : Container(),
-                            ElevatedButton.icon(
-                              onPressed: nextStep,
-                              icon: Icon(Icons.save_outlined),
-                              label: Text("Save"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Text(stepList[_activeStepIndex].getTitle(),
+                            style: Theme.of(context).textTheme.headline5),
+                        stepList[_activeStepIndex],
+                      ],
+                    ),
+                  ]),
             ),
           ],
         ),

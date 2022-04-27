@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 getRandChoice(List list) {
-  return list[Random(42).nextInt(list.length)];
+  return list[Random().nextInt(list.length)];
 }
 
 getRandPoints() {

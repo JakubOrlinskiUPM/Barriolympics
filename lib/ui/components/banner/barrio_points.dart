@@ -17,10 +17,15 @@ class BarrioPoints extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  state.barrio.name,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      state.barrio.name,
+                    ),
+                    BannerPoints(state: state),
+                  ],
                 ),
-                BannerPoints(state: state),
                 InvisibleExpandedHeader(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

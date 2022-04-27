@@ -49,9 +49,10 @@ class _InvisibleExpandedHeaderState extends State<InvisibleExpandedHeader> {
         context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
     if (settings != null) {
       bool visible = settings.currentExtent > settings.maxExtent - 70;
+      double minimum = settings.minExtent / settings.maxExtent;
       double opacity =
           min(settings.currentExtent, settings.maxExtent) / settings.maxExtent;
-      opacity = (opacity - 0.5) / (1 - 0.5);
+      opacity = (opacity - minimum) / (1 - minimum);
       setState(() {
         _visible = visible;
         _opacity = opacity;

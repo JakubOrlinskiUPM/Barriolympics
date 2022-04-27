@@ -28,7 +28,7 @@ class _TopBannerState extends State<TopBanner> {
       snap: true,
       floating: true,
       expandedHeight: 250,
-      collapsedHeight: 110.0,
+      collapsedHeight: 90.0,
       centerTitle: false,
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.none,

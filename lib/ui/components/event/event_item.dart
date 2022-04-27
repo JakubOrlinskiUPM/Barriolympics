@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:barriolympics/models/event.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/event.dart';
+import '../../../provider/app_state.dart';
+import '../../pages/routing.dart';
 
 class EventItem extends StatefulWidget {
   const EventItem({Key? key, required this.event}) : super(key: key);
@@ -32,7 +35,13 @@ class _EventItemState extends State<EventItem> {
               ),
             ),
           ),
-          child: Container(
+          child: OutlinedButton(
+            onPressed: () {
+              AppState appSatte = Provider.of<AppState>(context, listen: false);
+              Navigator.pushNamed(context, VIEW_EVENT_PAGE,
+                  arguments: {'event': widget.event});
+            },
+            /*child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 stops: [0.35, 1],
@@ -40,12 +49,12 @@ class _EventItemState extends State<EventItem> {
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
               ),
-            ),
+            ),*/
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,7 +67,7 @@ class _EventItemState extends State<EventItem> {
                         ),
                       ),
                       Card(
-                        margin: EdgeInsets.only(bottom: 6),
+                          margin: EdgeInsets.only(bottom: 6),
                           color: Colors.white,
                           child: Padding(
                               padding: const EdgeInsets.all(5),
@@ -88,22 +97,23 @@ class _EventItemState extends State<EventItem> {
                   decoration: BoxDecoration(color: Colors.white),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8, right: 16, left: 8),
+                  padding: const EdgeInsets.only(
+                      top: 8, bottom: 8, right: 16, left: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(children: [
-                        const Icon(Icons.location_on, size: 15, color: Colors.white),
+                        const Icon(Icons.location_on,
+                            size: 15, color: Colors.white),
                         Text(widget.event.location!.locationName,
                             style: TextStyle(color: Colors.white)),
                       ]),
-                      Row(
-                          children: [
-                            const Icon(Icons.access_time_outlined,
-                                size: 15, color: Colors.white),
-                            Text(widget.event.time!.hour.toString()+'h',
-                                style: TextStyle(color: Colors.white)),
-                          ]),
+                      Row(children: [
+                        const Icon(Icons.access_time_outlined,
+                            size: 15, color: Colors.white),
+                        Text(widget.event.time!.hour.toString() + 'h',
+                            style: TextStyle(color: Colors.white)),
+                      ]),
                     ],
                   ),
                 )

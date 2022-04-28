@@ -36,6 +36,40 @@ class _EditEventPageState extends State<EditEventPage> {
     Provider.of<AppState>(context, listen: false).updateEvent(widget.event);
   }
 
+  void checkDiscard() {
+    AppState state = Provider.of<AppState>(context, listen: false);
+
+    if (state.user.ownEvents.contains(widget.event)) {
+      Navigator.popUntil(context, (route) => route.isFirst);
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Discard draft?"),
+            content: Text("Are you sure you want to discard your draft?"),
+            actionsAlignment: MainAxisAlignment.spaceBetween,
+            actionsPadding: const EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 20.0),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("No"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
+                child: Text("Yes"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<EditEventStep> stepList = [
@@ -53,9 +87,7 @@ class _EditEventPageState extends State<EditEventPage> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
+          onPressed: checkDiscard,
         ),
         title: const Text("Edit event"),
       ),

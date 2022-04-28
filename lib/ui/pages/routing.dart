@@ -18,7 +18,6 @@ const String EDIT_EVENT_SPLASH_PAGE = "editEventSplashPage";
 const String NEW_EVENT_PAGE = "newEventPage";
 const String VIEW_EVENT_PAGE = "viewEventPage";
 
-
 PageRoute? checkGeneralRoutes(RouteSettings route) {
   switch (route.name) {
     case POST_IMAGE_VIEW:
@@ -43,10 +42,12 @@ PageRoute? checkGeneralRoutes(RouteSettings route) {
         return const NewEventSplashScreen();
       });
     case EDIT_EVENT_PAGE:
-      return PageRouteBuilder(pageBuilder: (BuildContext context, _, __) {
-        Event event = getArgument(route, "event");
-        return EditEventPage(event: event);
-      });
+      return PageRouteBuilder(
+        pageBuilder: (BuildContext context, _, __) {
+          Event event = getArgument(route, "event");
+          return EditEventPage(event: event);
+        },
+      );
     case EDIT_EVENT_SPLASH_PAGE:
       return PageRouteBuilder(pageBuilder: (BuildContext context, _, __) {
         return EditEventSplashScreen();

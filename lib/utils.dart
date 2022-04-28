@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:barriolympics/models/event.dart';
 import 'package:flutter/material.dart';
-
 
 getRandChoice(List list) {
   return list[Random().nextInt(list.length)];
@@ -12,8 +13,8 @@ getRandPoints() {
 }
 
 getRandSublist(List list) {
-  int index = Random().nextInt(list.length-1);
-  return list.sublist(index, list.length-1);
+  int index = Random().nextInt(list.length - 1);
+  return list.sublist(index, list.length - 1);
 }
 
 DateTime getRandDate() {
@@ -33,7 +34,6 @@ String formatDate(DateTime dt) {
       hour += "s";
     }
     res = diff.inHours.toString() + hour + " ago";
-
   } else if (diff.inMinutes > 0) {
     String minute = " hour";
     if (diff.inHours > 1) {
@@ -58,4 +58,22 @@ getArgument(RouteSettings route, String key) {
   final args = route.arguments;
   dynamic res = args != null ? (args as Map)[key] : null;
   return res;
+}
+
+DecorationImage? getImage(Event event) {
+  if (event.fileUrl != null) {
+    if (event.fileUrl!.contains("upm.hcid.barriolympics")) {
+      return DecorationImage(
+        fit: BoxFit.cover,
+        image: FileImage(File(event.fileUrl!), scale: 5),
+      );
+    } else {
+      return DecorationImage(
+        fit: BoxFit.cover,
+        image: NetworkImage(
+          event.fileUrl!,
+        ),
+      );
+    }
+  }
 }

@@ -6,6 +6,7 @@ import 'package:barriolympics/ui/pages/new_event/edit_event_step_basic_info.dart
 import 'package:barriolympics/ui/pages/new_event/edit_event_step_loc.dart';
 import 'package:barriolympics/ui/pages/new_event/edit_event_step_permits.dart';
 import 'package:barriolympics/ui/pages/new_event/edit_event_step_publish.dart';
+import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:intl/intl.dart';
@@ -40,19 +41,30 @@ class _ViewEventPageState extends State<ViewEventPage> {
 
     AppState appState = Provider.of<AppState>(context, listen: false);
 
-    return Column(
-      children: [
-        Image.network(widget.event.fileUrl.toString()),
-        Column(children: [
-          Text(
-              widget.event.name.toString()
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.event.name!),
+      ),
+      body: Column(
+        children: [
+          SafeArea(
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                image: getImage(widget.event),
+              ),
+            ),
           ),
-          Text(widget.event.barrio.toString()), //barrio??? is not in the dummy data -> ==null
-          Text(widget.event.date.toString().substring(0, 10)),
-          Text(widget.event.time.toString().substring(10, 15)),
-          Text(widget.event.description.toString()),
-        ])
-      ],
+          Column(children: [
+            Text(widget.event.name.toString()),
+            Text(widget.event.barrio.toString()),
+            //barrio??? is not in the dummy data -> ==null
+            Text(widget.event.date.toString().substring(0, 10)),
+            Text(widget.event.time.toString().substring(10, 15)),
+            Text(widget.event.description.toString()),
+          ])
+        ],
+      ),
     );
   }
 }

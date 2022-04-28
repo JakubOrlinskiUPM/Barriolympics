@@ -44,6 +44,7 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
   int? typeIndex;
   ll.LatLng? searchResult;
   Location? location;
+  bool showSearch = false;
 
   @override
   void initState() {
@@ -90,61 +91,64 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.35,
-          child: FlutterMap(
-            mapController: mapController,
-            options: MapOptions(
-              center: ll.LatLng(40.416661, -3.703533),
-              zoom: 11.0,
-              onTap: (_, ll.LatLng lng) {
-                if (typeIndex!= null) {
-                  setState(() {
-                    markers.add({lng: markerTypes[typeIndex!]});
-                  });
-                }
-              },
-            ),
-            layers: [
-              TileLayerOptions(
-                urlTemplate:
-                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: ['a', 'b', 'c'],
-                attributionBuilder: (_) {
-                  return Text("© OpenStreetMap contributors");
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: FlutterMap(
+              mapController: mapController,
+              options: MapOptions(
+                center: ll.LatLng(40.416661, -3.703533),
+                zoom: 11.0,
+                onTap: (_, ll.LatLng lng) {
+                  if (typeIndex != null) {
+                    setState(() {
+                      markers.add({lng: markerTypes[typeIndex!]});
+                    });
+                  }
                 },
               ),
-              CircleLayerOptions(
-                circles: [
-                  if (searchResult != null) ...[
-                    CircleMarker(
-                      point: searchResult!,
-                      color: Colors.red.withOpacity(0.3),
-                      borderStrokeWidth: 3.0,
-                      borderColor: Colors.red,
-                      radius: 10,
-                    ),
+              layers: [
+                TileLayerOptions(
+                  urlTemplate:
+                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  subdomains: ['a', 'b', 'c'],
+                  attributionBuilder: (_) {
+                    return Text("© OpenStreetMap contributors");
+                  },
+                ),
+                CircleLayerOptions(
+                  circles: [
+                    if (searchResult != null) ...[
+                      CircleMarker(
+                        point: searchResult!,
+                        color: Colors.red.withOpacity(0.3),
+                        borderStrokeWidth: 3.0,
+                        borderColor: Colors.red,
+                        radius: 10,
+                      ),
+                    ],
                   ],
-                ],
-              ),
-              MarkerLayerOptions(
-                markers: [
-                  ...markers
-                      .map(
-                        (marker) => Marker(
-                          width: 40.0,
-                          height: 40.0,
-                          point: marker.keys.first,
-                          builder: (ctx) => Container(
-                            child: Icon(
-                              Icons.pin_drop,
-                              color: marker.values.first.color,
+                ),
+                MarkerLayerOptions(
+                  markers: [
+                    ...markers
+                        .map(
+                          (marker) => Marker(
+                            width: 40.0,
+                            height: 40.0,
+                            point: marker.keys.first,
+                            builder: (ctx) => Container(
+                              child: Icon(
+                                Icons.pin_drop,
+                                color: marker.values.first.color,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                ],
-              ),
-            ],
+                        )
+                        .toList(),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         SizedBox(
@@ -186,15 +190,25 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
             }).toList(),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: TextFormField(
-            decoration: InputDecoration(
-                hintText: "Search for an address here...",
-                prefixIcon: Icon(Icons.search)),
-            onFieldSubmitted: lookupAddress,
-          ),
-        ),
+        showSearch
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "Search for an address here...",
+                      prefixIcon: Icon(Icons.search)),
+                  onFieldSubmitted: lookupAddress,
+                ),
+              )
+            : OutlinedButton.icon(
+                onPressed: () {
+                  setState(() {
+                    showSearch = true;
+                  });
+                },
+                icon: Icon(Icons.search_outlined),
+                label: Text("Search for an address"),
+              ),
         EditEventStepNavigation(
           isSaveEnabled: _isSaveEnabled(),
           previousStep: () {
@@ -212,7 +226,8 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
   }
 
   void _saveStep() {
-    widget.event.location = Location(locationName: locationName, markers: markers);
+    widget.event.location =
+        Location(locationName: locationName, markers: markers);
     widget.nextStep();
   }
 }

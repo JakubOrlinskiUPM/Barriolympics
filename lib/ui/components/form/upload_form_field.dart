@@ -90,14 +90,28 @@ class _UploadFormFieldState extends State<UploadFormField> {
                     pickFile();
                   },
                 )
-              : IconButton(
-                  color: Theme.of(context).primaryColor,
-                  onPressed: fileUrl != null
-                      ? () {
-                          OpenFile.open(fileUrl);
-                        }
-                      : null,
-                  icon: Icon(Icons.download),
+              : Row(
+                  children: [
+                    IconButton(
+                      color: Theme.of(context).primaryColor,
+                      onPressed: fileUrl != null
+                          ? () {
+                              OpenFile.open(fileUrl);
+                            }
+                          : null,
+                      icon: Icon(Icons.download),
+                    ),
+                    IconButton(
+                      color: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        setState(() {
+                          fileUrl = null;
+                          fileName = "";
+                        });
+                      },
+                      icon: Icon(Icons.delete_outline_rounded),
+                    ),
+                  ],
                 ),
         ],
       ),

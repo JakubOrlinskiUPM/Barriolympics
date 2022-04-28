@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:barriolympics/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,12 +31,7 @@ class _EventItemState extends State<EventItem> {
         child: Container(
           height: 150,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                widget.event.fileUrl!,
-              ),
-            ),
+            image: getImage(widget.event),
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -45,7 +43,8 @@ class _EventItemState extends State<EventItem> {
               ),
             ),
             child: OutlinedButton(
-              style: ButtonStyle(padding: MaterialStateProperty.all(EdgeInsets.zero)),
+              style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.zero)),
               onPressed: () {
                 AppState appSatte =
                     Provider.of<AppState>(context, listen: false);

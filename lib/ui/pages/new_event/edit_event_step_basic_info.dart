@@ -94,7 +94,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
             }),
         TextFormField(
           initialValue: this.description,
-          maxLines: 6,
+          maxLines: 4,
           decoration: InputDecoration(hintText: "Description"),
           onChanged: (String val) {
             setState(() {

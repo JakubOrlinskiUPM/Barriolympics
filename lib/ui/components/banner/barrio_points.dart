@@ -31,6 +31,15 @@ class BarrioPoints extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      OutlinedButton.icon(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 0, horizontal: 6)),
+                          // foregroundColor: MaterialStateProperty.all(Colors.white)
+                        ),
+                        onPressed: () {},
+                        label: Text("Pick barrio", style: TextStyle(fontSize: 12),),
+                        icon: Icon(Icons.map_outlined, size: 16,),
+                      ),
                       ElevatedButton.icon(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 0, horizontal: 6)),
@@ -41,15 +50,6 @@ class BarrioPoints extends StatelessWidget {
                         },
                         label: Text("Earn points", style: TextStyle(fontSize: 12),),
                         icon: Icon(Icons.handshake_outlined, size: 16,),
-                      ),
-                      ElevatedButton.icon(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 0, horizontal: 6)),
-                          foregroundColor: MaterialStateProperty.all(Colors.white)
-                        ),
-                        onPressed: () {},
-                        label: Text("Your points", style: TextStyle(fontSize: 12),),
-                        icon: Icon(Icons.star, size: 16,),
                       ),
                     ],
                   ),

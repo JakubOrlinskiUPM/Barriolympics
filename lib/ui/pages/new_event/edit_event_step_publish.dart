@@ -1,6 +1,12 @@
 import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/provider/app_state.dart';
+import 'package:barriolympics/ui/components/dismissible_modal_bar.dart';
+import 'package:barriolympics/ui/components/event/event_item.dart';
+import 'package:barriolympics/ui/pages/events/view_event_page.dart';
 import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
+import 'package:barriolympics/ui/pages/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditEventStepPublish extends StatefulWidget implements EditEventStep {
   const EditEventStepPublish({
@@ -27,26 +33,58 @@ class EditEventStepPublish extends StatefulWidget implements EditEventStep {
 }
 
 class _EditEventStepPublishState extends State<EditEventStepPublish> {
+  void showPreview(bool page) {
+    showModalBottomSheet(
+      isDismissible: true,
+      context: context,
+      builder: (BuildContext ctx) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const DismissibleModalBar(),
+            ListView(
+              shrinkWrap: true,
+              children: [
+                page
+                    ? ViewEventPage(event: widget.event)
+                    : EventItem(event: widget.event)
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
       children: [
-        Text("Good job, you're nearly there!", textAlign: TextAlign.center,),
+        Text(
+          "Good job, you're nearly there!",
+          textAlign: TextAlign.center,
+        ),
         ListTile(
           title: Text("Preview event page"),
-          trailing: TextButton.icon(
+          subtitle: Text("Your event as a full page"),
+          trailing: OutlinedButton.icon(
             icon: Icon(Icons.find_in_page),
             label: Text("Preview"),
-            onPressed: () {},
+            onPressed: () {
+              showPreview(true);
+            },
           ),
         ),
         ListTile(
           title: Text("Preview event in a list"),
-          trailing: TextButton.icon(
+          subtitle: Text("Your event in a list"),
+          trailing: OutlinedButton.icon(
             icon: Icon(Icons.list_alt),
             label: Text("Preview"),
-            onPressed: () {},
+            onPressed: () {
+              showPreview(false);
+            },
           ),
         ),
         Padding(
@@ -60,5 +98,8 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
     );
   }
 
-  void _publishEvent() {}
+  void _publishEvent() {
+    Provider.of<AppState>(context, listen: false).publishEvent(widget.event);
+    Navigator.pushNamed(context, EDIT_EVENT_SPLASH_PAGE);
+  }
 }

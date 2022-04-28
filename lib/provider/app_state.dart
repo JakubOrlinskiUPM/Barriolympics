@@ -45,5 +45,11 @@ class AppState extends ChangeNotifier {
       tmp.add(event);
       user.ownEvents = tmp;
     }
+    notifyListeners();
+  }
+
+  void publishEvent(Event event) {
+    barrio.events.add(event);
+    notifyListeners();
   }
 }

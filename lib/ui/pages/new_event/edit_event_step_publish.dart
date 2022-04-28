@@ -39,8 +39,8 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext ctx) {
-        return SizedBox(
-          height: 500,
+        return Container(
+          constraints: BoxConstraints(maxHeight: 500),
           child: page
               ? ViewEventPage(event: widget.event)
               : EventItem(event: widget.event),

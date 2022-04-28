@@ -46,14 +46,6 @@ class _EditEventStepPermitsState extends State<EditEventStepPermits> {
         : widget.event.neededPermits();
   }
 
-  String messageUrl() {
-    if (Platform.isAndroid) {
-      return "https://wa.me/$phoneNumber/"; // new line
-    } else {
-      return "https://api.whatsapp.com/send?phone=$phoneNumber"; // new line
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -78,7 +70,7 @@ class _EditEventStepPermitsState extends State<EditEventStepPermits> {
                         child: IconButton(
                           icon: Icon(Icons.phone),
                           onPressed: () {
-                            launchUrlString("sms://$phoneNumber");
+                            launchUrlString("tel://$phoneNumber");
                           },
                         ),
                         decoration: BoxDecoration(
@@ -93,7 +85,7 @@ class _EditEventStepPermitsState extends State<EditEventStepPermits> {
                         child: IconButton(
                           icon: Icon(Icons.chat_outlined),
                           onPressed: () {
-                            launchUrlString(messageUrl());
+                            launchUrlString("sms://$phoneNumber");
                           },
                         ),
                         decoration: BoxDecoration(

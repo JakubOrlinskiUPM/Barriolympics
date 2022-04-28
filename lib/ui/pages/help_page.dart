@@ -15,6 +15,7 @@ class HelpPage extends StatefulWidget {
   static void showHelpPage(BuildContext context) {
     showModalBottomSheet(
       useRootNavigator: true,
+      isDismissible: true,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext ctx) {

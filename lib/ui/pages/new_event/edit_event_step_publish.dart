@@ -36,21 +36,14 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
   void showPreview(bool page) {
     showModalBottomSheet(
       isDismissible: true,
+      isScrollControlled: true,
       context: context,
       builder: (BuildContext ctx) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const DismissibleModalBar(),
-            ListView(
-              shrinkWrap: true,
-              children: [
-                page
-                    ? ViewEventPage(event: widget.event)
-                    : EventItem(event: widget.event)
-              ],
-            ),
-          ],
+        return SizedBox(
+          height: 500,
+          child: page
+              ? ViewEventPage(event: widget.event)
+              : EventItem(event: widget.event),
         );
       },
     );

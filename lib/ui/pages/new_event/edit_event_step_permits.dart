@@ -78,7 +78,7 @@ class _EditEventStepPermitsState extends State<EditEventStepPermits> {
                         child: IconButton(
                           icon: Icon(Icons.phone),
                           onPressed: () {
-                            launchUrlString("tel://$phoneNumber");
+                            launchUrlString("sms://$phoneNumber");
                           },
                         ),
                         decoration: BoxDecoration(

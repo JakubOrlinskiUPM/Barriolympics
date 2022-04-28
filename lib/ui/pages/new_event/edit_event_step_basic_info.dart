@@ -9,6 +9,7 @@ import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
 import 'package:barriolympics/ui/pages/new_event/edit_event_step_navigation.dart';
 import 'package:barriolympics/ui/components/form/upload_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class NewEventStepBasicInfo extends StatefulWidget implements EditEventStep {
@@ -39,6 +40,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
   Barrio? barrio;
   String? name = "";
   String? description = "";
+  int? volunteersNeeded = 0;
   TimeOfDay? time;
   DateTime? date;
 
@@ -49,6 +51,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
     barrio = widget.event.barrio;
     name = widget.event.name;
     description = widget.event.description;
+    volunteersNeeded = widget.event.volunteersNeeded;
     time = widget.event.time;
     date = widget.event.date;
   }
@@ -109,6 +112,19 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
           },
           imageOnly: true,
         ),
+        TextFormField(
+          initialValue: (this.volunteersNeeded ?? 0).toString(),
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+          ],
+          decoration: InputDecoration(hintText: "Volunteers needed"),
+          onChanged: (String val) {
+            setState(() {
+              this.volunteersNeeded = int.tryParse(val);
+            });
+          },
+        ),
         EditEventStepNavigation(
           isSaveEnabled: _isSaveEnabled(),
           previousStep: () {
@@ -126,6 +142,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
         name!.length > 0 &&
         date != null &&
         time != null &&
+        volunteersNeeded != null &&
         widget.event.fileUrl != null;
   }
 
@@ -135,6 +152,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
     widget.event.date = date;
     widget.event.time = time;
     widget.event.description = description;
+    widget.event.volunteersNeeded = volunteersNeeded;
     widget.nextStep();
   }
 }

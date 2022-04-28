@@ -17,6 +17,7 @@ class Event extends Uploadable {
     this.date,
     this.time,
     this.location,
+    this.volunteersNeeded,
     this.permits = const [],
 
     required this.isPublished,
@@ -34,6 +35,7 @@ class Event extends Uploadable {
   DateTime? date;
   TimeOfDay? time;
   Location? location;
+  int? volunteersNeeded;
   List<Permit> permits;
 
   final bool isPublished;

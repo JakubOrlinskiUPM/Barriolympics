@@ -33,20 +33,41 @@ class EditEventStepPublish extends StatefulWidget implements EditEventStep {
 }
 
 class _EditEventStepPublishState extends State<EditEventStepPublish> {
-  void showPreview(bool page) {
-    showModalBottomSheet(
-      isDismissible: true,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext ctx) {
-        return Container(
-          constraints: BoxConstraints(maxHeight: 500),
-          child: page
-              ? ViewEventPage(event: widget.event)
-              : EventItem(event: widget.event),
+  bool isEventDone(bool preview) {
+    bool res = widget.event.name != null &&
+        widget.event.time != null &&
+        widget.event.date != null &&
+        widget.event.fileUrl != null &&
+        widget.event.location != null;
+    if (!preview) {
+      res =
+          res && widget.event.permits.every((permit) => permit.fileUrl != null);
+    }
+    return res;
+  }
+
+  void Function()? showPreview(bool page) {
+    if (isEventDone(true)) {
+      return () {
+        showModalBottomSheet(
+          isDismissible: true,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext ctx) {
+            return AbsorbPointer(
+              child: Container(
+                constraints: BoxConstraints(maxHeight: 500),
+                child: page
+                    ? ViewEventPage(event: widget.event)
+                    : EventItem(event: widget.event),
+              ),
+            );
+          },
         );
-      },
-    );
+      };
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -64,9 +85,7 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
           trailing: OutlinedButton.icon(
             icon: Icon(Icons.find_in_page),
             label: Text("Preview"),
-            onPressed: () {
-              showPreview(true);
-            },
+            onPressed: showPreview(true),
           ),
         ),
         ListTile(
@@ -75,15 +94,13 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
           trailing: OutlinedButton.icon(
             icon: Icon(Icons.list_alt),
             label: Text("Preview"),
-            onPressed: () {
-              showPreview(false);
-            },
+            onPressed: showPreview(false),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: ElevatedButton(
-            onPressed: _publishEvent,
+            onPressed: _publishEvent(),
             child: Text("Publish event"),
           ),
         ),
@@ -91,8 +108,14 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
     );
   }
 
-  void _publishEvent() {
-    Provider.of<AppState>(context, listen: false).publishEvent(widget.event);
-    Navigator.pushNamed(context, EDIT_EVENT_SPLASH_PAGE);
+  void Function()? _publishEvent() {
+    if (isEventDone(false)) {
+      return () {
+        Provider.of<AppState>(context, listen: false).publishEvent(widget.event);
+        Navigator.pushNamed(context, EDIT_EVENT_SPLASH_PAGE);
+      };
+    } else {
+      return null;
+    }
   }
 }

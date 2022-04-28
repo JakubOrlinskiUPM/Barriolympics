@@ -178,7 +178,11 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
                 style: style,
                 onPressed: () {
                   setState(() {
-                    typeIndex = markerTypes.indexOf(markerType);
+                    if (typeIndex == markerTypes.indexOf(markerType)) {
+                      typeIndex = null;
+                    } else {
+                      typeIndex = markerTypes.indexOf(markerType);
+                    }
                   });
                 },
                 icon: Icon(
@@ -200,14 +204,16 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
                   onFieldSubmitted: lookupAddress,
                 ),
               )
-            : OutlinedButton.icon(
-                onPressed: () {
-                  setState(() {
-                    showSearch = true;
-                  });
-                },
-                icon: Icon(Icons.search_outlined),
-                label: Text("Search for an address"),
+            : Align(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      showSearch = true;
+                    });
+                  },
+                  icon: Icon(Icons.search_outlined),
+                  label: Text("Search for an address"),
+                ),
               ),
         EditEventStepNavigation(
           isSaveEnabled: _isSaveEnabled(),

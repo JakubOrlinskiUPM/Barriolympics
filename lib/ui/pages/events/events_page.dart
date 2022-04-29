@@ -38,7 +38,7 @@ class _EventsPageState extends State<EventsPage> {
         slivers: <Widget>[
           TopBanner(),
           SliverAppBar(
-            toolbarHeight: 60,
+            toolbarHeight: 70,
             backgroundColor: const Color(0xfffdf5f0),
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.zero,
@@ -64,6 +64,12 @@ class _EventsPageState extends State<EventsPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+          hoverElevation: 1.5,
+          shape: StadiumBorder(
+              side: BorderSide(
+                  color: Colors.deepOrange, width: 3)),
+          elevation: 1.5,
           foregroundColor: Colors.deepOrange,
           onPressed: () {
             Navigator.push(
@@ -73,11 +79,8 @@ class _EventsPageState extends State<EventsPage> {
                       FilterPage(setFilters: this.setFilters)),
             );
           },
-          child: Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.deepOrange)),
-              child: const Icon(Icons.filter_alt, size: 30))),
+          child: const Icon(Icons.filter_alt, size: 30),
+      ),
     );
   }
 }

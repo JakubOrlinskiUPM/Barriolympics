@@ -109,52 +109,49 @@ class _ChipListState extends State<ChipList> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 30,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: ListView.separated(
-          itemCount: _chipsSelected.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int index) {
-            if (!_chipsSelected[index].isFilter) {
-              return FilterChip(
-                selected: _chipsSelected[index].selected,
-                labelStyle: TextStyle(
-                    color: _chipsSelected[index].selected
-                        ? Colors.white
-                        : Colors.black),
-                label: Text(_chipsSelected[index].category!.label),
-                onSelected: (bool value) {
-                  setState(() {
-                    _chipsSelected[index].selected = value;
-                  });
-                  widget.updateFilters(
-                      _chipsSelected[index].applyFilter(widget.filterData));
-                },
-              );
-            } else {
-              return Chip(
-                backgroundColor: Colors.deepOrange,
-                labelStyle: TextStyle(color: Colors.white),
-                avatar: Icon(
-                  _chipsSelected[index].icon,
-                  color: Colors.white,
-                ),
-                deleteIcon: Icon(Icons.highlight_remove),
-                onDeleted: () {
-                  setState(() {
-                    _chipsSelected.removeAt(index);
-                  });
-                },
-                label: Text(_chipsSelected[index].label!),
-              );
-            }
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              width: 6,
+      child: ListView.separated(
+        itemCount: _chipsSelected.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          if (!_chipsSelected[index].isFilter) {
+            return FilterChip(
+              selected: _chipsSelected[index].selected,
+              labelStyle: TextStyle(
+                  color: _chipsSelected[index].selected
+                      ? Colors.white
+                      : Colors.black),
+              label: Text(_chipsSelected[index].category!.label),
+              onSelected: (bool value) {
+                setState(() {
+                  _chipsSelected[index].selected = value;
+                });
+                widget.updateFilters(
+                    _chipsSelected[index].applyFilter(widget.filterData));
+              },
             );
-          },
-        ),
+          } else {
+            return Chip(
+              backgroundColor: Colors.deepOrange,
+              labelStyle: TextStyle(color: Colors.white),
+              avatar: Icon(
+                _chipsSelected[index].icon,
+                color: Colors.white,
+              ),
+              deleteIcon: Icon(Icons.highlight_remove),
+              onDeleted: () {
+                setState(() {
+                  _chipsSelected.removeAt(index);
+                });
+              },
+              label: Text(_chipsSelected[index].label!),
+            );
+          }
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width: 6,
+          );
+        },
       ),
     );
   }

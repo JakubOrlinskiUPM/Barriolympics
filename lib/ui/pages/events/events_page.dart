@@ -21,7 +21,8 @@ class _EventsPageState extends State<EventsPage> {
   void initState() {
     super.initState();
 
-    _filterData = EventFilterData(user: Provider.of<AppState>(context, listen: false).user);
+    _filterData = EventFilterData(
+        user: Provider.of<AppState>(context, listen: false).user);
   }
 
   void setFilters(EventFilterData filters) {
@@ -33,30 +34,37 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: TopBanner(),
       body: CustomScrollView(
         slivers: <Widget>[
           TopBanner(),
           SliverAppBar(
-            pinned: true,
+            toolbarHeight: 60,
             backgroundColor: const Color(0xfffdf5f0),
             flexibleSpace: FlexibleSpaceBar(
-              title: Column(
-                children: [
-                  Text('Events', style: Theme.of(context).textTheme.headline6),
-                  ChipList(filterData: _filterData, updateFilters: setFilters),
-                ],
+              titlePadding: EdgeInsets.zero,
+              title: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Events',
+                        style: Theme.of(context).textTheme.headline6),
+                    ChipList(
+                        filterData: _filterData, updateFilters: setFilters),
+                  ],
+                ),
               ),
             ),
           ),
           Consumer<AppState>(builder: (context, state, widget) {
-            return EventList(events: state.getEvents(_filterData), filters: _filterData);
-          })
+            return EventList(
+                events: state.getEvents(_filterData), filters: _filterData);
+          }),
+          SliverPadding(padding: EdgeInsets.only(bottom: 70)),
         ],
       ),
       floatingActionButton: FloatingActionButton(
           foregroundColor: Colors.deepOrange,
-          backgroundColor: Colors.white,
           onPressed: () {
             Navigator.push(
               context,

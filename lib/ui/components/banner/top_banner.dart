@@ -25,8 +25,6 @@ class _TopBannerState extends State<TopBanner> {
               BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS))),
       backgroundColor: Color(0xFFFFA98E),
       pinned: true,
-      snap: true,
-      floating: true,
       expandedHeight: 250,
       collapsedHeight: 90.0,
       centerTitle: false,

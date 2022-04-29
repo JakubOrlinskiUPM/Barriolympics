@@ -48,7 +48,7 @@ class BarrioPoints extends StatelessWidget {
                         onPressed: () {
                           HelpPage.showHelpPage(context);
                         },
-                        label: Text("Earn points", style: TextStyle(fontSize: 12),),
+                        label: Text("Contribute", style: TextStyle(fontSize: 12),),
                         icon: Icon(Icons.handshake_outlined, size: 16,),
                       ),
                     ],

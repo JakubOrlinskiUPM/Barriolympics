@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:barriolympics/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,8 +23,23 @@ class EventItem extends StatefulWidget {
 }
 
 class _EventItemState extends State<EventItem> {
+  String getEventBanner(AppState state) {
+    if (state.user.organisedEvents.contains(widget.event)) {
+      return "Your event!";
+    }
+    if (state.user.attendingEvents.contains(widget.event)) {
+      return "Attending!";
+    }
+    if (state.user.volunteeringEvents.contains(widget.event)) {
+      return "Volunteering!";
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
+    AppState state = Provider.of<AppState>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.all(0),
       child: Card(
@@ -46,78 +62,114 @@ class _EventItemState extends State<EventItem> {
               style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero)),
               onPressed: () {
-                AppState appSatte =
-                    Provider.of<AppState>(context, listen: false);
                 Navigator.pushNamed(context, VIEW_EVENT_PAGE,
                     arguments: {'event': widget.event});
               },
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          widget.event.name!,
-                          style: const TextStyle(
-                            color: Color(0xffff6900),
-                            fontSize: 25.0,
-                          ),
+                        Text(getEventBanner(state)),
+                        state.user.organisedEvents.contains(widget.event)
+                            ? TextButton.icon(
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                    StadiumBorder(
+                                      side:
+                                          BorderSide(color: Colors.deepOrange),
+                                    ),
+                                  ),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                ),
+                                label: Text("Edit"),
+                                icon: Icon(Icons.edit),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, EDIT_EVENT_PAGE,
+                                      arguments: {"event": widget.event});
+                                },
+                              )
+                            : Container(),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              widget.event.name!,
+                              style: const TextStyle(
+                                color: Color(0xffff6900),
+                                fontSize: 25.0,
+                              ),
+                            ),
+                            Card(
+                                margin: EdgeInsets.only(bottom: 6),
+                                color: Colors.white,
+                                child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(children: [
+                                          const Icon(Icons.date_range_outlined,
+                                              size: 15),
+                                          Text(
+                                              widget.event.date!.day.toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2),
+                                          const Text('/'),
+                                          Text(
+                                              widget.event.date!.month
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2),
+                                        ]),
+                                      ],
+                                    ))),
+                          ],
                         ),
-                        Card(
-                            margin: EdgeInsets.only(bottom: 6),
-                            color: Colors.white,
-                            child: Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(children: [
-                                      const Icon(Icons.date_range_outlined,
-                                          size: 15),
-                                      Text(widget.event.date!.day.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2),
-                                      const Text('/'),
-                                      Text(widget.event.date!.month.toString(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2),
-                                    ]),
-                                  ],
-                                ))),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        height: 1,
+                        decoration: BoxDecoration(color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8, bottom: 8, right: 16, left: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(children: [
+                              const Icon(Icons.location_on,
+                                  size: 15, color: Colors.white),
+                              Text(widget.event.location!.locationName,
+                                  style: TextStyle(color: Colors.white)),
+                            ]),
+                            Row(children: [
+                              const Icon(Icons.access_time_outlined,
+                                  size: 15, color: Colors.white),
+                              Text(widget.event.time!.hour.toString() + 'h',
+                                  style: TextStyle(color: Colors.white)),
+                            ]),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  Container(
-                    height: 1,
-                    decoration: BoxDecoration(color: Colors.white),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 8, right: 16, left: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(children: [
-                          const Icon(Icons.location_on,
-                              size: 15, color: Colors.white),
-                          Text(widget.event.location!.locationName,
-                              style: TextStyle(color: Colors.white)),
-                        ]),
-                        Row(children: [
-                          const Icon(Icons.access_time_outlined,
-                              size: 15, color: Colors.white),
-                          Text(widget.event.time!.hour.toString() + 'h',
-                              style: TextStyle(color: Colors.white)),
-                        ]),
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),

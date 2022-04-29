@@ -1,4 +1,5 @@
 import 'package:barriolympics/models/barrio.dart';
+import 'package:barriolympics/models/event_category.dart';
 import 'package:barriolympics/models/permit.dart';
 import 'package:barriolympics/models/uploadable.dart';
 import 'package:barriolympics/models/user.dart';
@@ -19,6 +20,7 @@ class Event extends Uploadable {
     this.location,
     this.volunteersNeeded,
     this.permits = const [],
+    this.categories = const [],
 
     required this.isPublished,
 
@@ -37,6 +39,7 @@ class Event extends Uploadable {
   Location? location;
   int? volunteersNeeded;
   List<Permit> permits;
+  List<EventCategory> categories;
 
   final bool isPublished;
 

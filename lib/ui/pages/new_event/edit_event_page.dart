@@ -39,7 +39,7 @@ class _EditEventPageState extends State<EditEventPage> {
   void checkDiscard() {
     AppState state = Provider.of<AppState>(context, listen: false);
 
-    if (state.user.ownEvents.contains(widget.event)) {
+    if (state.user.organisedEvents.contains(widget.event)) {
       Navigator.popUntil(context, (route) => route.isFirst);
     } else {
       showDialog(

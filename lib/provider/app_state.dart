@@ -1,6 +1,8 @@
 import 'package:barriolympics/models/comment.dart';
 import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/models/event_category.dart';
 import 'package:barriolympics/models/post.dart';
+import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:flutter/material.dart';
 
 import 'package:barriolympics/models/barrio.dart';
@@ -12,7 +14,9 @@ class AppState extends ChangeNotifier {
   Barrio barrio = BARRIO_LIST[0];
   List<Barrio> barrioList = BARRIO_LIST;
 
-  User user = User(id: 0, firstName: "Jake", lastName: "the Snake", events: EVENT_LIST.getRange(0, 2).toList());
+  List<EventCategory> eventCategories = CATEGORY_LIST;
+
+  User user = User(id: 0, firstName: "Jake", lastName: "the Snake", attendingEvents: EVENT_LIST.getRange(0, 2).toList());
 
   void likePost(Post post) {
     List<Post> posts = user.postsLiked.toList();
@@ -30,20 +34,25 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Event> getEvents() {
+  List<Event> getEvents(EventFilterData _filterData) {
     List<Event> res = [];
-    res.addAll(user.ownEvents);
+    res.addAll(user.organisedEvents);
     res.addAll(barrio.events);
+
+    print("before: " + res.length.toString());
+    res = res.where((event) => _filterData.doesEventMatch(event)).toList();
+    print("after: " + res.length.toString());
+
     return res;
   }
 
   void updateEvent(Event event) {
-    if (user.ownEvents.contains(event)) {
-      user.ownEvents[user.ownEvents.indexOf(event)] = event;
+    if (user.organisedEvents.contains(event)) {
+      user.organisedEvents[user.organisedEvents.indexOf(event)] = event;
     } else {
-      List<Event> tmp = user.ownEvents.toList();
+      List<Event> tmp = user.organisedEvents.toList();
       tmp.add(event);
-      user.ownEvents = tmp;
+      user.organisedEvents = tmp;
     }
     notifyListeners();
   }

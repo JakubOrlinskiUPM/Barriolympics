@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:barriolympics/models/barrio.dart';
 import 'package:barriolympics/models/comment.dart';
 import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/models/event_category.dart';
 import 'package:barriolympics/models/location.dart';
 import 'package:barriolympics/models/post.dart';
 import 'package:barriolympics/models/user.dart';
+import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -162,34 +164,43 @@ List<Event> EVENT_LIST = [
   Event(
     id: 0,
     name: "Outdoor BBQ",
-    description: "The outdoor barbeque for everyone in the neighbourhood who still has not got plans for dinner! We will all be bringing own meat and veggies, so be sure to bring some to share with the others :)",
-    fileUrl: "https://st2.depositphotos.com/1662991/11546/i/950/depositphotos_115465050-stock-photo-young-male-with-a-beard.jpg",
+    description:
+        "The outdoor barbeque for everyone in the neighbourhood who still has not got plans for dinner! We will all be bringing own meat and veggies, so be sure to bring some to share with the others :)",
+    fileUrl:
+        "https://st2.depositphotos.com/1662991/11546/i/950/depositphotos_115465050-stock-photo-young-male-with-a-beard.jpg",
     date: DateTime(2022, 5, 24),
     time: const TimeOfDay(hour: 18, minute: 0),
     location: const Location(locationName: "Park"),
     organiser: getRandChoice(USER_LIST),
+    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
   ),
   Event(
     id: 1,
     name: "Art exhibition",
-    description: "There will be an art exhibition for everyone to stroll in. All kinds of art from madrileños will be shown. You can bring something to drink of you'd like ;)",
-    fileUrl: "https://allaboutlimassol.com/assets/images/primary-image/141124-0.art_exhibition_gallery.jpg",
+    description:
+        "There will be an art exhibition for everyone to stroll in. All kinds of art from madrileños will be shown. You can bring something to drink of you'd like ;)",
+    fileUrl:
+        "https://img.theculturetrip.com/1440x807/smart/wp-content/uploads/2017/04/reina-sofia-sala-3.jpg",
     date: DateTime(2022, 5, 15),
     time: const TimeOfDay(hour: 9, minute: 0),
     location: const Location(locationName: "Gallery"),
     organiser: getRandChoice(USER_LIST),
+    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
   ),
   Event(
     id: 2,
     name: "Light show",
-    description: "Part of the amazing light shows all over town. See what this street has to offer!",
-    fileUrl: "https://phantom-elmundo.unidadeditorial.es/dbbeca15d0c12d0ad0d3f9c179db88a6/crop/93x0/1087x670/resize/700/f/webp/assets/multimedia/imagenes/2021/11/04/16360352948948.jpg",
+    description:
+        "Part of the amazing light shows all over town. See what this street has to offer!",
+    fileUrl:
+        "https://phantom-elmundo.unidadeditorial.es/dbbeca15d0c12d0ad0d3f9c179db88a6/crop/93x0/1087x670/resize/700/f/webp/assets/multimedia/imagenes/2021/11/04/16360352948948.jpg",
     date: DateTime(2022, 5, 15),
     time: const TimeOfDay(hour: 23, minute: 0),
     location: const Location(locationName: "Botanical garden"),
     organiser: getRandChoice(USER_LIST),
+    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
   ),
   Event(
@@ -202,30 +213,35 @@ List<Event> EVENT_LIST = [
     time: const TimeOfDay(hour: 20, minute: 0),
     location: const Location(locationName: "Autocine Madrid"),
     organiser: getRandChoice(USER_LIST),
+    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
   ),
   Event(
     id: 4,
     name: "Basketball event",
-    description: "Make sure to sign up, because there will be teams made. Only 24 spots!",
+    description:
+        "Make sure to sign up, because there will be teams made. Only 24 spots!",
     fileUrl:
         "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
     date: DateTime(2022, 6, 2),
     time: const TimeOfDay(hour: 19, minute: 0),
     location: const Location(locationName: "Parque de baloncesto"),
     organiser: getRandChoice(USER_LIST),
+    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
   ),
   Event(
     id: 5,
     name: "Pool Party",
-    description: "A cool pool party for internationals, make sure to bring some cash if you want to buy something.",
+    description:
+        "A cool pool party for internationals, make sure to bring some cash if you want to buy something.",
     fileUrl:
         "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
     date: DateTime(2022, 6, 6),
     time: const TimeOfDay(hour: 12, minute: 0),
     location: const Location(locationName: "Calle de Velásquez 36"),
     organiser: getRandChoice(USER_LIST),
+    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
   ),
 ];
@@ -241,4 +257,44 @@ List<Barrio> BARRIO_LIST = [
   Barrio(id: 2, name: "Chueca", points: getRandPoints()),
   Barrio(id: 3, name: "Lavapies", points: getRandPoints()),
   Barrio(id: 4, name: "Retiro", points: getRandPoints()),
+];
+
+List<EventCategory> CATEGORY_LIST = [
+  EventCategory(
+    iconData: Icons.sports_soccer,
+    label: "Attending",
+    isSpecial: true,
+    applyFilter: (EventFilterData filterData) {
+      filterData.isAttending = filterData.isAttending == null ? true : null;
+      return filterData;
+    },
+  ),
+  EventCategory(
+    iconData: Icons.sports_soccer,
+    label: "Volunteering",
+    isSpecial: true,
+    applyFilter: (EventFilterData filterData) {
+      filterData.isVolunteering = filterData.isVolunteering == null ? true : null;
+      return filterData;
+    },
+  ),
+  EventCategory(
+    iconData: Icons.sports_soccer,
+    label: "Organised",
+    isSpecial: true,
+    applyFilter: (EventFilterData filterData) {
+      filterData.isOwn = filterData.isOwn == null ? true : null;
+      return filterData;
+    },
+  ),
+  EventCategory(
+      iconData: Icons.format_paint_outlined, label: "Art", isSpecial: false),
+  EventCategory(
+      iconData: Icons.music_note_outlined, label: "Music", isSpecial: false),
+  EventCategory(
+      iconData: Icons.fastfood_outlined, label: "Food", isSpecial: false),
+  EventCategory(
+      iconData: Icons.museum_outlined, label: "Culture", isSpecial: false),
+  EventCategory(
+      iconData: Icons.sports_soccer, label: "Sport", isSpecial: false),
 ];

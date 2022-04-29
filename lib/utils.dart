@@ -77,3 +77,35 @@ DecorationImage? getImage(Event event) {
     }
   }
 }
+
+String getDateRangeLabel(DateTime dt1, DateTime? dt2) {
+  String res = "";
+  res = dt1.day.toString();
+  if (dt2 != null) {
+    String secondDate = "-" + dt2.day.toString() + "/" + dt2.month.toString();
+    if (dt1.month == dt2.month) {
+      res += secondDate;
+    } else {
+      res += "/" + dt1.month.toString();
+      res += secondDate;
+    }
+  } else {
+    res += "/" + dt1.month.toString();
+  }
+
+  return res;
+}
+
+String getTimeRangeLabel(TimeOfDay tod1, TimeOfDay? tod2) {
+  String res = "";
+
+  res = tod1.hour.toString() + "h";
+
+  if (tod2 != null) {
+    res += " - " + tod2.hour.toString() + "h";
+  } else {
+    res += " - 24h";
+  }
+
+  return res;
+}

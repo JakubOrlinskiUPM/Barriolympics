@@ -12,8 +12,9 @@ class User {
     this.imageUrl = "",
     this.postsLiked = const [],
     this.commentsLiked = const [],
-    this.events = const [],
-    this.ownEvents = const [],
+    this.attendingEvents = const [],
+    this.volunteeringEvents = const [],
+    this.organisedEvents = const [],
   });
 
   final int id;
@@ -21,8 +22,9 @@ class User {
   final String lastName;
   List<Post> postsLiked;
   List<Comment> commentsLiked;
-  List<Event> events;
-  List<Event> ownEvents;
+  List<Event> attendingEvents;
+  List<Event> volunteeringEvents;
+  List<Event> organisedEvents;
   final String imageUrl;
 
   String get fullName {

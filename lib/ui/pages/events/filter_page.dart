@@ -1,8 +1,11 @@
+import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:flutter/material.dart';
 import 'package:barriolympics/ui/pages/events/events_page.dart';
 
 import 'dart:core';
+
+import 'package:provider/provider.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key, required this.setFilters}) : super(key: key);
@@ -92,18 +95,20 @@ class _FilterPageState extends State<FilterPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text('Starts after:', style: TextStyle(fontSize: 14)),
-                Text('${time?.hour}:${time?.minute}',
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold)),
-                OutlinedButton(
-                  onPressed: () {
-                    selectTime(context);
-                  },
-                  child: const Text('Pick a starting time'),
-                ),
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Starts after:', style: TextStyle(fontSize: 14)),
+                    Text('${time?.hour}:${time?.minute}',
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                    OutlinedButton(
+                      onPressed: () {
+                        selectTime(context);
+                      },
+                      child: const Text('Pick a starting time'),
+                    ),
+                  ]),
             ),
             Row(children: [
               const SizedBox(width: 10),
@@ -125,7 +130,13 @@ class _FilterPageState extends State<FilterPage> {
             OutlinedButton(
                 child: const Text('Apply Filters'),
                 onPressed: () {
-                  widget.setFilters(EventFilterData(startDate: _dateStartTime));
+                  widget.setFilters(
+                    EventFilterData(
+                      user: Provider.of<AppState>(context, listen: false).user,
+                      startDate: _dateStartTime,
+                      timeFrom: time,
+                    ),
+                  );
 
                   Navigator.pop(context);
                 }),

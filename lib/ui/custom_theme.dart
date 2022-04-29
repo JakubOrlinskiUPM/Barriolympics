@@ -50,6 +50,16 @@ class CustomTheme {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(),
       ),
+      chipTheme: ChipThemeData(
+        backgroundColor: Color(0xfffff6f1),
+        checkmarkColor: Colors.white,
+        secondarySelectedColor: Colors.white,
+        selectedColor: Colors.deepOrange,
+        deleteIconColor: Colors.white,
+        shape: StadiumBorder(
+          side: BorderSide(color: Colors.deepOrange),
+        ),
+      ),
 
       // primaryColorLight: Color(0x000000),
       // primaryColorDark: Color(0x000000),
@@ -70,7 +80,6 @@ class CustomTheme {
       // hintColor: Color(0x000000),
       // errorColor: Color(0x000000),
       // cardTheme: CardTheme(),
-      // chipTheme: ChipThemeData(),
       // progressIndicatorTheme: ProgressIndicatorThemeData(),
     );
   }

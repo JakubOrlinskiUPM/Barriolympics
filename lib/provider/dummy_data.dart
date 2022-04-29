@@ -5,11 +5,13 @@ import 'package:barriolympics/models/comment.dart';
 import 'package:barriolympics/models/event.dart';
 import 'package:barriolympics/models/event_category.dart';
 import 'package:barriolympics/models/location.dart';
+import 'package:barriolympics/models/marker_type.dart';
 import 'package:barriolympics/models/post.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 
 bool isNetworkPresent = true;
 
@@ -170,7 +172,14 @@ List<Event> EVENT_LIST = [
         "https://st2.depositphotos.com/1662991/11546/i/950/depositphotos_115465050-stock-photo-young-male-with-a-beard.jpg",
     date: DateTime(2022, 5, 24),
     time: const TimeOfDay(hour: 18, minute: 0),
-    location: const Location(locationName: "Park"),
+    location: Location(
+      locationName: "Park",
+      markers: [
+        {
+          LatLng(40.434890, -3.726069): MarkerType(label: "Main activity", color: Colors.green),
+        },
+      ],
+    ),
     organiser: getRandChoice(USER_LIST),
     categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
@@ -184,7 +193,14 @@ List<Event> EVENT_LIST = [
         "https://img.theculturetrip.com/1440x807/smart/wp-content/uploads/2017/04/reina-sofia-sala-3.jpg",
     date: DateTime(2022, 5, 15),
     time: const TimeOfDay(hour: 9, minute: 0),
-    location: const Location(locationName: "Gallery"),
+    location: Location(
+      locationName: "Gallery",
+      markers: [
+        {
+          LatLng(40.413250, -3.698108): MarkerType(label: "Main activity", color: Colors.green),
+        },
+      ],
+    ),
     organiser: getRandChoice(USER_LIST),
     categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
@@ -198,7 +214,14 @@ List<Event> EVENT_LIST = [
         "https://phantom-elmundo.unidadeditorial.es/dbbeca15d0c12d0ad0d3f9c179db88a6/crop/93x0/1087x670/resize/700/f/webp/assets/multimedia/imagenes/2021/11/04/16360352948948.jpg",
     date: DateTime(2022, 5, 15),
     time: const TimeOfDay(hour: 23, minute: 0),
-    location: const Location(locationName: "Botanical garden"),
+    location: Location(
+      locationName: "Botanical garden",
+      markers: [
+        {
+          LatLng(40.410677, -3.691365): MarkerType(label: "Main activity", color: Colors.green),
+        },
+      ],
+    ),
     organiser: getRandChoice(USER_LIST),
     categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
@@ -211,7 +234,14 @@ List<Event> EVENT_LIST = [
         "https://socratessculpturepark.org/wp-content/uploads/2018/08/ssp-119_m-768x512.jpg",
     date: DateTime(2022, 6, 1),
     time: const TimeOfDay(hour: 20, minute: 0),
-    location: const Location(locationName: "Autocine Madrid"),
+    location: Location(
+      locationName: "Autocine Madrid",
+      markers: [
+        {
+          LatLng(40.485914, -3.677616): MarkerType(label: "Main activity", color: Colors.green),
+        },
+      ],
+    ),
     organiser: getRandChoice(USER_LIST),
     categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
@@ -225,7 +255,14 @@ List<Event> EVENT_LIST = [
         "https://estaticos03.marca.com/albumes/2012/07/08/baloncesto_nike_festival/1341740668_extras_albumes_0.jpg",
     date: DateTime(2022, 6, 2),
     time: const TimeOfDay(hour: 19, minute: 0),
-    location: const Location(locationName: "Parque de baloncesto"),
+    location: Location(
+      locationName: "Parque de baloncesto",
+      markers: [
+        {
+          LatLng(40.432683, -3.725307): MarkerType(label: "Main activity", color: Colors.green),
+        },
+      ],
+    ),
     organiser: getRandChoice(USER_LIST),
     categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
@@ -239,7 +276,14 @@ List<Event> EVENT_LIST = [
         "https://www.partybus.es/wp-content/uploads/2019/05/POOL-PARTY-4.jpg",
     date: DateTime(2022, 6, 6),
     time: const TimeOfDay(hour: 12, minute: 0),
-    location: const Location(locationName: "Calle de Velásquez 36"),
+    location: Location(
+      locationName: "Calle de Velásquez 36",
+      markers: [
+        {
+          LatLng(40.418540, -3.731719): MarkerType(label: "Main activity", color: Colors.green),
+        },
+      ],
+    ),
     organiser: getRandChoice(USER_LIST),
     categories: getRandSublist(CATEGORY_LIST.sublist(3)),
     isPublished: true,
@@ -274,7 +318,8 @@ List<EventCategory> CATEGORY_LIST = [
     label: "Volunteering",
     isSpecial: true,
     applyFilter: (EventFilterData filterData) {
-      filterData.isVolunteering = filterData.isVolunteering == null ? true : null;
+      filterData.isVolunteering =
+          filterData.isVolunteering == null ? true : null;
       return filterData;
     },
   ),

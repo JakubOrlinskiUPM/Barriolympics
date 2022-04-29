@@ -1,21 +1,15 @@
 import 'package:barriolympics/models/event.dart';
 import 'package:barriolympics/provider/app_state.dart';
-import 'package:barriolympics/ui/pages/new_event/edit_event_step.dart';
-import 'package:barriolympics/ui/pages/new_event/new_event_splash_screen.dart';
-import 'package:barriolympics/ui/pages/new_event/edit_event_step_basic_info.dart';
-import 'package:barriolympics/ui/pages/new_event/edit_event_step_loc.dart';
-import 'package:barriolympics/ui/pages/new_event/edit_event_step_permits.dart';
-import 'package:barriolympics/ui/pages/new_event/edit_event_step_publish.dart';
+import 'package:barriolympics/ui/components/invisible_expanded.dart';
+import 'package:barriolympics/ui/pages/events/event_general_details.dart';
+import 'package:barriolympics/ui/pages/events/event_location_details.dart';
+import 'package:barriolympics/ui/pages/events/event_signup_buttons.dart';
 import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:im_stepper/stepper.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/barrio.dart';
-
 class ViewEventPage extends StatefulWidget {
-  ViewEventPage({Key? key, required this.event}) : super(key: key);
+  const ViewEventPage({Key? key, required this.event}) : super(key: key);
 
   final Event event;
 
@@ -26,45 +20,99 @@ class ViewEventPage extends StatefulWidget {
 class _ViewEventPageState extends State<ViewEventPage> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController _dateController = TextEditingController(
-      text: widget.event.date != null
-          ? DateFormat('yyyy-MM-dd').format(widget.event.date!)
-          : null,
-    );
-    TextEditingController _timeController = TextEditingController(
-      text:
-          widget.event.time != null ? widget.event.time!.format(context) : null,
-    );
-    TextEditingController _descriptionController = TextEditingController(
-      text: widget.event.description,
-    );
-
-    AppState appState = Provider.of<AppState>(context, listen: false);
+    TextStyle headingStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
+          fontSize: 20,
+        );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.event.name!),
-      ),
-      body: Column(
-        children: [
-          SafeArea(
-            child: Container(
-              height: 200,
-              decoration: BoxDecoration(
-                image: getImage(widget.event),
+      extendBodyBehindAppBar: true,
+      body: Consumer<AppState>(builder: (context, state, child) {
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.deepOrange,
+              elevation: 0,
+              pinned: true,
+              expandedHeight: 200,
+              flexibleSpace: FlexibleSpaceBar(
+                titlePadding: EdgeInsets.zero,
+                centerTitle: true,
+                title: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    InvisibleExpandedHeader(
+                      child: Hero(
+                        tag: "event-${widget.event.id}-image",
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: getImage(widget.event),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InvisibleExpandedHeader(
+                      reversed: true,
+                      child: SafeArea(
+                        child: Center(
+                            child: Text(
+                          widget.event.name!,
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        )),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Column(children: [
-            Text(widget.event.name.toString()),
-            Text(widget.event.barrio.toString()),
-            //barrio??? is not in the dummy data -> ==null
-            Text(widget.event.date.toString().substring(0, 10)),
-            Text(widget.event.time.toString().substring(10, 15)),
-            Text(widget.event.description.toString()),
-          ])
-        ],
-      ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          getFullDateString(widget.event.date!),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        Text(
+                          widget.event.name.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(widget.event.location!.locationName,
+                            style: Theme.of(context).textTheme.caption),
+                        EventSignupButtons(event: widget.event),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          child: EventGeneralDetails(event: widget.event),
+                        ),
+                        Text(
+                          "Description:",
+                          style: headingStyle,
+                        ),
+                        Text(
+                          widget.event.description.toString(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: EventLocationDetails(
+                              event: widget.event, style: headingStyle),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

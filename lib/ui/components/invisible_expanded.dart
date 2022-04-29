@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class InvisibleExpandedHeader extends StatefulWidget {
   final Widget child;
+  final bool reversed;
 
   const InvisibleExpandedHeader({
     Key? key,
     required this.child,
+    this.reversed = false,
   }) : super(key: key);
 
   @override
@@ -48,11 +50,15 @@ class _InvisibleExpandedHeaderState extends State<InvisibleExpandedHeader> {
     final FlexibleSpaceBarSettings? settings =
         context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
     if (settings != null) {
-      bool visible = settings.currentExtent > settings.maxExtent - 70;
+      bool visible = settings.currentExtent > settings.maxExtent - settings.minExtent;
       double minimum = settings.minExtent / settings.maxExtent;
       double opacity =
           min(settings.currentExtent, settings.maxExtent) / settings.maxExtent;
       opacity = (opacity - minimum) / (1 - minimum);
+      if (widget.reversed) {
+        visible = !visible;
+        opacity = 1 - opacity;
+      }
       setState(() {
         _visible = visible;
         _opacity = opacity;

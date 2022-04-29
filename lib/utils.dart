@@ -109,3 +109,23 @@ String getTimeRangeLabel(TimeOfDay tod1, TimeOfDay? tod2) {
 
   return res;
 }
+
+List<String> weekdays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
+String getFullDateString(DateTime dateTime) {
+  String res = "";
+
+  res += weekdays[dateTime.weekday - 1] + ", ";
+  res += "${dateTime.day} / ${dateTime.month} / ${dateTime.year} ";
+  res += "at ${dateTime.hour}:${dateTime.minute}";
+
+  return res;
+}

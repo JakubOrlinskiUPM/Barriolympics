@@ -9,14 +9,28 @@ import 'package:barriolympics/models/barrio.dart';
 import 'package:barriolympics/models/user.dart';
 import 'package:barriolympics/provider/dummy_data.dart';
 
-
 class AppState extends ChangeNotifier {
+  AppState() {
+    EVENT_LIST.map((event) {
+      event.barrio = BARRIO_LIST[0];
+      return event;
+    }).toList();
+
+    EVENT_LIST[0].goingUsers = [user];
+    EVENT_LIST[1].goingUsers = [user];
+  }
+
   Barrio barrio = BARRIO_LIST[0];
   List<Barrio> barrioList = BARRIO_LIST;
 
   List<EventCategory> eventCategories = CATEGORY_LIST;
 
-  User user = User(id: 0, firstName: "Jake", lastName: "the Snake", attendingEvents: EVENT_LIST.getRange(0, 2).toList());
+  User user = User(
+    id: 0,
+    firstName: "Jake",
+    lastName: "Archibald",
+    attendingEvents: EVENT_LIST.getRange(0, 2).toList(),
+  );
 
   void likePost(Post post) {
     List<Post> posts = user.postsLiked.toList();
@@ -30,7 +44,12 @@ class AppState extends ChangeNotifier {
   }
 
   void addComment(Post post, String comment) {
-    post.comments.add(Comment(id: 10, user: this.user, text: comment, likes: 0, timePosted: DateTime.now()));
+    post.comments.add(Comment(
+        id: 10,
+        user: this.user,
+        text: comment,
+        likes: 0,
+        timePosted: DateTime.now()));
     notifyListeners();
   }
 
@@ -39,9 +58,7 @@ class AppState extends ChangeNotifier {
     res.addAll(user.organisedEvents);
     res.addAll(barrio.events);
 
-    print("before: " + res.length.toString());
     res = res.where((event) => _filterData.doesEventMatch(event)).toList();
-    print("after: " + res.length.toString());
 
     return res;
   }
@@ -59,6 +76,40 @@ class AppState extends ChangeNotifier {
 
   void publishEvent(Event event) {
     barrio.events.add(event);
+    notifyListeners();
+  }
+
+  void toggleEventAttendance(Event event) {
+    List<Event> events = user.attendingEvents.toList();
+    List<User> users = event.goingUsers.toList();
+
+    if (user.attendingEvents.contains(event)) {
+      events.remove(event);
+      users.remove(user);
+    } else {
+      events.add(event);
+      users.add(user);
+    }
+
+    user.attendingEvents = events;
+    event.goingUsers = users;
+    notifyListeners();
+  }
+
+  void toggleEventVolunteering(Event event) {
+    List<Event> events = user.volunteeringEvents.toList();
+    List<User> users = event.goingVolunteers.toList();
+
+    if (user.volunteeringEvents.contains(event)) {
+      events.remove(event);
+      users.remove(user);
+    } else {
+      events.add(event);
+      users.add(user);
+    }
+
+    user.volunteeringEvents = events;
+    event.goingVolunteers = users;
     notifyListeners();
   }
 }

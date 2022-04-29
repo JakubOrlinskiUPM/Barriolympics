@@ -86,21 +86,21 @@ class _ChipListState extends State<ChipList> {
       tmp.add(chip);
     }
 
-    tmp.sort((c1, c2) {
-      if (c1.selected) {
-        if (c2.selected) {
-          return 0;
-        } else {
-          return -1;
-        }
-      } else {
-        if (c2.selected) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-    });
+    // tmp.sort((c1, c2) {
+    //   if (c1.selected) {
+    //     if (c2.selected) {
+    //       return 0;
+    //     } else {
+    //       return -1;
+    //     }
+    //   } else {
+    //     if (c2.selected) {
+    //       return 1;
+    //     } else {
+    //       return 0;
+    //     }
+    //   }
+    // });
 
     return tmp;
   }

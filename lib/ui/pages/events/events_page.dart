@@ -68,9 +68,9 @@ class _EventsPageState extends State<EventsPage> {
           hoverElevation: 1.5,
           shape: StadiumBorder(
               side: BorderSide(
-                  color: Colors.deepOrange, width: 3)),
+                  color: Theme.of(context).colorScheme.primary, width: 3)),
           elevation: 1.5,
-          foregroundColor: Colors.deepOrange,
+          foregroundColor: Theme.of(context).colorScheme.secondary,
           onPressed: () {
             Navigator.push(
               context,

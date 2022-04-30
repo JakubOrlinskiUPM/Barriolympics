@@ -78,16 +78,6 @@ class _EventItemState extends State<EventItem> {
                           Text(getEventBanner(state)),
                           state.user.organisedEvents.contains(widget.event)
                               ? TextButton.icon(
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(
-                                      StadiumBorder(
-                                        side: BorderSide(
-                                            color: Colors.deepOrange),
-                                      ),
-                                    ),
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.white),
-                                  ),
                                   label: Text("Edit"),
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
@@ -107,14 +97,13 @@ class _EventItemState extends State<EventItem> {
                               EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(right: 5),
                                 child: Text(
                                   widget.event.name!,
-                                  style: const TextStyle(
-                                    color: Color(0xffff6900),
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.primary,
                                     fontSize: 25.0,
                                   ),
                                 ),

@@ -81,8 +81,8 @@ class _EventItemState extends State<EventItem> {
                                   style: ButtonStyle(
                                     shape: MaterialStateProperty.all(
                                       StadiumBorder(
-                                        side:
-                                            BorderSide(color: Colors.deepOrange),
+                                        side: BorderSide(
+                                            color: Colors.deepOrange),
                                       ),
                                     ),
                                     backgroundColor:
@@ -91,7 +91,8 @@ class _EventItemState extends State<EventItem> {
                                   label: Text("Edit"),
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
-                                    Navigator.pushNamed(context, EDIT_EVENT_PAGE,
+                                    Navigator.pushNamed(
+                                        context, EDIT_EVENT_PAGE,
                                         arguments: {"event": widget.event});
                                   },
                                 )
@@ -106,13 +107,16 @@ class _EventItemState extends State<EventItem> {
                               EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                widget.event.name!,
-                                style: const TextStyle(
-                                  color: Color(0xffff6900),
-                                  fontSize: 25.0,
+                              Padding(
+                                padding: EdgeInsets.only(right: 5),
+                                child: Text(
+                                  widget.event.name!,
+                                  style: const TextStyle(
+                                    color: Color(0xffff6900),
+                                    fontSize: 25.0,
+                                  ),
                                 ),
                               ),
                               Card(
@@ -125,10 +129,12 @@ class _EventItemState extends State<EventItem> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Row(children: [
-                                            const Icon(Icons.date_range_outlined,
+                                            const Icon(
+                                                Icons.date_range_outlined,
                                                 size: 15),
                                             Text(
-                                                widget.event.date!.day.toString(),
+                                                widget.event.date!.day
+                                                    .toString(),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyText2),

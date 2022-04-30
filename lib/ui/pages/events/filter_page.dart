@@ -1,11 +1,8 @@
-import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:flutter/material.dart';
 import 'package:barriolympics/ui/pages/events/events_page.dart';
 
 import 'dart:core';
-
-import 'package:provider/provider.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key, required this.setFilters}) : super(key: key);
@@ -19,38 +16,75 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   DateTime? _dateStartTime;
 
-  TimeOfDay? time;
-  TimeOfDay? time1;
+  TimeOfDay? timeFrom;
+  TimeOfDay? timeTill;
   TimeOfDay? picked;
-  TimeOfDay? picked1;
+
+  bool? timeError;
 
   @override
   void initState() {
     super.initState();
-    time = const TimeOfDay(hour: 10, minute: 30);
-    time1 = TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 120)));
   }
 
-  Future<Null> selectTime(BuildContext context) async {
+  void showErrorMessage() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Incorrect time selection"),
+            content: Text("Please change the time where the starting time comes before the ending time."),
+            actionsAlignment: MainAxisAlignment.end,
+            actionsPadding: const EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 20.0),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Okay"),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<Null?> selectTimeFrom(BuildContext context) async {
     picked =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (picked != Null) {
+    if (picked != null) {
       setState(() {
-        time = picked;
+        timeFrom = picked;
       });
+      if (timeTill != null) {
+        if (picked!.hour > timeTill!.hour &&
+            picked!.minute > timeTill!.minute) {
+          setState(() {
+            timeTill = null;
+          });
+          // showErrorMessage();
+        }
+      }
     }
   }
 
-  Future<Null> selectTime1(BuildContext context) async {
-    picked1 = await showTimePicker(
-        context: context,
-        initialTime:
-            TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 120))));
-
-    if (picked1 != Null) {
-      setState(() {
-        time1 = picked1;
-      });
+  Future<Null?> selectTimeTill(BuildContext context) async {
+    picked =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (picked != null) {
+      if (timeFrom != null) {
+        if (picked!.hour < timeFrom!.hour ||
+            (picked!.hour == timeFrom!.hour && picked!.minute > timeFrom!.minute)) {
+          showErrorMessage();
+        } else {
+          setState(() {
+            timeTill = picked;
+          });
+        }
+      } else {
+        setState(() {
+          timeTill = picked;
+        });
+      }
     }
   }
 
@@ -61,87 +95,81 @@ class _FilterPageState extends State<FilterPage> {
           leading: const BackButton(),
           title: Text("Filter"),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Date: ', style: TextStyle(fontSize: 14)),
-                    Text(
-                        _dateStartTime == null
-                            ? ''
-                            : (_dateStartTime!.day).toString() +
-                                " / " +
-                                (_dateStartTime!.month).toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
-                    OutlinedButton(
-                      onPressed: () {
-                        showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2020),
-                                lastDate: DateTime(2030))
-                            .then((date) {
-                          setState(() {
-                            _dateStartTime = date;
-                          });
-                        });
-                      },
-                      child: const Text('Pick a date for event'),
-                    ),
-                  ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Starts after:', style: TextStyle(fontSize: 14)),
-                    Text('${time?.hour}:${time?.minute}',
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold)),
-                    OutlinedButton(
-                      onPressed: () {
-                        selectTime(context);
-                      },
-                      child: const Text('Pick a starting time'),
-                    ),
-                  ]),
-            ),
-            Row(children: [
-              const SizedBox(width: 10),
-              const Text('Ends before:', style: TextStyle(fontSize: 14)),
-              const SizedBox(width: 10),
-              Text('${time1?.hour}:${time1?.minute}',
-                  style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.bold)),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text('Date: ', style: TextStyle(fontSize: 14)),
+                Text(
+                    _dateStartTime == null
+                        ? ''
+                        : (_dateStartTime!.day).toString() +
+                            " / " +
+                            (_dateStartTime!.month).toString(),
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                OutlinedButton(
+                  onPressed: () {
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2020),
+                            lastDate: DateTime(2030))
+                        .then((date) {
+                      setState(() {
+                        _dateStartTime = date;
+                      });
+                    });
+                  },
+                  child: const Text('Pick a date for event'),
+                ),
+              ]),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Starts after:', style: TextStyle(fontSize: 14)),
+                if (timeFrom != null) ...[
+                  Text('${timeFrom?.hour}:${timeFrom?.minute}',
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold)),
+                ],
+                OutlinedButton(
+                  onPressed: () {
+                    selectTimeFrom(context);
+                  },
+                  child: const Text('Pick a starting time'),
+                ),
+              ]),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Ends before:', style: TextStyle(fontSize: 14)),
+                if (timeTill != null) ...[
+                  Text('${timeTill?.hour}:${timeTill?.minute}',
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold)),
+                ],
+                OutlinedButton(
+                  onPressed: () {
+                    selectTimeTill(context);
+                  },
+                  child: const Text('Pick an ending time'),
+                ),
+              ]),
+              if (timeError == true) ...[
+                Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                        'The starting time is bigger than the ending time.',
+                        style: TextStyle(color: Colors.red)))
+              ],
               const Spacer(),
               OutlinedButton(
-                onPressed: () {
-                  selectTime(context);
-                },
-                child: const Text('Pick an ending time'),
-              ),
-              const SizedBox(width: 100),
-            ]),
-            const Spacer(),
-            OutlinedButton(
-                child: const Text('Apply Filters'),
-                onPressed: () {
-                  widget.setFilters(
-                    EventFilterData(
-                      user: Provider.of<AppState>(context, listen: false).user,
-                      startDate: _dateStartTime,
-                      timeFrom: time,
-                    ),
-                  );
+                  child: const Text('Apply Filters'),
+                  onPressed: () {
+                    // widget.setFilters(EventFilterData(startDate: _dateStartTime));
 
-                  Navigator.pop(context);
-                }),
-            const SizedBox(height: 50),
-          ],
+                    Navigator.pop(context);
+                  }),
+              const SizedBox(height: 50),
+            ],
+          ),
         ));
   }
 }

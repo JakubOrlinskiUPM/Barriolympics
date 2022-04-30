@@ -1,8 +1,11 @@
+import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:flutter/material.dart';
 import 'package:barriolympics/ui/pages/events/events_page.dart';
 
 import 'dart:core';
+
+import 'package:provider/provider.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key, required this.setFilters}) : super(key: key);
@@ -90,6 +93,8 @@ class _FilterPageState extends State<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppState state =
+    Provider.of<AppState>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           leading: const BackButton(),
@@ -163,7 +168,7 @@ class _FilterPageState extends State<FilterPage> {
               OutlinedButton(
                   child: const Text('Apply Filters'),
                   onPressed: () {
-                    // widget.setFilters(EventFilterData(startDate: _dateStartTime));
+                    widget.setFilters(EventFilterData(startDate: _dateStartTime, user: state.user));
 
                     Navigator.pop(context);
                   }),

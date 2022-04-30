@@ -1,11 +1,9 @@
-import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
 import 'package:flutter/material.dart';
 import 'package:barriolympics/ui/pages/events/events_page.dart';
 
 import 'dart:core';
 
-import 'package:provider/provider.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key, required this.setFilters}) : super(key: key);
@@ -24,29 +22,46 @@ class _FilterPageState extends State<FilterPage> {
   TimeOfDay? picked;
   TimeOfDay? picked1;
 
+  bool? timeError;
+
   @override
   void initState() {
     super.initState();
-    time = const TimeOfDay(hour: 10, minute: 30);
-    time1 = TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 120)));
   }
 
-  Future<Null> selectTime(BuildContext context) async {
+  Future<Null?> selectTime(BuildContext context) async {
     picked =
-        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
     if (picked != Null) {
-      setState(() {
-        time = picked;
-      });
+      if (time1 != Null){
+        setState(() {
+          time = picked;
+        });
+      }
+      else {
+        // it says there is begin used a null checker on time1, but it is not going in this if statement so it is a bit weird
+        if (picked!.hour > time1!.hour) {
+          if (picked!.minute > time1!.minute) {
+            setState(() {
+              time = picked;
+            });
+          }
+          else{
+            timeError = true;
+          }
+        }
+        else {
+          timeError = true;
+        }
+      }
     }
   }
 
-  Future<Null> selectTime1(BuildContext context) async {
-    picked1 = await showTimePicker(
-        context: context,
-        initialTime:
-            TimeOfDay.fromDateTime(DateTime.now().add(Duration(minutes: 120))));
 
+  Future<Null?> selectTime1(BuildContext context) async {
+    picked1 =
+    await showTimePicker(context: context, initialTime: TimeOfDay.now());
     if (picked1 != Null) {
       setState(() {
         time1 = picked1;
@@ -61,11 +76,11 @@ class _FilterPageState extends State<FilterPage> {
           leading: const BackButton(),
           title: Text("Filter"),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Date: ', style: TextStyle(fontSize: 14)),
@@ -73,16 +88,16 @@ class _FilterPageState extends State<FilterPage> {
                         _dateStartTime == null
                             ? ''
                             : (_dateStartTime!.day).toString() +
-                                " / " +
-                                (_dateStartTime!.month).toString(),
+                            " / " +
+                            (_dateStartTime!.month).toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold)),
                     OutlinedButton(
                       onPressed: () {
                         showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2020),
-                                lastDate: DateTime(2030))
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2020),
+                            lastDate: DateTime(2030))
                             .then((date) {
                           setState(() {
                             _dateStartTime = date;
@@ -92,16 +107,15 @@ class _FilterPageState extends State<FilterPage> {
                       child: const Text('Pick a date for event'),
                     ),
                   ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+              Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Starts after:', style: TextStyle(fontSize: 14)),
-                    Text('${time?.hour}:${time?.minute}',
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold)),
+                    if (time != null) ...[
+                      Text('${time?.hour}:${time?.minute}',
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold)),
+                    ],
                     OutlinedButton(
                       onPressed: () {
                         selectTime(context);
@@ -109,39 +123,37 @@ class _FilterPageState extends State<FilterPage> {
                       child: const Text('Pick a starting time'),
                     ),
                   ]),
-            ),
-            Row(children: [
-              const SizedBox(width: 10),
-              const Text('Ends before:', style: TextStyle(fontSize: 14)),
-              const SizedBox(width: 10),
-              Text('${time1?.hour}:${time1?.minute}',
-                  style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.bold)),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Ends before:', style: TextStyle(fontSize: 14)),
+                if (time1 != null) ...[
+                  Text('${time1?.hour}:${time1?.minute}',
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold)),
+                ],
+                OutlinedButton(
+                  onPressed: () {
+                    selectTime1(context);
+                  },
+                  child: const Text('Pick an ending time'),
+                ),
+              ]),
+              if (timeError == true) ...[
+                Padding(padding: EdgeInsets.all(10),
+                    child: Text('The starting time is bigger than the ending time.', style: TextStyle(
+                        color: Colors.red)))
+              ],
               const Spacer(),
-              OutlinedButton(
-                onPressed: () {
-                  selectTime(context);
-                },
-                child: const Text('Pick an ending time'),
-              ),
-              const SizedBox(width: 100),
-            ]),
-            const Spacer(),
-            OutlinedButton(
-                child: const Text('Apply Filters'),
-                onPressed: () {
-                  widget.setFilters(
-                    EventFilterData(
-                      user: Provider.of<AppState>(context, listen: false).user,
-                      startDate: _dateStartTime,
-                      timeFrom: time,
-                    ),
-                  );
 
-                  Navigator.pop(context);
-                }),
-            const SizedBox(height: 50),
-          ],
+              OutlinedButton(
+                  child: const Text('Apply Filters'),
+                  onPressed: () {
+                    // widget.setFilters(EventFilterData(startDate: _dateStartTime));
+
+                    Navigator.pop(context);
+                  }),
+              const SizedBox(height: 50),
+            ],
+          ),
         ));
   }
 }

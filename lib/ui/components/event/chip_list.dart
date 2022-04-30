@@ -83,24 +83,8 @@ class _ChipListState extends State<ChipList> {
     List<FilteringChip> extraChips = widget.filterData.getFilterChips();
 
     for (FilteringChip chip in extraChips) {
-      tmp.add(chip);
+      tmp.insert(0, chip);
     }
-
-    // tmp.sort((c1, c2) {
-    //   if (c1.selected) {
-    //     if (c2.selected) {
-    //       return 0;
-    //     } else {
-    //       return -1;
-    //     }
-    //   } else {
-    //     if (c2.selected) {
-    //       return 1;
-    //     } else {
-    //       return 0;
-    //     }
-    //   }
-    // });
 
     return tmp;
   }
@@ -126,7 +110,9 @@ class _ChipListState extends State<ChipList> {
               },
             );
           } else {
-            return Chip(
+            return InputChip(
+              showCheckmark: false,
+              selected: true,
               avatar: Icon(
                 _chipsSelected[index].icon,
               ),
@@ -135,6 +121,9 @@ class _ChipListState extends State<ChipList> {
                 setState(() {
                   _chipsSelected.removeAt(index);
                 });
+                // TODO respond to removal of filter
+                // widget.updateFilters(
+                //     _chipsSelected[index].applyFilter(widget.filterData));
               },
               label: Text(_chipsSelected[index].label!),
             );

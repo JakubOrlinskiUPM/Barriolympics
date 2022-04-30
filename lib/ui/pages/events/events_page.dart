@@ -39,7 +39,7 @@ class _EventsPageState extends State<EventsPage> {
           TopBanner(),
           SliverAppBar(
             toolbarHeight: 70,
-            backgroundColor: const Color(0xfffdf5f0),
+            backgroundColor: Theme.of(context).colorScheme.background,
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.zero,
               title: Padding(

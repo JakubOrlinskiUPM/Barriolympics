@@ -36,6 +36,7 @@ class EventFilterData {
           label: getDateRangeLabel(startDate!, endDate),
           isFilter: true,
           selected: true,
+
         ),
       );
     }

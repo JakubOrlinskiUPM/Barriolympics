@@ -41,11 +41,13 @@ Color _thirdColor = Colors.white;
 Color _onPrimary = Colors.black;
 Color _onSecondary = Colors.white;
 
+Color _background = Color(0xfffff2e0);
+
 ColorScheme _customColorScheme = ColorScheme(
   primary: _primary,
   secondary: _secondary,
   surface: Colors.white,
-  background: Color(0xffFFEBCC),
+  background: _background,
   error: Colors.red.shade100,
   onPrimary: _onPrimary,
   onSecondary: _onSecondary,
@@ -59,6 +61,7 @@ class CustomTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       colorScheme: _customColorScheme,
+      scaffoldBackgroundColor: _background,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: _thirdColor,
         elevation: 0,

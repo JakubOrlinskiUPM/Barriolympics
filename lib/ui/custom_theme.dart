@@ -1,34 +1,39 @@
 import 'package:flutter/material.dart';
 
+Color _primary = Color(0xfff9d10f);
+Color _secondary = Color(0xff3b4d61);
+
+ColorScheme _customColorScheme = ColorScheme(
+  primary: _primary,
+  secondary: _secondary,
+  surface: Colors.white,
+  background: Color(0xffFFEBCC),
+  error: Colors.red.shade100,
+  onPrimary: Colors.black,
+  onSecondary: Colors.white,
+  onSurface: Colors.black,
+  onBackground: Colors.black,
+  onError: Colors.black,
+  brightness: Brightness.light,
+);
+
 class CustomTheme {
   static ThemeData get lightTheme {
     return ThemeData(
-      primarySwatch: Colors.orange,
-      primaryColor: Colors.orange,
-      scaffoldBackgroundColor: const Color(0xfffff6f1),
-      bottomAppBarColor: Colors.white,
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: Color(0xFFFF6E00),
-        unselectedItemColor: Colors.black,
-        backgroundColor: Colors.transparent,
+      colorScheme: _customColorScheme,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 0,
         selectedLabelStyle: TextStyle(fontSize: 16),
-        unselectedLabelStyle: TextStyle(fontSize: 16),
+        unselectedLabelStyle: TextStyle(fontSize: 14),
       ),
       fontFamily: 'Narin',
       buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
         ),
-        buttonColor: Colors.orangeAccent,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
         elevation: 0,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Color(0xFFFF5900),
-        foregroundColor: Colors.white,
       ),
       cardTheme: const CardTheme(
         shape: RoundedRectangleBorder(
@@ -36,7 +41,6 @@ class CustomTheme {
             Radius.circular(10),
           ),
         ),
-        shadowColor: Color(0x45FF5900),
         elevation: 10,
         margin: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
       ),
@@ -44,22 +48,37 @@ class CustomTheme {
         contentPadding: EdgeInsets.only(top: 6, left: 10),
         minVerticalPadding: 10,
       ),
-      textTheme: TextTheme(),
-      primaryTextTheme: TextTheme(),
+      textTheme: const TextTheme(),
+      primaryTextTheme: const TextTheme(),
 
       textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(),
-      ),
-      chipTheme: ChipThemeData(
-        backgroundColor: Color(0xfffff6f1),
-        checkmarkColor: Colors.white,
-        secondarySelectedColor: Colors.white,
-        selectedColor: Colors.deepOrange,
-        deleteIconColor: Colors.white,
-        shape: StadiumBorder(
-          side: BorderSide(color: Colors.deepOrange),
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all(
+            _secondary,
+          ),
         ),
       ),
+      chipTheme: const ChipThemeData(),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(4),
+              ),
+              side: BorderSide(
+                color: _primary,
+              ),
+            ),
+          ),
+          foregroundColor: MaterialStateProperty.all(
+            _secondary,
+          ),
+        ),
+      ),
+
+
 
       // primaryColorLight: Color(0x000000),
       // primaryColorDark: Color(0x000000),

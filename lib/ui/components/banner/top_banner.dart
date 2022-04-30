@@ -23,7 +23,6 @@ class _TopBannerState extends State<TopBanner> {
       shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS))),
-      backgroundColor: Color(0xFFFFA98E),
       pinned: true,
       expandedHeight: 250,
       collapsedHeight: 90.0,
@@ -53,12 +52,14 @@ class _TopBannerState extends State<TopBanner> {
           decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.vertical(bottom: Radius.circular(BORDER_RADIUS)),
+            // color: Theme.of(context).colorScheme.primary,
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
+              // TODO make these colors correct
               colors: [
-                Color(0xFFFF8795),
-                Color(0xFFFFA98E),
+                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).colorScheme.primary,
               ],
             ),
           ),

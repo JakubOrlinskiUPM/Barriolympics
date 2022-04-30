@@ -30,8 +30,6 @@ class _ViewEventPageState extends State<ViewEventPage> {
         return CustomScrollView(
           slivers: [
             SliverAppBar(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.deepOrange,
               elevation: 0,
               pinned: true,
               expandedHeight: 200,
@@ -57,7 +55,6 @@ class _ViewEventPageState extends State<ViewEventPage> {
                         child: Center(
                             child: Text(
                           widget.event.name!,
-                          style: TextStyle(color: Colors.white),
                           textAlign: TextAlign.center,
                         )),
                       ),

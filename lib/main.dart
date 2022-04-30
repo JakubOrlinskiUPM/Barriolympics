@@ -55,15 +55,18 @@ class _AppState extends State<App> {
           notchMargin: 8.0,
           clipBehavior: Clip.antiAlias,
           child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               iconSize: 25,
-              backgroundColor: Colors.white,
               currentIndex: _currentIndex,
               onTap: (val) => _onTap(val, context),
               items: tabs
                   .map(
                     (tab) => BottomNavigationBarItem(
                       icon: Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                        padding: const EdgeInsets.only(
+                          top: 8.0,
+                          bottom: 4.0,
+                        ),
                         child: Icon(tab.pageIcon),
                       ),
                       label: tab.pageName,

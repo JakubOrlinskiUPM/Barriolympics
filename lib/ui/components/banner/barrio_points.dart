@@ -34,7 +34,6 @@ class BarrioPoints extends StatelessWidget {
                       OutlinedButton.icon(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 0, horizontal: 6)),
-                          // foregroundColor: MaterialStateProperty.all(Colors.white)
                         ),
                         onPressed: () {},
                         label: Text("Pick barrio", style: TextStyle(fontSize: 12),),
@@ -43,7 +42,6 @@ class BarrioPoints extends StatelessWidget {
                       ElevatedButton.icon(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 0, horizontal: 6)),
-                          foregroundColor: MaterialStateProperty.all(Colors.white)
                         ),
                         onPressed: () {
                           HelpPage.showHelpPage(context);

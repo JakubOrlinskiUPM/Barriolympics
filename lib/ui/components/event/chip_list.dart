@@ -116,10 +116,6 @@ class _ChipListState extends State<ChipList> {
           if (!_chipsSelected[index].isFilter) {
             return FilterChip(
               selected: _chipsSelected[index].selected,
-              labelStyle: TextStyle(
-                  color: _chipsSelected[index].selected
-                      ? Colors.white
-                      : Colors.black),
               label: Text(_chipsSelected[index].category!.label),
               onSelected: (bool value) {
                 setState(() {
@@ -131,11 +127,8 @@ class _ChipListState extends State<ChipList> {
             );
           } else {
             return Chip(
-              backgroundColor: Colors.deepOrange,
-              labelStyle: TextStyle(color: Colors.white),
               avatar: Icon(
                 _chipsSelected[index].icon,
-                color: Colors.white,
               ),
               deleteIcon: Icon(Icons.highlight_remove),
               onDeleted: () {

@@ -20,20 +20,20 @@ class AppState extends ChangeNotifier {
     EVENT_LIST[0].goingUsers = [user];
     EVENT_LIST[1].goingUsers = [user];
 
-    user.organisedEvents = [
-      Event(
-          id: 101,
-          name: "BBQ",
-          description: "A nice day out with some sausages",
-          barrio: BARRIO_LIST[0],
-          fileName: "Image.png",
-          fileUrl: "https://media.istockphoto.com/photos/barbecue-camping-picture-id1177886278",
-          date: DateTime(2022, 5, 15),
-          time: TimeOfDay(hour: 16, minute: 30),
-          location: Location(locationName: "Park"),
-          organiser: user,
-          isPublished: false),
-    ];
+    // user.organisedEvents = [
+    //   Event(
+    //       id: 101,
+    //       name: "BBQ",
+    //       description: "A nice day out with some sausages",
+    //       barrio: BARRIO_LIST[0],
+    //       fileName: "Image.png",
+    //       fileUrl: "https://media.istockphoto.com/photos/barbecue-camping-picture-id1177886278",
+    //       date: DateTime(2022, 5, 15),
+    //       time: TimeOfDay(hour: 16, minute: 30),
+    //       location: Location(locationName: "Park"),
+    //       organiser: user,
+    //       isPublished: false),
+    // ];
   }
 
   Barrio barrio = BARRIO_LIST[0];

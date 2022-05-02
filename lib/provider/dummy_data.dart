@@ -17,11 +17,11 @@ bool isNetworkPresent = true;
 
 List<User> USER_LIST = [
   User(id: 1, firstName: "John", lastName: "Johnson"),
-  User(id: 2, firstName: "Jack", lastName: "Jackson"),
-  User(id: 3, firstName: "Jane", lastName: "Janet"),
-  User(id: 4, firstName: "Jake", lastName: "Jakeson"),
-  User(id: 5, firstName: "James", lastName: "Jameson"),
-  User(id: 6, firstName: "Jonas", lastName: "Jonasson"),
+  User(id: 2, firstName: "Robert", lastName: "Olson"),
+  User(id: 3, firstName: "Jane", lastName: "Pratchett"),
+  User(id: 4, firstName: "Dolly", lastName: "Parton"),
+  User(id: 5, firstName: "Trevor", lastName: "Vic"),
+  User(id: 6, firstName: "Zach", lastName: "McKenzie"),
 ];
 
 List<Comment> COMMENT_LIST = [

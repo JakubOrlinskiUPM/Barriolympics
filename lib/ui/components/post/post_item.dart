@@ -53,15 +53,6 @@ class _PostItemState extends State<PostItem> {
               ),
               title: Text(widget.post.author.fullName),
               subtitle: Text(formatDate(widget.post.timePosted)),
-              trailing: PopupMenuButton(
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem(
-                      child: Text("Item"),
-                    ),
-                  ];
-                },
-              ),
             ),
             Text(
               widget.post.title,

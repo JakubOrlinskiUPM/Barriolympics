@@ -165,7 +165,7 @@ class _FilterPageState extends State<FilterPage> {
                         style: TextStyle(color: Colors.red)))
               ],
               const Spacer(),
-              OutlinedButton(
+              ElevatedButton(
                   child: const Text('Apply Filters'),
                   onPressed: () {
                     widget.setFilters(EventFilterData(startDate: _dateStartTime, user: state.user));

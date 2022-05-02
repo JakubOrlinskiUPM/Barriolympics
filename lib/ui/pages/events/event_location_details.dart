@@ -14,7 +14,12 @@ class EventLocationDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ll.LatLng latLng = event.location!.markers[0].keys.first;
+    late ll.LatLng? latLng;
+    if (event.location!.markers.length > 0) {
+      latLng = event.location!.markers[0].keys.first;
+    } else {
+      latLng = ll.LatLng(40.416661, -3.703533);
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,6 +32,7 @@ class EventLocationDetails extends StatelessWidget {
           height: 300,
           child: FlutterMap(
             options: MapOptions(
+              interactiveFlags: InteractiveFlag.pinchZoom,
               center: latLng,
               zoom: 13.0,
             ),

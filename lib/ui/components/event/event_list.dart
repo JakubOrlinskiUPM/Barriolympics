@@ -17,20 +17,27 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
-
   @override
   Widget build(BuildContext context) {
     List<Event> eventsToShow = widget.events
         .where((event) => widget.filters.doesEventMatch(event))
         .toList();
 
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return EventItem(event: eventsToShow[index]);
-        },
-        childCount: eventsToShow.length,
-      ),
+    return Container(
+      child: eventsToShow.length > 0
+          ? SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return EventItem(event: eventsToShow[index]);
+                },
+                childCount: eventsToShow.length,
+              ),
+            )
+          : SliverToBoxAdapter(
+              child: Center(
+                child: Text("No matching events"),
+              ),
+            ),
     );
   }
 }

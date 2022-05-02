@@ -69,7 +69,7 @@ class _UploadFormFieldState extends State<UploadFormField> {
       res = res.substring(0, limit - 3) + "...";
     }
 
-    res += ext;
+    res += "." + ext;
     return res;
   }
 
@@ -93,7 +93,7 @@ class _UploadFormFieldState extends State<UploadFormField> {
               : Row(
                   children: [
                     IconButton(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       onPressed: fileUrl != null
                           ? () {
                               OpenFile.open(fileUrl);
@@ -102,7 +102,7 @@ class _UploadFormFieldState extends State<UploadFormField> {
                       icon: Icon(Icons.download),
                     ),
                     IconButton(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       onPressed: () {
                         setState(() {
                           fileUrl = null;

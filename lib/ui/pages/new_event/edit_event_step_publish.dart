@@ -56,7 +56,7 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
           builder: (BuildContext ctx) {
             return AbsorbPointer(
               child: Container(
-                constraints: BoxConstraints(maxHeight: 500),
+                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height - 200),
                 child: page
                     ? ViewEventPage(event: widget.event)
                     : EventItem(event: widget.event),
@@ -72,8 +72,7 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         Text(
           "Good job, you're nearly there!",
@@ -109,8 +108,10 @@ class _EditEventStepPublishState extends State<EditEventStepPublish> {
   }
 
   void Function()? _publishEvent() {
+    print(isEventDone(false));
     if (isEventDone(false)) {
       return () {
+        widget.event.isPublished = true;
         Provider.of<AppState>(context, listen: false).publishEvent(widget.event);
         Navigator.pushNamed(context, EDIT_EVENT_SPLASH_PAGE);
       };

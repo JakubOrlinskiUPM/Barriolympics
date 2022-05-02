@@ -48,8 +48,7 @@ class _EditEventStepPermitsState extends State<EditEventStepPermits> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         Card(
           clipBehavior: Clip.hardEdge,

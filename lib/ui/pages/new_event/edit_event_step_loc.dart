@@ -49,6 +49,11 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
   @override
   void initState() {
     super.initState();
+    print(widget.event.location);
+    print(widget.event.location?.locationName);
+    locationName = widget.event.location != null
+        ? widget.event.location!.locationName
+        : "";
     location = widget.event.location ?? Location(locationName: '');
     markers = location?.markers.toList() ?? [];
   }
@@ -73,12 +78,12 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
+            initialValue: locationName,
             decoration: InputDecoration(
                 hintText: "Enter the address of the event here...",
                 prefixIcon: Icon(Icons.pin_drop)),
@@ -234,6 +239,7 @@ class _EditEventStepLocState extends State<EditEventStepLoc> {
   void _saveStep() {
     widget.event.location =
         Location(locationName: locationName, markers: markers);
+    widget.event.permits = widget.event.neededPermits();
     widget.nextStep();
   }
 }

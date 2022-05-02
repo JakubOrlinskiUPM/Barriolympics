@@ -4,6 +4,7 @@ import 'package:barriolympics/ui/components/invisible_expanded.dart';
 import 'package:barriolympics/ui/pages/events/event_general_details.dart';
 import 'package:barriolympics/ui/pages/events/event_location_details.dart';
 import 'package:barriolympics/ui/pages/events/event_signup_buttons.dart';
+import 'package:barriolympics/ui/pages/routing.dart';
 import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
         return CustomScrollView(
           slivers: [
             SliverAppBar(
+              foregroundColor: Colors.white,
               elevation: 0,
               pinned: true,
               expandedHeight: 200,
@@ -71,19 +73,39 @@ class _ViewEventPageState extends State<ViewEventPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          getFullDateString(widget.event.date!),
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  getFullDateString(widget.event.date!),
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                Text(
+                                  widget.event.name.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                Text(widget.event.location!.locationName,
+                                    style: Theme.of(context).textTheme.caption),
+                              ],
+                            ),
+                            if (state.user.organisedEvents.contains(widget.event)) ...[ElevatedButton.icon(
+                              label: Text("Edit"),
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, EDIT_EVENT_PAGE,
+                                    arguments: {"event": widget.event});
+                              },
+                            ),]
+                          ],
                         ),
-                        Text(
-                          widget.event.name.toString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        Text(widget.event.location!.locationName,
-                            style: Theme.of(context).textTheme.caption),
                         EventSignupButtons(event: widget.event),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12.0),

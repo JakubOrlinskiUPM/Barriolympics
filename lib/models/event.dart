@@ -41,7 +41,7 @@ class Event extends Uploadable {
   List<Permit> permits;
   List<EventCategory> categories;
 
-  final bool isPublished;
+  bool isPublished;
 
   final User organiser;
   List<User> goingUsers;

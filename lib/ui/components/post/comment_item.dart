@@ -52,10 +52,9 @@ class CommentItem extends StatelessWidget {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(15),
                 ),
-                // TODO change this color
-                color: isOwn ? Colors.orange.shade200 : Colors.grey.shade200,
+                color: isOwn ? lighten(Theme.of(context).colorScheme.primary, 0.2) : Colors.grey.shade200,
               ),
-              child: Text(comment.text),
+              child: Text(comment.text, style: TextStyle(color: Colors.black),),
             ),
           ),
         ),

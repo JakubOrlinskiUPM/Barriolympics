@@ -1,3 +1,4 @@
+import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 
 // PINK -> BLUE
@@ -35,8 +36,10 @@ import 'package:flutter/material.dart';
 // Color _onPrimary = Colors.white;
 // Color _onSecondary = Colors.black;
 
-Color _primary = Color(0xffa6b64d);
-Color _secondary = Color(0xff297A32);
+// Color _primary = Color(0xffd08103);
+// Color _secondary = Color(0xff005EB0);
+Color _primary = Color(0xfff6a320);
+Color _secondary = Color(0xff843BFF);
 Color _thirdColor = Colors.white;
 Color _onPrimary = Colors.black;
 Color _onSecondary = Colors.white;
@@ -65,8 +68,13 @@ class CustomTheme {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: _thirdColor,
         elevation: 0,
-        selectedLabelStyle: TextStyle(fontSize: 16),
-        unselectedLabelStyle: TextStyle(fontSize: 14),
+        selectedItemColor: Colors.black,
+        selectedLabelStyle: TextStyle(
+          fontSize: 16,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontSize: 14,
+        ),
       ),
       fontFamily: 'Narin',
       buttonTheme: ButtonThemeData(

@@ -99,6 +99,9 @@ class _ChipListState extends State<ChipList> {
         itemBuilder: (BuildContext context, int index) {
           if (!_chipsSelected[index].isFilter) {
             return FilterChip(
+              labelStyle: _chipsSelected[index].selected
+                  ? TextStyle(color: Theme.of(context).colorScheme.onPrimary)
+                  : TextStyle(),
               selected: _chipsSelected[index].selected,
               label: Text(_chipsSelected[index].category!.label),
               onSelected: (bool value) {

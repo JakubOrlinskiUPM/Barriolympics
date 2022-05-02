@@ -97,10 +97,10 @@ class _EditEventPageState extends State<EditEventPage> {
           shrinkWrap: true,
           children: [
             IconStepper(
-              activeStepColor: Theme.of(context).primaryColor,
-              activeStepBorderColor: Theme.of(context).primaryColorDark,
-              stepColor: Theme.of(context).highlightColor,
-              lineColor: Theme.of(context).primaryColorDark,
+              activeStepColor: Theme.of(context).colorScheme.primary,
+              activeStepBorderColor: Theme.of(context).colorScheme.secondary,
+              stepColor: Colors.white,
+              lineColor: Theme.of(context).colorScheme.secondary,
               previousButtonIcon: _activeStepIndex > 0
                   ? Icon(
                       Icons.arrow_back,

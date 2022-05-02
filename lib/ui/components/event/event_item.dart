@@ -23,17 +23,35 @@ class EventItem extends StatefulWidget {
 }
 
 class _EventItemState extends State<EventItem> {
-  String getEventBanner(AppState state) {
+  Widget getEventBanner(AppState state) {
+    String? label = null;
     if (state.user.organisedEvents.contains(widget.event)) {
-      return "Your event!";
+      label = "Your event - " + (widget.event.isPublished ? "published" : "draft");
     }
     if (state.user.attendingEvents.contains(widget.event)) {
-      return "Attending!";
+      label = "Attending!";
     }
     if (state.user.volunteeringEvents.contains(widget.event)) {
-      return "Volunteering!";
+      label = "Volunteering!";
     }
-    return "";
+
+    if (label == null) {
+      return Container();
+    } else {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Container(
+          padding: EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
+          child: Text(label),
+        ),
+      );
+    }
   }
 
   @override
@@ -71,13 +89,13 @@ class _EventItemState extends State<EventItem> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(getEventBanner(state)),
+                          getEventBanner(state),
                           state.user.organisedEvents.contains(widget.event)
-                              ? TextButton.icon(
+                              ? ElevatedButton.icon(
                                   label: Text("Edit"),
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
@@ -103,7 +121,8 @@ class _EventItemState extends State<EventItem> {
                                 child: Text(
                                   widget.event.name!,
                                   style: TextStyle(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     fontSize: 25.0,
                                   ),
                                 ),

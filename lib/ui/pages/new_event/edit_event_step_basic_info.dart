@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:barriolympics/models/barrio.dart';
 import 'package:barriolympics/models/event.dart';
+import 'package:barriolympics/models/event_category.dart';
 import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/components/platform_specific/date_picker.dart';
 import 'package:barriolympics/ui/components/platform_specific/time_picker.dart';
@@ -40,9 +41,10 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
   Barrio? barrio;
   String? name = "";
   String? description = "";
-  int? volunteersNeeded = 0;
+  int? volunteersNeeded = null;
   TimeOfDay? time;
   DateTime? date;
+  List<EventCategory> categories = [];
 
   @override
   void initState() {
@@ -54,14 +56,14 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
     volunteersNeeded = widget.event.volunteersNeeded;
     time = widget.event.time;
     date = widget.event.date;
+    categories = widget.event.categories.toList();
   }
 
   @override
   Widget build(BuildContext context) {
     AppState appState = Provider.of<AppState>(context, listen: false);
 
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         DropdownButtonFormField<Barrio>(
           value: barrio,
@@ -113,7 +115,9 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
           imageOnly: true,
         ),
         TextFormField(
-          initialValue: (this.volunteersNeeded ?? 0).toString(),
+          initialValue: this.volunteersNeeded != null
+              ? this.volunteersNeeded.toString()
+              : null,
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -124,6 +128,28 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
               this.volunteersNeeded = int.tryParse(val);
             });
           },
+        ),
+        Wrap(
+          spacing: 8,
+          children: appState.eventCategories.map((category) {
+            bool selected = categories.contains(category);
+            return FilterChip(
+              labelStyle: selected
+                  ? TextStyle(color: Theme.of(context).colorScheme.onPrimary)
+                  : TextStyle(),
+              selected: selected,
+              label: Text(category.label),
+              onSelected: (bool selected) {
+                setState(() {
+                  if (selected) {
+                    categories.add(category);
+                  } else {
+                    categories.remove(category);
+                  }
+                });
+              },
+            );
+          }).toList(),
         ),
         EditEventStepNavigation(
           isSaveEnabled: _isSaveEnabled(),
@@ -143,6 +169,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
         date != null &&
         time != null &&
         volunteersNeeded != null &&
+        categories.length > 0 &&
         widget.event.fileUrl != null;
   }
 
@@ -153,6 +180,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
     widget.event.time = time;
     widget.event.description = description;
     widget.event.volunteersNeeded = volunteersNeeded;
+    widget.event.categories = categories;
     widget.nextStep();
   }
 }

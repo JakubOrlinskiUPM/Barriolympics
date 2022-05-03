@@ -113,7 +113,7 @@ List<Post> POST_LIST = [
       ]
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: getRandDate(),
+    timePosted: getRandDate(0),
   ),
   Post(
     id: 1,
@@ -129,11 +129,11 @@ List<Post> POST_LIST = [
       ]
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: getRandDate(),
+    timePosted: getRandDate(1),
   ),
   Post(
     id: 2,
-    author: getRandChoice(USER_LIST),
+    author: USER_LIST[2],
     title: "The best walking tour of my life!",
     text:
         "I loved seeing the city in a new light and learning all about the area! 100% recommended!",
@@ -144,7 +144,7 @@ List<Post> POST_LIST = [
       ]
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: getRandDate(),
+    timePosted: getRandDate(2),
   ),
   Post(
     id: 3,
@@ -158,7 +158,7 @@ List<Post> POST_LIST = [
       ]
     ],
     comments: getRandSublist(COMMENT_LIST),
-    timePosted: getRandDate(),
+    timePosted: getRandDate(3),
   ),
 ];
 
@@ -235,7 +235,7 @@ List<Event> EVENT_LIST = [
     date: DateTime(2022, 6, 1),
     time: const TimeOfDay(hour: 20, minute: 0),
     location: Location(
-      locationName: "Autocine Madrid",
+      locationName: "Autocine",
       markers: [
         {
           LatLng(40.485914, -3.677616): MarkerType(label: "Main activity", color: Colors.green),
@@ -256,7 +256,7 @@ List<Event> EVENT_LIST = [
     date: DateTime(2022, 6, 2),
     time: const TimeOfDay(hour: 19, minute: 0),
     location: Location(
-      locationName: "Parque de baloncesto",
+      locationName: "Polideportivo",
       markers: [
         {
           LatLng(40.432683, -3.725307): MarkerType(label: "Main activity", color: Colors.green),
@@ -277,7 +277,7 @@ List<Event> EVENT_LIST = [
     date: DateTime(2022, 6, 6),
     time: const TimeOfDay(hour: 12, minute: 0),
     location: Location(
-      locationName: "Calle de Velásquez 36",
+      locationName: "C/ de Velásquez 36",
       markers: [
         {
           LatLng(40.418540, -3.731719): MarkerType(label: "Main activity", color: Colors.green),
@@ -285,7 +285,7 @@ List<Event> EVENT_LIST = [
       ],
     ),
     organiser: getRandChoice(USER_LIST),
-    categories: getRandSublist(CATEGORY_LIST.sublist(3)),
+    categories: [CATEGORY_LIST.last],
     isPublished: true,
   ),
 ];

@@ -54,6 +54,6 @@ class Event extends Uploadable {
   String uploadDescription = "The image that represents the event";
 
   List<Permit> neededPermits() {
-    return [Permit(uploadName: "Permit 1")];
+    return [Permit(uploadName: "Modelo 750C-a")];
   }
 }

@@ -28,8 +28,8 @@ class HelpPage extends StatefulWidget {
 class _HelpPageState extends State<HelpPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const DismissibleModalBar(),
         Text(
@@ -40,6 +40,7 @@ class _HelpPageState extends State<HelpPage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),

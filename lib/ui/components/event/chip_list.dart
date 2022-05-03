@@ -92,13 +92,17 @@ class _ChipListState extends State<ChipList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
+      height: 40,
       child: ListView.separated(
         itemCount: _chipsSelected.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           if (!_chipsSelected[index].isFilter) {
             return FilterChip(
+              avatar: _chipsSelected[index].selected ||
+                      _chipsSelected[index].category!.isSpecial
+                  ? null
+                  : Icon(_chipsSelected[index].category!.iconData, size: 18,),
               labelStyle: _chipsSelected[index].selected
                   ? TextStyle(color: Theme.of(context).colorScheme.onPrimary)
                   : TextStyle(),
@@ -124,9 +128,8 @@ class _ChipListState extends State<ChipList> {
                 setState(() {
                   _chipsSelected.removeAt(index);
                 });
-                // TODO respond to removal of filter
-                // widget.updateFilters(
-                //     _chipsSelected[index].applyFilter(widget.filterData));
+                widget.filterData.startDate = null;
+                widget.updateFilters(widget.filterData);
               },
               label: Text(_chipsSelected[index].label!),
             );

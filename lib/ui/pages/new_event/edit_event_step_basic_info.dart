@@ -64,6 +64,7 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
     AppState appState = Provider.of<AppState>(context, listen: false);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DropdownButtonFormField<Barrio>(
           value: barrio,
@@ -129,9 +130,15 @@ class _NewEventStepBasicInfoState extends State<NewEventStepBasicInfo> {
             });
           },
         ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Text("Event categories:"),
+        ),
         Wrap(
           spacing: 8,
-          children: appState.eventCategories.map((category) {
+          children: appState.eventCategories
+              .where((cat) => !cat.isSpecial)
+              .map((category) {
             bool selected = categories.contains(category);
             return FilterChip(
               labelStyle: selected

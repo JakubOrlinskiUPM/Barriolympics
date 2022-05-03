@@ -48,11 +48,11 @@ class _AppState extends State<App> {
         body: tabs[_currentIndex].navigator,
         extendBodyBehindAppBar: true,
         bottomNavigationBar: BottomAppBar(
-          shape: AutomaticNotchedShape(
-            RoundedRectangleBorder(),
-            StadiumBorder(),
-          ),
-          notchMargin: 8.0,
+          // shape: AutomaticNotchedShape(
+          //   RoundedRectangleBorder(),
+          //   StadiumBorder(),
+          // ),
+          // notchMargin: 8.0,
           clipBehavior: Clip.antiAlias,
           child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,

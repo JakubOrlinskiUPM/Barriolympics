@@ -129,34 +129,42 @@ class _FilterPageState extends State<FilterPage> {
                   child: const Text('Pick a date for event'),
                 ),
               ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text('Starts after:', style: TextStyle(fontSize: 14)),
-                if (timeFrom != null) ...[
-                  Text('${timeFrom?.hour}:${timeFrom?.minute}',
-                      style: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold)),
-                ],
-                OutlinedButton(
-                  onPressed: () {
-                    selectTimeFrom(context);
-                  },
-                  child: const Text('Pick a starting time'),
-                ),
-              ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text('Ends before:', style: TextStyle(fontSize: 14)),
-                if (timeTill != null) ...[
-                  Text('${timeTill?.hour}:${timeTill?.minute}',
-                      style: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold)),
-                ],
-                OutlinedButton(
-                  onPressed: () {
-                    selectTimeTill(context);
-                  },
-                  child: const Text('Pick an ending time'),
-                ),
-              ]),
+              Opacity(
+                opacity: 0.2,
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  const Text('Starts after:', style: TextStyle(fontSize: 14)),
+                  if (timeFrom != null) ...[
+                    Text('${timeFrom?.hour}:${timeFrom?.minute}',
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                  ],
+                  OutlinedButton(
+                    onPressed: null,
+                    // onPressed: () {
+                    //   selectTimeFrom(context);
+                    // },
+                    child: const Text('Pick a starting time'),
+                  ),
+                ]),
+              ),
+              Opacity(
+                opacity: 0.2,
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  const Text('Ends before:', style: TextStyle(fontSize: 14)),
+                  if (timeTill != null) ...[
+                    Text('${timeTill?.hour}:${timeTill?.minute}',
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold)),
+                  ],
+                  OutlinedButton(
+                    onPressed: null,
+                    // onPressed: () {
+                    //   selectTimeTill(context);
+                    // },
+                    child: const Text('Pick an ending time'),
+                  ),
+                ]),
+              ),
               if (timeError == true) ...[
                 Padding(
                     padding: EdgeInsets.all(10),

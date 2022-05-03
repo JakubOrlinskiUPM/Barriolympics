@@ -26,7 +26,8 @@ class _EventItemState extends State<EventItem> {
   Widget getEventBanner(AppState state) {
     String? label = null;
     if (state.user.organisedEvents.contains(widget.event)) {
-      label = "Your event - " + (widget.event.isPublished ? "published" : "draft");
+      label =
+          "Your event - " + (widget.event.isPublished ? "published" : "draft");
     }
     if (state.user.attendingEvents.contains(widget.event)) {
       label = "Attending!";
@@ -175,10 +176,32 @@ class _EventItemState extends State<EventItem> {
                                     style: TextStyle(color: Colors.white)),
                               ]),
                               Row(children: [
-                                const Icon(Icons.access_time_outlined,
-                                    size: 15, color: Colors.white),
-                                Text(widget.event.time!.hour.toString() + 'h',
-                                    style: TextStyle(color: Colors.white)),
+                                Row(
+                                    children: widget.event.categories
+                                        .map(
+                                          (category) => Container(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(right: 8.0),
+                                              child: Icon(
+                                                category.iconData,
+                                                size: 18,
+                                                color: Theme.of(context).colorScheme.primary,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.access_time_outlined,
+                                        size: 15, color: Colors.white),
+                                    Text(
+                                        widget.event.time!.hour.toString() +
+                                            'h',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                ),
                               ]),
                             ],
                           ),

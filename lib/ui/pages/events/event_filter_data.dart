@@ -36,7 +36,6 @@ class EventFilterData {
           label: getDateRangeLabel(startDate!, endDate),
           isFilter: true,
           selected: true,
-
         ),
       );
     }
@@ -56,10 +55,9 @@ class EventFilterData {
   bool doesEventMatch(Event event) {
     bool doesMatch = true;
     if (startDate != null) {
-      doesMatch = event.date!.isBefore(startDate!);
-    }
-    if (endDate != null) {
-      doesMatch = doesMatch || event.date!.isAfter(endDate!);
+      doesMatch = event.date!.day == startDate!.day &&
+          event.date!.month == startDate!.month &&
+          event.date!.year == startDate!.year;
     }
 
     if (isOwn != null) {

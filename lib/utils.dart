@@ -17,10 +17,10 @@ getRandSublist(List list) {
   return list.sublist(index, list.length - 1);
 }
 
-DateTime getRandDate() {
+DateTime getRandDate([int? seed]) {
   return DateTime.now().subtract(Duration(
-    hours: Random().nextInt(15),
-    minutes: Random().nextInt(60),
+    hours: Random(seed).nextInt(15),
+    minutes: Random(seed).nextInt(60),
   ));
 }
 

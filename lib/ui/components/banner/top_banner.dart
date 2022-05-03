@@ -56,10 +56,9 @@ class _TopBannerState extends State<TopBanner> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              // TODO make these colors correct
               colors: [
-                Theme.of(context).colorScheme.secondary,
                 Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
               ],
             ),
           ),

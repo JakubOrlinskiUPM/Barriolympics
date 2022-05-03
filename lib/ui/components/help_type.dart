@@ -25,7 +25,11 @@ class HelpType extends StatelessWidget {
             padding: EdgeInsets.all(4),
             child: Column(
               children: [
-                Text(text, textAlign: TextAlign.center, style: TextStyle(color: Colors.black),),
+                Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                ),
                 Expanded(
                   child: Image(
                     image: AssetImage(this.imagePath),

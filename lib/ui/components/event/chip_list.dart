@@ -92,7 +92,7 @@ class _ChipListState extends State<ChipList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 33,
       child: ListView.separated(
         itemCount: _chipsSelected.length,
         scrollDirection: Axis.horizontal,

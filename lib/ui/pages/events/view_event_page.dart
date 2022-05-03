@@ -81,7 +81,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  getFullDateString(widget.event.date!),
+                                  getFullDateString(widget.event.date!, widget.event.time!),
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 Text(

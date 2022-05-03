@@ -177,28 +177,31 @@ class _EventItemState extends State<EventItem> {
                               ]),
                               Row(children: [
                                 Row(
-                                    children: widget.event.categories
-                                        .map(
-                                          (category) => Container(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(right: 8.0),
-                                              child: Icon(
-                                                category.iconData,
-                                                size: 18,
-                                                color: Theme.of(context).colorScheme.primary,
-                                              ),
+                                  children: widget.event.categories
+                                      .map(
+                                        (category) => Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
+                                            child: Icon(
+                                              category.iconData,
+                                              size: 18,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
                                             ),
                                           ),
-                                        )
-                                        .toList(),
+                                        ),
+                                      )
+                                      .toList(),
                                 ),
                                 Row(
                                   children: [
                                     const Icon(Icons.access_time_outlined,
                                         size: 15, color: Colors.white),
                                     Text(
-                                        widget.event.time!.hour.toString() +
-                                            'h',
+                                        getTimeString(widget.event.time!.hour,
+                                            widget.event.time!.minute),
                                         style: TextStyle(color: Colors.white)),
                                   ],
                                 ),

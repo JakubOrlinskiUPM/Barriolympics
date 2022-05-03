@@ -1,5 +1,6 @@
 import 'package:barriolympics/provider/app_state.dart';
 import 'package:barriolympics/ui/pages/events/event_filter_data.dart';
+import 'package:barriolympics/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:barriolympics/ui/pages/events/events_page.dart';
 
@@ -134,7 +135,7 @@ class _FilterPageState extends State<FilterPage> {
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   const Text('Starts after:', style: TextStyle(fontSize: 14)),
                   if (timeFrom != null) ...[
-                    Text('${timeFrom?.hour}:${timeFrom?.minute}',
+                    Text('${getTimeString(timeFrom!.hour, timeFrom!.minute)}',
                         style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold)),
                   ],

@@ -35,8 +35,8 @@ String formatDate(DateTime dt) {
     }
     res = diff.inHours.toString() + hour + " ago";
   } else if (diff.inMinutes > 0) {
-    String minute = " hour";
-    if (diff.inHours > 1) {
+    String minute = " minute";
+    if (diff.inMinutes > 1) {
       minute += "s";
     }
     res = diff.inMinutes.toString() + minute + " ago";
@@ -120,14 +120,23 @@ List<String> weekdays = [
   "Sunday",
 ];
 
-String getFullDateString(DateTime dateTime) {
+String getFullDateString(DateTime dateTime, TimeOfDay timeOfDay) {
   String res = "";
 
   res += weekdays[dateTime.weekday - 1] + ", ";
   res += "${dateTime.day} / ${dateTime.month} / ${dateTime.year} ";
-  res += "at ${dateTime.hour}:${dateTime.minute}";
+  res += "at ${getTimeString(timeOfDay.hour, timeOfDay.minute)}";
 
   return res;
+}
+
+String getTimeString(int hour, int minute) {
+  String h = hour.toString();
+  h = h.padLeft(2, "0");
+  String m = minute.toString();
+  m = m.padLeft(2, "0");
+
+  return "$h:$m";
 }
 
 Color darken(Color color, [double amount = .1]) {
